@@ -1,0 +1,152 @@
+{
+  "automated_evaluation": {
+    "citation_precision": {
+      "denominator": 0,
+      "numerator": 0,
+      "status": "not_measured",
+      "value": null
+    },
+    "complete": true,
+    "human_accuracy": {
+      "denominator": 0,
+      "numerator": 0,
+      "status": "not_measured",
+      "value": null
+    },
+    "output_count": 100,
+    "performance_claim_allowed": false,
+    "status": "unreviewed",
+    "unsupported_claim_rate": {
+      "denominator": 0,
+      "numerator": 0,
+      "status": "not_measured",
+      "value": null
+    }
+  },
+  "benchmark_sha256": "ce92848f2d807b586ce89186b5532d865ff11163dcd342a7e9a2b334cf37fae9",
+  "claim_support_review": "not_measured",
+  "clinical_correctness": "not_measured",
+  "config_sha256": "1bb75fd01f08ebcc49499ca0ee710a98414d1228a6f2587a27fbeff521208c0e",
+  "engine_settings": {
+    "database_driver": "sqlite",
+    "max_output_tokens": 512,
+    "network_calls": false,
+    "release_mode": false
+  },
+  "engine_version": "0.1.0",
+  "evidence_manifest_sha256": "8b24d594434178b816fe8e7b959771c60263dbdf03c8b8f31ec82733ddc4beb6",
+  "expected_labels_used_for_runtime_decisions": false,
+  "heldout_labels_used_for_tuning": false,
+  "mode": "full",
+  "model_manifest": {
+    "codeExecutionEnabled": false,
+    "components": [
+      {
+        "activation": "active",
+        "active": true,
+        "artifactSHA256": null,
+        "dimensions": null,
+        "failureReason": null,
+        "localOnly": true,
+        "modelID": null,
+        "name": "sqlite-fts5-bm25",
+        "provider": null,
+        "purpose": "sparse retrieval",
+        "revision": null,
+        "version": "builtin"
+      },
+      {
+        "activation": "active",
+        "active": true,
+        "artifactSHA256": null,
+        "dimensions": null,
+        "failureReason": null,
+        "localOnly": true,
+        "modelID": null,
+        "name": "reciprocal-rank-fusion",
+        "provider": null,
+        "purpose": "hybrid rank fusion",
+        "revision": null,
+        "version": "k60"
+      },
+      {
+        "activation": "fallback",
+        "active": true,
+        "artifactSHA256": null,
+        "dimensions": 128,
+        "failureReason": null,
+        "localOnly": true,
+        "modelID": null,
+        "name": "signed-hashing-vector",
+        "provider": null,
+        "purpose": "deterministic dense-like retrieval fallback",
+        "revision": null,
+        "version": "1"
+      },
+      {
+        "activation": "fallback",
+        "active": true,
+        "artifactSHA256": null,
+        "dimensions": null,
+        "failureReason": null,
+        "localOnly": true,
+        "modelID": null,
+        "name": "deterministic-lexical-reranker",
+        "provider": null,
+        "purpose": "deterministic local reranking fallback",
+        "revision": null,
+        "version": "1"
+      },
+      {
+        "activation": "unconfigured",
+        "active": false,
+        "artifactSHA256": null,
+        "dimensions": 384,
+        "failureReason": null,
+        "localOnly": true,
+        "modelID": "BAAI/bge-small-en-v1.5",
+        "name": "bge-small-en-v1.5-onnx",
+        "provider": null,
+        "purpose": "local semantic dense retrieval",
+        "revision": "5c38ec7c405ec4b44b94cc5a9bb96e735b38267a",
+        "version": "unconfigured"
+      },
+      {
+        "activation": "unconfigured",
+        "active": false,
+        "artifactSHA256": null,
+        "dimensions": null,
+        "failureReason": null,
+        "localOnly": true,
+        "modelID": "cross-encoder/ms-marco-MiniLM-L-6-v2",
+        "name": "ms-marco-MiniLM-L6-v2-onnx",
+        "provider": null,
+        "purpose": "local cross-encoder reranking",
+        "revision": "233902d25c440f23af6f7d6e94d2946bac0bee0a",
+        "version": "unconfigured"
+      }
+    ],
+    "modelPackActivation": "unconfigured",
+    "modelPackID": null,
+    "runtimeWeightUpdatesEnabled": false,
+    "storageDriver": "sqlite",
+    "storageEncryptionActive": false,
+    "webSearchEnabled": false
+  },
+  "model_manifest_sha256": "812aa5fa4b81c382c5b5ad8e11719130ed0d9e7c9dc8f6e447c0ba19904171c3",
+  "profile_ids": {
+    "adult": "a314c428-4be9-5529-af79-188f4697fc4c",
+    "age_ambiguous": "190fefdb-a8e1-5ab8-bd0d-614727f62636",
+    "child_caregiver": "82b5a31b-3891-5a50-a118-1597a0f7dcca",
+    "older_adult_caregiver": "1f3686f0-fde2-5397-b150-8b06ca869635",
+    "teen": "af89dfe4-e02f-5988-9cc4-b55574456474"
+  },
+  "promotion_gates": "not_evaluated",
+  "review_status": "unreviewed",
+  "run_output_sha256": "d4b367f5f0dba146a6d7f87f27bfdc2dfd19a1c1dea35803be785bbdda41f843",
+  "runner_file_sha256": "421e160ff19c0619e68945f6797da0ae2ec8f83be11264102329a4aa63d3a2ce",
+  "runner_version": "1",
+  "schema_version": "1.0",
+  "selected_item_count": 100,
+  "selected_item_ids_sha256": "2593c6809f05467024df6967b1153f40010f465df974f42f41525e9d456516ae"
+}

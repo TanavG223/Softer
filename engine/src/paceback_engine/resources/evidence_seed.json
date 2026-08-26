@@ -1,0 +1,58 @@
+[
+  {
+    "id": "cdc-danger-signs-2025",
+    "title": "CDC: Symptoms of Mild TBI and Concussion",
+    "url": "https://www.cdc.gov/traumatic-brain-injury/signs-symptoms/index.html",
+    "published": "2025-09-15",
+    "scope": "allAges",
+    "content": "A possible danger sign after a bump, blow, or jolt requires immediate emergency medical care. Call 911 or go to an emergency department right away. Danger signs summarized from CDC include a worsening headache that does not go away; repeated vomiting; seizures or convulsions; weakness, numbness, or decreased coordination; slurred speech or unusual behavior; unequal pupils; confusion, restlessness, or agitation; loss of consciousness; and being very drowsy or unable to wake."
+  },
+  {
+    "id": "cdc-danger-signs-young-child-2025",
+    "title": "CDC: Young-child behavioral danger signs",
+    "url": "https://www.cdc.gov/traumatic-brain-injury/signs-symptoms/index.html",
+    "published": "2025-09-15",
+    "scope": "youngChild0To5",
+    "content": "For infants and young children who cannot clearly describe how they feel, CDC also lists behavior changes such as inconsolable crying and refusing to nurse or eat among signs that require emergency medical care after a bump, blow, or jolt. Call 911 or go to an emergency department right away. This is static safety information, not an AI assessment."
+  },
+  {
+    "id": "cdc-school-child-2025",
+    "title": "CDC HEADS UP: Returning to School After a Concussion",
+    "url": "https://www.cdc.gov/heads-up/guidelines/returning-to-school.html",
+    "published": "2025-08-06",
+    "scope": "child6To12",
+    "content": "CDC says school support and accommodations should be based on the student's symptoms and information from their healthcare provider. A school concussion management plan should use a collaborative team, identify who monitors symptoms, and account for the student's age, understanding, emotional status, and ability to handle activities. Examples of possible school supports include adjusted assignments, extra time, rest breaks, reduced exposure to bright or noisy environments, and a quiet place when overwhelmed. The healthcare provider and school team decide what is appropriate for the student."
+  },
+  {
+    "id": "cdc-school-teen-2025",
+    "title": "CDC HEADS UP: Returning to School After a Concussion",
+    "url": "https://www.cdc.gov/heads-up/guidelines/returning-to-school.html",
+    "published": "2025-08-06",
+    "scope": "teen13To17",
+    "content": "CDC says school support and accommodations should be based on the student's symptoms and information from their healthcare provider. A school concussion management plan should use a collaborative team, identify who monitors symptoms, and account for the student's age, understanding, emotional status, and ability to handle activities. Examples of possible school supports include adjusted assignments, extra time, rest breaks, reduced exposure to bright or noisy environments, and a quiet place when overwhelmed. The healthcare provider and school team decide what is appropriate for the student."
+  },
+  {
+    "id": "cdc-work-adult-2024",
+    "title": "CDC: Instructions on Returning to Work",
+    "url": "https://www.cdc.gov/traumatic-brain-injury/media/pdfs/2024/05/return_to_work_instructions_ENG-508.pdf",
+    "published": "2024-05-01",
+    "scope": "adult18To64",
+    "content": "CDC's return-to-work form is completed by a healthcare provider and says recommendations may be updated at follow-up. The form lets a provider document changes such as a shortened workday, extended task time, a quiet place for rest breaks, reduced screen time, light or noise supports, and restrictions involving driving, heights, machinery, or heavy equipment. PaceBack must display only confirmed entries from a clinician plan and must not choose or change these restrictions."
+  },
+  {
+    "id": "cdc-work-older-adult-2024",
+    "title": "CDC: Instructions on Returning to Work",
+    "url": "https://www.cdc.gov/traumatic-brain-injury/media/pdfs/2024/05/return_to_work_instructions_ENG-508.pdf",
+    "published": "2024-05-01",
+    "scope": "olderAdult65Plus",
+    "content": "CDC's return-to-work form is completed by a healthcare provider and says recommendations may be updated at follow-up. The form lets a provider document changes such as a shortened workday, extended task time, a quiet place for rest breaks, reduced screen time, light or noise supports, and restrictions involving driving, heights, machinery, or heavy equipment. PaceBack must display only confirmed entries from a clinician plan and must not choose or change these restrictions."
+  },
+  {
+    "id": "amsterdam-consensus-2023",
+    "title": "Amsterdam 2022 concussion-in-sport consensus statement",
+    "url": "https://bjsm.bmj.com/content/57/11/695",
+    "published": "2023-06-01",
+    "scope": "allAges",
+    "content": "The Amsterdam concussion-in-sport consensus describes staged return-to-learn and return-to-sport strategies overseen by qualified healthcare professionals. It distinguishes relative rest from prolonged complete rest and describes gradual activity that does not meaningfully worsen symptoms. Medical determination is required before activities with a risk of head impact, and PaceBack must never select a stage, advance a stage, diagnose concussion, predict recovery, or provide sports clearance."
+  }
+]

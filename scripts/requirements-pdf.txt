@@ -1,0 +1,2 @@
+# Pinned dependency for scripts/generate_synthetic_plan_pdfs.py only.
+reportlab==4.4.9

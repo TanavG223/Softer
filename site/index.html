@@ -1,0 +1,845 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta
+      name="description"
+      content="PaceBack is an all-ages, local-first native Apple concussion-recovery companion for Mac and iPhone, with cited evidence and deterministic safety boundaries."
+    >
+    <meta name="theme-color" content="#0b2630">
+    <meta name="color-scheme" content="light dark">
+    <meta property="og:title" content="PaceBack — Recovery support that knows when not to answer">
+    <meta
+      property="og:description"
+      content="Local AI, age-aware evidence, and explicit abstention for safer concussion-recovery support."
+    >
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="assets/paceback-icon-512.png">
+    <title>PaceBack — Local, evidence-grounded recovery support</title>
+    <link rel="icon" href="assets/paceback-icon-512.png" type="image/png">
+    <link rel="stylesheet" href="styles.css">
+    <script src="app.js" defer></script>
+  </head>
+
+  <body>
+    <a class="skip-link" href="#main">Skip to main content</a>
+
+    <div class="field-strip" aria-label="Prototype status">
+      <span>Native Mac + iPhone</span>
+      <span aria-hidden="true">/</span>
+      <span>Research prototype</span>
+      <span aria-hidden="true">/</span>
+      <span>AI/ML + Responsible AI</span>
+    </div>
+
+    <header class="site-header">
+      <a class="brand" href="#top">
+        <img src="assets/paceback-icon-96.png" width="48" height="48" alt="">
+        <span>
+          <strong>PaceBack</strong>
+          <small>evidence before answers</small>
+        </span>
+      </a>
+
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="#people">All ages</a>
+        <a href="#iphone">iPhone</a>
+        <a href="#pipeline">AI system</a>
+        <a href="#evidence">Evidence</a>
+        <a href="#safety">Safety</a>
+        <a class="nav-cta" href="#demo">View demo path</a>
+      </nav>
+    </header>
+
+    <main id="main" tabindex="-1">
+      <section class="hero spine-section" id="top" aria-labelledby="hero-title">
+        <div class="spine-marker" aria-hidden="true"><span>00</span></div>
+
+        <div class="hero-copy">
+          <p class="eyebrow">Native Mac + iPhone · without the black box</p>
+          <h1 id="hero-title">Recovery support that knows when <em>not</em> to answer.</h1>
+          <p class="lede">
+            PaceBack is an all-ages native Apple companion. On Mac, a confirmed clinician plan can meet trusted public
+            guidance inside bounded hybrid RAG. On iPhone, frozen local models search public trusted evidence only.
+            No health question goes to a cloud model. The person stays in control.
+          </p>
+
+          <div class="hero-actions" aria-label="Project links">
+            <a class="button button-primary" href="#iphone">See the iPhone trust setup</a>
+            <a class="button button-text" href="#pipeline">Inspect the AI pipeline <span aria-hidden="true">↓</span></a>
+          </div>
+
+          <dl class="platform-boundary" aria-label="Platform evidence boundaries">
+            <div><dt>macOS</dt><dd>Confirmed clinician plan + public evidence</dd></div>
+            <div><dt>iPhone</dt><dd>Bundled public evidence only · no plan RAG</dd></div>
+          </dl>
+
+          <aside class="boundary-note" aria-label="Clinical boundary">
+            <span class="boundary-icon" aria-hidden="true">!</span>
+            <p>
+              <strong>Supports care. Never replaces it.</strong>
+              PaceBack does not diagnose, treat, predict recovery, prescribe, or clear anyone for school, work,
+              driving, exercise, or sport.
+            </p>
+          </aside>
+        </div>
+
+        <article class="decision-receipt" aria-labelledby="receipt-title">
+          <div class="receipt-head">
+            <div>
+              <p class="micro-label">macOS · local decision receipt</p>
+              <h2 id="receipt-title">Evidence Q&amp;A</h2>
+            </div>
+            <span class="status-key"><span aria-hidden="true"></span> Mac · on device</span>
+          </div>
+
+          <div class="query-block">
+            <p class="micro-label">Question · synthetic age-15 profile</p>
+            <p>“Which school supports are in my confirmed plan?”</p>
+          </div>
+
+          <dl class="receipt-grid">
+            <div>
+              <dt>Route</dt>
+              <dd>Single retrieval</dd>
+            </div>
+            <div>
+              <dt>Corpus</dt>
+              <dd>All ages + teen</dd>
+            </div>
+            <div>
+              <dt>Generator</dt>
+              <dd>Frozen</dd>
+            </div>
+            <div>
+              <dt>Network</dt>
+              <dd>Disabled</dd>
+            </div>
+          </dl>
+
+          <div class="answer-preview">
+            <p class="micro-label">Extractive answer · verify before use</p>
+            <p>Your confirmed plan includes reduced screen brightness and scheduled breaks.</p>
+            <div class="citation-line">
+              <span>Plan p. 1</span>
+              <span>Plan p. 2</span>
+              <span class="verified-mark">2 claims located</span>
+            </div>
+          </div>
+
+          <footer>
+            <span>Human confirmation required</span>
+            <span aria-hidden="true">PB–015</span>
+          </footer>
+        </article>
+      </section>
+
+      <section class="purpose-band" aria-label="Project thesis">
+        <p>Two native surfaces. One evidence-before-answers rule.</p>
+        <p>Mac and iPhone expose different evidence boundaries instead of flattening them into one bigger claim.</p>
+      </section>
+
+      <section class="people spine-section" id="people" aria-labelledby="people-title">
+        <div class="spine-marker" aria-hidden="true"><span>01</span></div>
+
+        <div class="section-intro">
+          <p class="eyebrow">Five care contexts · local by design</p>
+          <h2 id="people-title">Age changes the experience—not the privacy promise.</h2>
+          <p>
+            PaceBack stores an alias and age band, never a name or birth date. Each local profile has a separate key;
+            macOS adds an isolated retrieval namespace, while iPhone filters public evidence before both retrievers.
+            Profiles and documents do not sync between platforms. Select an age context to inspect the role boundary.
+          </p>
+        </div>
+
+        <div class="age-layout">
+          <div class="age-rail" role="group" aria-label="Age-band examples and synthetic demo profiles">
+            <button
+              class="age-stop"
+              type="button"
+              data-age="0–5"
+              aria-pressed="false"
+              aria-controls="persona-receipt"
+              data-operator="Caregiver-operated"
+              data-view="Caregiver-led sessions; no unrestricted chat"
+              data-gate="All administrative actions remain caregiver-only"
+            >
+              <span class="age-number age-range">0–5</span>
+              <span><strong>Young child</strong><small>caregiver operated</small></span>
+            </button>
+            <button
+              class="age-stop is-selected"
+              type="button"
+              data-age="7"
+              aria-pressed="true"
+              aria-controls="persona-receipt"
+              data-operator="Caregiver-operated"
+              data-view="Brief guided child view"
+              data-gate="Imports, reports, deletion, and settings"
+            >
+              <span class="age-number">7</span>
+              <span><strong>School age</strong><small>caregiver-managed</small></span>
+            </button>
+            <button
+              class="age-stop"
+              type="button"
+              data-age="15"
+              aria-pressed="false"
+              aria-controls="persona-receipt"
+              data-operator="Guardian-initialized teen"
+              data-view="Sessions, simplification, cited Q&amp;A"
+              data-gate="Care-plan administration and exports"
+            >
+              <span class="age-number">15</span>
+              <span><strong>Teen</strong><small>guided independence</small></span>
+            </button>
+            <button
+              class="age-stop"
+              type="button"
+              data-age="35"
+              aria-pressed="false"
+              aria-controls="persona-receipt"
+              data-operator="Self-managed"
+              data-view="Full recovery workspace"
+              data-gate="Caregiver access requires revocable approval"
+            >
+              <span class="age-number">35</span>
+              <span><strong>Adult</strong><small>owner controlled</small></span>
+            </button>
+            <button
+              class="age-stop"
+              type="button"
+              data-age="72"
+              aria-pressed="false"
+              aria-controls="persona-receipt"
+              data-operator="Self or approved caregiver"
+              data-view="Full workspace with readable defaults"
+              data-gate="Caregiver access remains revocable"
+            >
+              <span class="age-number">72</span>
+              <span><strong>Older adult</strong><small>flexible support</small></span>
+            </button>
+          </div>
+
+          <article class="persona-receipt" id="persona-receipt" aria-live="polite" aria-atomic="true">
+            <p class="micro-label">Selected profile · synthetic</p>
+            <div class="persona-age"><span>Age</span><strong id="persona-age">7</strong></div>
+            <dl>
+              <div><dt>Normal operator</dt><dd id="persona-operator">Caregiver-operated</dd></div>
+              <div><dt>Direct experience</dt><dd id="persona-view">Brief guided child view</dd></div>
+              <div><dt>Protected by local gate</dt><dd id="persona-gate">Imports, reports, deletion, and settings</dd></div>
+            </dl>
+            <p class="persona-foot">Ages 0–5 are fully caregiver-operated. Exact birth dates are never stored.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="iphone spine-section" id="iphone" aria-labelledby="iphone-title">
+        <div class="spine-marker" aria-hidden="true"><span>02</span></div>
+
+        <div class="section-intro split-intro">
+          <div>
+            <p class="eyebrow">Native iPhone · setup you can inspect</p>
+            <h2 id="iphone-title">Private AI arrives as a receipt—not a promise.</h2>
+          </div>
+          <p>
+            Evidence search stays locked until four frozen artifacts pass a signed, byte-for-byte verification. The
+            setup is explicit, cancellable, and user-initiated; after activation, evidence search is offline.
+          </p>
+        </div>
+
+        <div class="iphone-layout">
+          <div class="setup-column">
+            <div class="setup-stages" role="group" aria-label="iPhone model setup stages">
+              <button
+                class="setup-stage is-active"
+                type="button"
+                data-ios-stage="download"
+                aria-pressed="true"
+                aria-controls="ios-stage-receipt"
+              ><span>01</span>Download</button>
+              <button
+                class="setup-stage"
+                type="button"
+                data-ios-stage="verify"
+                aria-pressed="false"
+                aria-controls="ios-stage-receipt"
+              ><span>02</span>Verify</button>
+              <button
+                class="setup-stage"
+                type="button"
+                data-ios-stage="ready"
+                aria-pressed="false"
+                aria-controls="ios-stage-receipt"
+              ><span>03</span>Ready offline</button>
+            </div>
+
+            <article class="ios-stage-receipt" id="ios-stage-receipt" aria-live="polite" aria-atomic="true">
+              <p class="micro-label" id="ios-stage-kicker">Stage 01 · explicit transfer</p>
+              <h3 id="ios-stage-title">The user chooses when the model pack arrives.</h3>
+              <p id="ios-stage-copy">
+                Four frozen files—BGE and MiniLM ONNX weights plus their tokenizers—download in the foreground over
+                immutable-revision HTTPS URLs on allowlisted hosts. PaceBack sends no profile, health, symptom, query,
+                or care-plan fields.
+              </p>
+              <dl>
+                <div><dt id="ios-stat-label-1">Pack size</dt><dd id="ios-stat-value-1">157,716,998 bytes</dd></div>
+                <div><dt id="ios-stat-label-2">Choice</dt><dd id="ios-stat-value-2">Wi-Fi or cellular</dd></div>
+                <div><dt id="ios-stat-label-3">Session</dt><dd id="ios-stat-value-3">Foreground only</dd></div>
+              </dl>
+            </article>
+
+            <dl class="byte-ledger" aria-label="iPhone local model storage facts">
+              <div>
+                <dt>Frozen pack</dt>
+                <dd><strong>157,716,998 bytes</strong><span>about 151 MiB</span></dd>
+              </div>
+              <div>
+                <dt>Conservative working-space check</dt>
+                <dd><strong>357,919,352 bytes</strong><span>download + staging + activation headroom</span></dd>
+              </div>
+            </dl>
+          </div>
+
+          <div class="setup-captures" aria-label="Real iPhone simulator setup captures">
+            <figure class="phone-capture phone-capture-front">
+              <img
+                src="assets/paceback-ios-setup-top.jpg"
+                width="368"
+                height="800"
+                alt="PaceBack iPhone Private AI setup showing Download, Verify, and Ready offline stages and the exact 157,716,998-byte model-pack size."
+              >
+              <figcaption>01 / Transfer is an explicit choice.</figcaption>
+            </figure>
+            <figure class="phone-capture phone-capture-back">
+              <img
+                src="assets/paceback-ios-setup-privacy.jpg"
+                width="368"
+                height="800"
+                alt="PaceBack iPhone setup showing enough working space, local hybrid search features, and a privacy receipt stating that model bytes come in while profile data stays out."
+              >
+              <figcaption>02 / Privacy boundary is visible before download.</figcaption>
+            </figure>
+            <p class="capture-note">Real app simulator captures · research prototype · not clinical validation</p>
+          </div>
+        </div>
+
+        <ol class="setup-contract" aria-label="Secure model activation contract">
+          <li><span>01</span><div><strong>Constrain transport</strong><p>Immutable-revision HTTPS URLs on allowlisted hosts; ephemeral, cookie-free, cache-free session.</p></div></li>
+          <li><span>02</span><div><strong>Prove integrity</strong><p>A bundled Ed25519 public key verifies the signed manifest, then exact size and SHA-256 verify every artifact.</p></div></li>
+          <li><span>03</span><div><strong>Activate atomically</strong><p>Downloads land in staging. Only a complete verified pack becomes active; an interrupted pack stays inert.</p></div></li>
+          <li><span>04</span><div><strong>Stay offline</strong><p>Frozen BGE/MiniLM ONNX models run locally. There is no cloud generation, search, tooling, or fallback.</p></div></li>
+        </ol>
+
+        <div class="iphone-run">
+          <div class="run-intro">
+            <p class="eyebrow">One captured run · not a latency benchmark</p>
+            <h3>A local answer leaves a source trail.</h3>
+            <p>
+              In this simulator capture, a work-support query completed locally in 388 ms with no cloud request. The
+              result cites a bundled CDC passage and explicitly says source-linked does not mean medically verified.
+              The locator proves only that the excerpt maps back to that bundled passage.
+            </p>
+            <dl class="run-receipt">
+              <div><dt>Captured runtime</dt><dd>388 ms</dd></div>
+              <div><dt>Network</dt><dd>No cloud request</dd></div>
+              <div><dt>Output</dt><dd>Extractive + source linked</dd></div>
+            </dl>
+          </div>
+
+          <div class="ios-proof-strip" aria-label="Real iPhone simulator product captures">
+            <figure class="proof-capture">
+              <img
+                src="assets/paceback-ios-today.jpg"
+                width="368"
+                height="800"
+                alt="PaceBack iPhone Today view with static danger-sign access, short focus, evidence, and care-plan entry points."
+              >
+              <figcaption>Today / safety stays one tap away</figcaption>
+            </figure>
+            <figure class="proof-capture">
+              <img
+                src="assets/paceback-ios-evidence-query.jpg"
+                width="368"
+                height="800"
+                alt="PaceBack iPhone evidence screen showing a ready-offline local engine and a work-support question before on-device search."
+              >
+              <figcaption>Ask / question remains on device</figcaption>
+            </figure>
+            <figure class="proof-capture proof-capture-result">
+              <img
+                src="assets/paceback-ios-evidence-result.jpg"
+                width="368"
+                height="800"
+                alt="PaceBack iPhone evidence result showing a source-linked CDC returning-to-work passage, a 388 millisecond local completion receipt, and explicit not-medically-verified language."
+              >
+              <figcaption>Result / locator and limitation travel together</figcaption>
+            </figure>
+          </div>
+        </div>
+
+        <aside class="ios-scope-boundary" aria-label="iPhone evidence scope boundary">
+          <span aria-hidden="true">iOS ≠ macOS</span>
+          <div>
+            <p class="micro-label">Public trusted evidence only on iPhone</p>
+            <h3>Clinician-plan RAG does not cross this platform boundary.</h3>
+            <p>
+              iPhone does not index clinician PDFs or run plan retrieval. It filters seven bundled curated
+              public-source summaries by age before sparse and dense search, then returns short source-linked passages
+              or abstains. macOS owns the confirmed clinician-plan workflow.
+            </p>
+          </div>
+          <a class="button button-text" href="../ios/README.md">Inspect the iOS contract <span aria-hidden="true">↗</span></a>
+        </aside>
+      </section>
+
+      <section class="pipeline spine-section section-dark" id="pipeline" aria-labelledby="pipeline-title">
+        <div class="spine-marker" aria-hidden="true"><span>03</span></div>
+
+        <div class="section-intro split-intro">
+          <div>
+            <p class="eyebrow">AI/ML · built for inspection</p>
+            <h2 id="pipeline-title">The answer is the last step—not the product.</h2>
+          </div>
+          <p>
+            Every evidence request carries profile, age, role, care context, and evidence scope. Filters run before
+            both retrievers. macOS can add a confirmed plan namespace; iPhone stays inside its bundled public corpus.
+            Retrieved text is evidence, never an instruction.
+          </p>
+        </div>
+
+        <div class="route-lab">
+          <div class="route-controls">
+            <p class="micro-label">Try an illustrative request path</p>
+            <div class="segmented" role="group" aria-label="Request route examples">
+              <button
+                type="button"
+                class="route-button is-active"
+                data-route="safety"
+                aria-pressed="true"
+                aria-controls="route-readout"
+              >Safety signal</button>
+              <button type="button" class="route-button" data-route="single" aria-pressed="false" aria-controls="route-readout">Cited question</button>
+              <button type="button" class="route-button" data-route="iterative" aria-pressed="false" aria-controls="route-readout">Multi-part plan</button>
+            </div>
+
+            <div class="route-readout" id="route-readout" aria-live="polite" aria-atomic="true">
+              <p id="route-kicker">Deterministic bypass</p>
+              <h3 id="route-title">Danger signs never wait for AI.</h3>
+              <p id="route-copy">
+                Reviewed danger-sign phrases route directly to static CDC emergency instructions. Retrieval and model
+                generation do not run.
+              </p>
+              <dl>
+                <div><dt>Maximum rounds</dt><dd id="route-rounds">0</dd></div>
+                <div><dt>Answer rule</dt><dd id="route-rule">Static safety copy</dd></div>
+                <div><dt>Stop condition</dt><dd id="route-stop">Immediate</dd></div>
+              </dl>
+            </div>
+          </div>
+
+          <ol class="pipeline-map" aria-label="PaceBack retrieval pipeline">
+            <li data-stage="scope">
+              <span class="stage-index">01</span>
+              <div><strong>Scope before ranking</strong><small>profile namespace + allAges + selected age corpus</small></div>
+              <span class="stage-state">required</span>
+            </li>
+            <li data-stage="sparse">
+              <span class="stage-index">02</span>
+              <div><strong>FTS5 / BM25</strong><small>sparse lexical retrieval · top 50</small></div>
+              <span class="stage-state">local</span>
+            </li>
+            <li data-stage="dense">
+              <span class="stage-index">03</span>
+              <div><strong>BGE-small-en-v1.5</strong><small>384-dimensional ONNX embeddings · top 50</small></div>
+              <span class="stage-state">signed</span>
+            </li>
+            <li data-stage="fusion">
+              <span class="stage-index">04</span>
+              <div><strong>Reciprocal-rank fusion</strong><small>RRF k=60 · deduplicated candidates</small></div>
+              <span class="stage-state">bounded</span>
+            </li>
+            <li data-stage="rerank">
+              <span class="stage-index">05</span>
+              <div><strong>MiniLM-L6-v2 reranking</strong><small>arm64 qint8 ONNX · top 30</small></div>
+              <span class="stage-state">frozen</span>
+            </li>
+            <li data-stage="budget">
+              <span class="stage-index">06</span>
+              <div><strong>Context budget</strong><small>extractive reduction · maximum 8 cited passages</small></div>
+              <span class="stage-state">loss-aware</span>
+            </li>
+            <li data-stage="verify">
+              <span class="stage-index">07</span>
+              <div><strong>Verify or abstain</strong><small>unlocatable claims are removed; empty support stops the answer</small></div>
+              <span class="stage-state">fail closed</span>
+            </li>
+          </ol>
+        </div>
+
+        <div class="model-strip" aria-label="Model and runtime facts">
+          <div><span>Dense model</span><strong>BGE-small-en-v1.5</strong></div>
+          <div><span>Reranker</span><strong>MiniLM-L6-v2 qint8</strong></div>
+          <div><span>Adaptive cap</span><strong>≤ 3 rounds</strong></div>
+          <div><span>Weight updates</span><strong>None at runtime</strong></div>
+          <a href="../engine/MODEL_PROVENANCE.md">Inspect model provenance <span aria-hidden="true">↗</span></a>
+        </div>
+      </section>
+
+      <section class="evidence spine-section" id="evidence" aria-labelledby="evidence-title">
+        <div class="spine-marker" aria-hidden="true"><span>04</span></div>
+
+        <div class="section-intro split-intro">
+          <div>
+            <p class="eyebrow">Measured, not marketed</p>
+            <h2 id="evidence-title">The ledger shows the failures, too.</h2>
+          </div>
+          <p>
+            The completed 100-item diagnostic ran the actual signed BGE + MiniLM model pack and a deterministic
+            fallback comparator. It is automated and unreviewed: useful engineering evidence, not clinical validation
+            or proof of health effectiveness.
+          </p>
+        </div>
+
+        <aside class="benchmark-scope" aria-label="Benchmark scope clarification">
+          <strong>Comparison boundary:</strong>
+          the real-model run swaps BGE dense retrieval and MiniLM reranking together. The observed difference cannot
+          be credited to either component individually, and promotion gates remain closed.
+        </aside>
+
+        <div class="comparison-frame">
+          <table class="model-comparison">
+            <caption>Actual signed model pack compared with the deterministic fallback on the same 100 items</caption>
+            <thead>
+              <tr>
+                <th scope="col">Automated metric</th>
+                <th scope="col">Signed BGE + MiniLM</th>
+                <th scope="col">Deterministic fallback</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Recall@20</th>
+                <td>0.9767</td>
+                <td>0.9667</td>
+              </tr>
+              <tr>
+                <th scope="row">nDCG@20</th>
+                <td>0.954886</td>
+                <td>0.894214</td>
+              </tr>
+              <tr>
+                <th scope="row">Mean latency</th>
+                <td>51.53 ms</td>
+                <td>7.09 ms</td>
+              </tr>
+            </tbody>
+          </table>
+          <p>Retrieval ranking improved in this diagnostic while mean latency increased. Human answer review is still absent.</p>
+          <p class="comparison-artifacts">
+            Frozen inputs and outputs:
+            <a href="../benchmark/results/full_real_models_unreviewed_unmeasured_2026-08-25-v2.summary.json">real-model v2 summary</a>
+            <span aria-hidden="true">·</span>
+            <a href="../benchmark/results/full_fallback_unreviewed_unmeasured_2026-08-25-v3.summary.json">fallback v3 summary</a>
+          </p>
+        </div>
+
+        <div class="evidence-ledger">
+          <article class="ledger-row ledger-pass">
+            <span class="ledger-symbol" aria-hidden="true">✓</span>
+            <p><strong>Cross-age leakage</strong><small>Automated isolation cases</small></p>
+            <p class="ledger-value"><strong>0</strong><small>observed</small></p>
+            <span class="ledger-status">structural pass</span>
+          </article>
+          <article class="ledger-row ledger-pass">
+            <span class="ledger-symbol" aria-hidden="true">✓</span>
+            <p><strong>Injection canary execution</strong><small>Retrieved-instruction adversarial cases</small></p>
+            <p class="ledger-value"><strong>0</strong><small>observed</small></p>
+            <span class="ledger-status">structural pass</span>
+          </article>
+          <article class="ledger-row ledger-pass">
+            <span class="ledger-symbol" aria-hidden="true">✓</span>
+            <p><strong>Structurally locatable citations</strong><small>Automated source locator check</small></p>
+            <p class="ledger-value"><strong>662/662</strong><small>located</small></p>
+            <span class="ledger-status">structural pass</span>
+          </article>
+          <article class="ledger-row ledger-open">
+            <span class="ledger-symbol" aria-hidden="true">↗</span>
+            <p><strong>Response-type match</strong><small>Current v2 diagnostic</small></p>
+            <p class="ledger-value"><strong>40/100</strong><small>matched</small></p>
+            <span class="ledger-status">needs work</span>
+          </article>
+          <article class="ledger-row ledger-open">
+            <span class="ledger-symbol" aria-hidden="true">↗</span>
+            <p><strong>Boundary-routing match</strong><small>Applicable diagnostic items</small></p>
+            <p class="ledger-value"><strong>3/63</strong><small>matched</small></p>
+            <span class="ledger-status">needs work</span>
+          </article>
+        </div>
+
+        <aside class="closed-gate">
+          <div class="gate-mark" aria-hidden="true"></div>
+          <div>
+            <p class="micro-label">Promotion gate · closed</p>
+            <h3>No performance claim until people review the evidence.</h3>
+            <p>
+              Clinical accuracy, citation precision, and unsupported-claim rate are not yet measured. Human review,
+              frozen retriever comparisons, and qualified clinical review remain required.
+            </p>
+          </div>
+          <a class="button button-light" href="../benchmark/results/README.md">Read the diagnostic record</a>
+        </aside>
+      </section>
+
+      <section class="safety spine-section" id="safety" aria-labelledby="safety-title">
+        <div class="spine-marker" aria-hidden="true"><span>05</span></div>
+
+        <div class="safety-heading">
+          <p class="eyebrow">Responsible AI is architecture</p>
+          <h2 id="safety-title">Privacy and restraint are not settings you can turn off.</h2>
+        </div>
+
+        <div class="safety-grid">
+          <article class="safety-primary">
+            <p class="index-label">Hard boundary / 01</p>
+            <h3>Health data has no intentional route to the internet.</h3>
+            <p>
+              No accounts, analytics, ads, trackers, cloud generation, external search, or user-data transmission.
+              iPhone setup makes four user-requested artifact transfers; their requests include no profile, health,
+              symptom, query, or care-plan fields. Normal evidence use is offline.
+            </p>
+            <ul class="plain-list">
+              <li><span aria-hidden="true">→</span> SQLCipher on macOS; per-profile AES-GCM keys in the iPhone Keychain</li>
+              <li><span aria-hidden="true">→</span> Signed model pack, pinned revisions, exact hashes, and ONNX probes</li>
+              <li><span aria-hidden="true">→</span> No live retraining; no child or user health data enters model weights</li>
+            </ul>
+          </article>
+
+          <article class="safety-item">
+            <p class="index-label">Hard boundary / 02</p>
+            <h3>Danger signs bypass AI.</h3>
+            <p>Age-specific static emergency guidance appears without retrieval or generation, including infant and young-child behavioral signs.</p>
+          </article>
+
+          <article class="safety-item">
+            <p class="index-label">Hard boundary / 03</p>
+            <h3>On macOS, clinician plans are confirmed—not silently interpreted.</h3>
+            <p>Every page-cited extracted restriction stays a draft until the profile owner or caregiver confirms it. iPhone plan RAG is absent.</p>
+          </article>
+
+          <article class="safety-item">
+            <p class="index-label">Hard boundary / 04</p>
+            <h3>Uncertainty has a visible outcome.</h3>
+            <p>If the verifier cannot locate support, PaceBack removes the claim or says it could not verify an answer.</p>
+          </article>
+        </div>
+
+        <div class="document-links" aria-label="Safety documentation">
+          <a href="../docs/safety_privacy.md"><strong>Safety + privacy</strong><span>read the enforced boundaries ↗</span></a>
+          <a href="../docs/threat_model.md"><strong>Threat model</strong><span>inspect trust boundaries ↗</span></a>
+          <a href="../docs/clinical_limitations.md"><strong>Clinical limitations</strong><span>see what remains unvalidated ↗</span></a>
+        </div>
+      </section>
+
+      <section class="experience spine-section section-ink" id="experience" aria-labelledby="experience-title">
+        <div class="spine-marker" aria-hidden="true"><span>06</span></div>
+
+        <div class="section-intro split-intro">
+          <div>
+            <p class="eyebrow">Designed for a lower cognitive load</p>
+            <h2 id="experience-title">A recovery workspace, not an endless chat.</h2>
+          </div>
+          <p>
+            Brief, standard, and full reading modes; adjustable typography and spacing; reduced motion; keyboard
+            navigation; VoiceOver labels; and text-to-speech are part of the native app’s contract.
+          </p>
+        </div>
+
+        <ol class="experience-index">
+          <li>
+            <span>01</span>
+            <div><h3>Today</h3><p>One calm view of confirmed supports, the next planned task, and explicit safety access.</p></div>
+            <small>orientation</small>
+          </li>
+          <li>
+            <span>02</span>
+            <div><h3>Focus session</h3><p>A cancellable timer that pauses when the user reports a higher symptom rating—without prescribing what to do next.</p></div>
+            <small>pacing</small>
+          </li>
+          <li>
+            <span>03</span>
+            <div><h3>Simplify</h3><p>On macOS, general text can use guarded local generation. Medical or restriction text always stays extractive.</p></div>
+            <small>macOS</small>
+          </li>
+          <li>
+            <span>04</span>
+            <div><h3>Ask evidence</h3><p>Age-filtered answers arrive with source locations, route metadata, and visible abstention.</p></div>
+            <small>grounding</small>
+          </li>
+          <li>
+            <span>05</span>
+            <div><h3>Care plan</h3><p>macOS PDF extraction produces a draft; nothing enters retrieval until confirmed. iPhone keeps plan content outside evidence search.</p></div>
+            <small>platform boundary</small>
+          </li>
+        </ol>
+      </section>
+
+      <section class="research spine-section" id="research" aria-labelledby="research-title">
+        <div class="spine-marker" aria-hidden="true"><span>07</span></div>
+
+        <div class="section-intro split-intro">
+          <div>
+            <p class="eyebrow">External design inputs · not validation</p>
+            <h2 id="research-title">Research shaped the questions, not the conclusions.</h2>
+          </div>
+          <p>
+            We used published usability work to challenge the interaction design and the official rubric to challenge
+            the engineering proof. None of these sources tested PaceBack, its AI, its safety, or health outcomes.
+          </p>
+        </div>
+
+        <ol class="research-ledger">
+          <li>
+            <span class="research-index">01 / Youth</span>
+            <div>
+              <h3>Design with young people and clinicians—not around them.</h3>
+              <p>
+                A small 2019 pediatric concussion app study used iterative input from seven young people and seven
+                health professionals. It supports participatory, age-aware usability as a design input; it does not
+                establish PaceBack’s usability or effectiveness.
+              </p>
+            </div>
+            <a href="https://humanfactors.jmir.org/2019/2/e12135" rel="external">Read the JMIR study <span aria-hidden="true">↗</span></a>
+          </li>
+          <li>
+            <span class="research-index">02 / Adults</span>
+            <div>
+              <h3>Personalized can still be quiet.</h3>
+              <p>
+                A 2025 adult persistent-symptom app study emphasized a personalized-yet-simple experience and reported
+                two adverse events related to increased symptom awareness. That informed restrained check-ins, brief
+                modes, and no endless nudging—not a safety or outcome claim.
+              </p>
+            </div>
+            <a href="https://humanfactors.jmir.org/2025/1/e75323" rel="external">Read the JMIR study <span aria-hidden="true">↗</span></a>
+          </li>
+          <li>
+            <span class="research-index">03 / Build target</span>
+            <div>
+              <h3>Judge the system where it can be inspected.</h3>
+              <p>
+                Hack for Humanity’s criteria foreground AI/ML technical complexity, data responsibility, domain and
+                clinical safety, research foundation, innovation, and accessible UX. We map those criteria to files
+                and measured limits; the rubric is a build target, not product evidence.
+              </p>
+            </div>
+            <a href="https://hack-for-humanity-summer-26.devpost.com/rules" rel="external">Read the official criteria <span aria-hidden="true">↗</span></a>
+          </li>
+        </ol>
+
+        <aside class="research-boundary">
+          <span aria-hidden="true">≠</span>
+          <p><strong>Research-informed does not mean research-validated.</strong> Independent usability, clinical safety, and outcome studies remain future work.</p>
+        </aside>
+      </section>
+
+      <section class="rubric spine-section" id="rubric" aria-labelledby="rubric-title">
+        <div class="spine-marker" aria-hidden="true"><span>08</span></div>
+
+        <div class="section-intro">
+          <p class="eyebrow">Built against the judging questions</p>
+          <h2 id="rubric-title">A proof trail for every ambitious claim.</h2>
+          <p>This map points to inspectable work. It does not predict a score.</p>
+        </div>
+
+        <div class="rubric-proof">
+          <article>
+            <span class="rubric-number">01</span>
+            <h3>Technical complexity</h3>
+            <p>Two native SwiftUI targets: a bounded macOS sidecar pipeline plus iPhone ONNX retrieval behind signed setup, pre-filtering, reranking, verification, and cancellation.</p>
+            <a href="../docs/architecture.md">Architecture record ↗</a>
+          </article>
+          <article>
+            <span class="rubric-number">02</span>
+            <h3>Data safety + responsibility</h3>
+            <p>Minimized, isolated profiles; platform-native encrypted storage; immutable artifact revisions and hashes; no cloud AI or user-data training; deterministic safety and visible failure states.</p>
+            <a href="../docs/safety_privacy.md">Safety record ↗</a>
+          </article>
+          <article>
+            <span class="rubric-number">03</span>
+            <h3>Clinical + domain responsibility</h3>
+            <p>Confirmed-only plans on macOS, public trusted evidence only on iPhone, age-specific care contexts, deterministic danger signs, and explicit non-diagnostic limits.</p>
+            <a href="../docs/product_policy.md">Product policy ↗</a>
+          </article>
+          <article>
+            <span class="rubric-number">04</span>
+            <h3>Innovation + accessibility</h3>
+            <p>A visible download-to-trust ceremony, cognitive-load-aware reading modes, all-age role transitions, human confirmation, keyboard-first flows, and non-color status.</p>
+            <a href="../docs/rubric_mapping.md">Full rubric map ↗</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="demo spine-section" id="demo" aria-labelledby="demo-title">
+        <div class="spine-marker" aria-hidden="true"><span>09</span></div>
+
+        <div class="demo-heading">
+          <div>
+            <p class="eyebrow">Four minutes · four synthetic lives</p>
+            <h2 id="demo-title">The demo follows people, not feature menus.</h2>
+          </div>
+          <p>No real health data. No hidden setup. Every result has a visible boundary or evidence trail.</p>
+        </div>
+
+        <ol class="demo-timeline">
+          <li>
+            <time datetime="PT0M">00:00</time>
+            <span class="demo-age">Age 7</span>
+            <div><h3>Caregiver confirms a school plan.</h3><p>Import a synthetic PDF, confirm one page-cited support, and begin a calm guided session.</p></div>
+          </li>
+          <li>
+            <time datetime="PT1M">01:00</time>
+            <span class="demo-age">Age 15</span>
+            <div><h3>A teen sees the iPhone boundary.</h3><p>Walk through Download → Verify → Ready offline, ask public evidence locally, then show that clinician-plan RAG is absent on iPhone.</p></div>
+          </li>
+          <li>
+            <time datetime="PT2M">02:00</time>
+            <span class="demo-age">Age 35</span>
+            <div><h3>An adult inspects the AI.</h3><p>Ask a multi-part work question, reveal the route and citations, then refuse a recovery-date prediction.</p></div>
+          </li>
+          <li>
+            <time datetime="PT3M">03:00</time>
+            <span class="demo-age">Age 72</span>
+            <div><h3>Caregiver access remains consent-based.</h3><p>Show explicit approval, a readable report, descriptive trends, and the medication boundary.</p></div>
+          </li>
+        </ol>
+
+        <div class="final-cta">
+          <div>
+            <p class="micro-label">Inspect before believing</p>
+            <h2>Every impressive sentence should have somewhere to click.</h2>
+          </div>
+          <div class="final-actions">
+            <a class="button button-primary" href="../docs/hackathon_submission.md">Open submission guide</a>
+            <a class="button button-text" href="../docs/evaluation_protocol.md">Evaluation protocol <span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-brand">
+        <img src="assets/paceback-icon-96.png" width="40" height="40" alt="">
+        <p><strong>PaceBack</strong><span>Unvalidated, local-first research prototype.</span></p>
+      </div>
+      <nav aria-label="Repository documentation">
+        <a href="../README.md">Repository</a>
+        <a href="../docs/provenance.md">Provenance</a>
+        <a href="../docs/evidence_manifest.json">Evidence manifest</a>
+        <a href="../NOTICE">Notices</a>
+      </nav>
+      <p class="footer-note">No cookies. No analytics. No runtime network requests. External research links open only when selected.</p>
+    </footer>
+  </body>
+</html>

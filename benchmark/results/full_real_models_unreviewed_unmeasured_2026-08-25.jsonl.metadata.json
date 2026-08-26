@@ -1,0 +1,154 @@
+{
+  "automated_evaluation": {
+    "citation_precision": {
+      "denominator": 0,
+      "numerator": 0,
+      "status": "not_measured",
+      "value": null
+    },
+    "complete": true,
+    "human_accuracy": {
+      "denominator": 0,
+      "numerator": 0,
+      "status": "not_measured",
+      "value": null
+    },
+    "output_count": 100,
+    "performance_claim_allowed": false,
+    "status": "unreviewed",
+    "unsupported_claim_rate": {
+      "denominator": 0,
+      "numerator": 0,
+      "status": "not_measured",
+      "value": null
+    }
+  },
+  "benchmark_sha256": "ce92848f2d807b586ce89186b5532d865ff11163dcd342a7e9a2b334cf37fae9",
+  "claim_support_review": "not_measured",
+  "clinical_correctness": "not_measured",
+  "config_sha256": "03ef2585849f7bd92b2cd71ebfc8bc261469303afcf20b5e4be0366653daaa69",
+  "engine_settings": {
+    "database_driver": "sqlite",
+    "max_output_tokens": 512,
+    "model_pack_activation": "active",
+    "model_pack_id": "paceback-bge-small-minilm-onnx-v1",
+    "network_calls": false,
+    "release_mode": false
+  },
+  "engine_version": "0.1.0",
+  "evidence_manifest_sha256": "8b24d594434178b816fe8e7b959771c60263dbdf03c8b8f31ec82733ddc4beb6",
+  "expected_labels_used_for_runtime_decisions": false,
+  "heldout_labels_used_for_tuning": false,
+  "mode": "full",
+  "model_manifest": {
+    "codeExecutionEnabled": false,
+    "components": [
+      {
+        "activation": "active",
+        "active": true,
+        "artifactSHA256": null,
+        "dimensions": null,
+        "failureReason": null,
+        "localOnly": true,
+        "modelID": null,
+        "name": "sqlite-fts5-bm25",
+        "provider": null,
+        "purpose": "sparse retrieval",
+        "revision": null,
+        "version": "builtin"
+      },
+      {
+        "activation": "active",
+        "active": true,
+        "artifactSHA256": null,
+        "dimensions": null,
+        "failureReason": null,
+        "localOnly": true,
+        "modelID": null,
+        "name": "reciprocal-rank-fusion",
+        "provider": null,
+        "purpose": "hybrid rank fusion",
+        "revision": null,
+        "version": "k60"
+      },
+      {
+        "activation": "standby",
+        "active": false,
+        "artifactSHA256": null,
+        "dimensions": 128,
+        "failureReason": null,
+        "localOnly": true,
+        "modelID": null,
+        "name": "signed-hashing-vector",
+        "provider": null,
+        "purpose": "deterministic dense-like retrieval fallback",
+        "revision": null,
+        "version": "1"
+      },
+      {
+        "activation": "standby",
+        "active": false,
+        "artifactSHA256": null,
+        "dimensions": null,
+        "failureReason": null,
+        "localOnly": true,
+        "modelID": null,
+        "name": "deterministic-lexical-reranker",
+        "provider": null,
+        "purpose": "deterministic local reranking fallback",
+        "revision": null,
+        "version": "1"
+      },
+      {
+        "activation": "active",
+        "active": true,
+        "artifactSHA256": "7f08c4efc917c6955144a45f8f9621963127f2739b804e407ff82e340974a58b",
+        "dimensions": 384,
+        "failureReason": null,
+        "localOnly": true,
+        "modelID": "BAAI/bge-small-en-v1.5",
+        "name": "bge-small-en-v1.5-onnx",
+        "provider": "CPUExecutionProvider",
+        "purpose": "local semantic dense retrieval",
+        "revision": "5c38ec7c405ec4b44b94cc5a9bb96e735b38267a",
+        "version": "1"
+      },
+      {
+        "activation": "active",
+        "active": true,
+        "artifactSHA256": "85a6239ef3d7c2c4245b11ea31d00a40e0faaa5f7963fa7b847c3420bbd09913",
+        "dimensions": null,
+        "failureReason": null,
+        "localOnly": true,
+        "modelID": "cross-encoder/ms-marco-MiniLM-L-6-v2",
+        "name": "ms-marco-MiniLM-L6-v2-onnx",
+        "provider": "CPUExecutionProvider",
+        "purpose": "local cross-encoder reranking",
+        "revision": "233902d25c440f23af6f7d6e94d2946bac0bee0a",
+        "version": "1"
+      }
+    ],
+    "modelPackActivation": "active",
+    "modelPackID": "paceback-bge-small-minilm-onnx-v1",
+    "runtimeWeightUpdatesEnabled": false,
+    "storageDriver": "sqlite",
+    "storageEncryptionActive": false,
+    "webSearchEnabled": false
+  },
+  "model_manifest_sha256": "8a118ae27c489645123851873c5a5ca84bccc5e3d5ec63c717bfb950c4ba3027",
+  "profile_ids": {
+    "adult": "a314c428-4be9-5529-af79-188f4697fc4c",
+    "age_ambiguous": "190fefdb-a8e1-5ab8-bd0d-614727f62636",
+    "child_caregiver": "82b5a31b-3891-5a50-a118-1597a0f7dcca",
+    "older_adult_caregiver": "1f3686f0-fde2-5397-b150-8b06ca869635",
+    "teen": "af89dfe4-e02f-5988-9cc4-b55574456474"
+  },
+  "promotion_gates": "not_evaluated",
+  "review_status": "unreviewed",
+  "run_output_sha256": "7b3bd59bd48ab02d19e3934e3d9e3adc6dd69fb043562a56165641b5ba45f915",
+  "runner_file_sha256": "f2bed5e3f547857cce8e696cec8856f0f62bc1bb28db003ff84dbf4dd62be628",
+  "runner_version": "2",
+  "schema_version": "1.0",
+  "selected_item_count": 100,
+  "selected_item_ids_sha256": "2593c6809f05467024df6967b1153f40010f465df974f42f41525e9d456516ae"
+}

@@ -1,0 +1,48 @@
+name: PaceBack verification
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  python:
+    name: Benchmark and engine
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: engine/pyproject.toml
+      - name: Install engine development dependencies
+        run: python -m pip install -e 'engine[dev]'
+      - name: Validate frozen benchmark
+        run: make benchmark-validate PYTHON=python
+      - name: Test benchmark and training contracts
+        run: make benchmark-test benchmark-lint reranker-contract PYTHON=python ENGINE_PYTHON=python
+      - name: Test and lint engine
+        run: make engine-test engine-lint ENGINE_PYTHON=python
+      - name: Verify static submission site
+        run: make site-test PYTHON=python
+
+  macos:
+    name: Native Apple builds and tests
+    runs-on: macos-26
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - name: Toolchain
+        run: swift --version
+      - name: Test native package
+        run: make macos-test
+      - name: Build native executable
+        run: make macos-build
+      - name: Test native iOS target
+        run: make ios-test
+      - name: Build iOS release configuration
+        run: make ios-build

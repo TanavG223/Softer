@@ -1,0 +1,54 @@
+[build-system]
+requires = ["hatchling==1.32.0"]
+build-backend = "hatchling.build"
+
+[project]
+name = "paceback-engine"
+version = "0.1.0"
+description = "Local-only, age-scoped evidence retrieval engine for PaceBack"
+readme = "README.md"
+requires-python = ">=3.11,<3.14"
+dependencies = [
+  "fastapi>=0.115,<1",
+  "pydantic>=2.10,<3",
+  "uvicorn>=0.34,<1",
+]
+
+[project.optional-dependencies]
+encrypted = [
+  "sqlcipher3==0.6.2",
+]
+dev = [
+  "httpx>=0.28,<1",
+  "pytest>=8.3,<9",
+  "pytest-cov>=6,<8",
+  "ruff>=0.9,<1",
+]
+packaging = [
+  "hatchling==1.32.0",
+  "pyinstaller==6.22.2",
+  "sqlcipher3==0.6.2",
+]
+ml = [
+  "cryptography==50.0.1",
+  "numpy==2.4.6",
+  "onnxruntime==1.29.0",
+  "tokenizers==0.23.1",
+]
+
+[project.scripts]
+paceback-engine = "paceback_engine.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/paceback_engine"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]

@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-08-25",
+  "purpose": "Local activation and wiring smoke test; not a retrieval-quality or clinical-performance result.",
+  "runtime": {
+    "releaseMode": true,
+    "storageDriver": "sqlcipher",
+    "modelPackActivation": "active",
+    "modelPackManifestSHA256": "9d432e366d410fe049313341e58b9d39e30f13b13f5310b2fe5fe9d0ad83c61d"
+  },
+  "activeComponents": [
+    "bge-small-en-v1.5-onnx",
+    "ms-marco-MiniLM-L6-v2-onnx",
+    "reciprocal-rank-fusion",
+    "sqlite-fts5-bm25"
+  ],
+  "fixture": {
+    "ageBand": "adult18To64",
+    "sourceKind": "clinicianPlan",
+    "content": "The confirmed clinician plan allows a quiet break after 18 minutes of screen use.",
+    "question": "What does my confirmed plan say about screen use?"
+  },
+  "observed": {
+    "httpStatus": 201,
+    "supportStatus": "verified",
+    "route": "singleRetrieval",
+    "retrievalRounds": 1,
+    "citationCount": 4
+  },
+  "limitations": [
+    "The fixture is synthetic and was not used to measure accuracy.",
+    "The archived 100-item diagnostic benchmark used deterministic fallback adapters, not this model pack.",
+    "No clinical effectiveness, citation precision, or unsupported-claim rate is established by this smoke test."
+  ]
+}
