@@ -8,7 +8,7 @@ Status: source-matched results for the current native macOS wellbeing prototype.
 | Native release compilation | PASS with Apple Command Line Tools and `swift build -c release --product PaceBack` |
 | Static site contract | PASS: structural/claim checker and JavaScript syntax; the Codex in-app browser exposed the expected landmarks, headings, support links, and pressed-state semantics; choosing “Thoughts moving fast” updated the live region to Harbor Tiles and the expected alternatives |
 | Packaged app signature/bundle inventory | PASS: 6.7 MiB arm64 bundle; strict deep signature valid; Apple Development team `8RMK4MG9T2`; only Apple system frameworks and Swift runtime libraries are linked |
-| Packaged app launch and visual smoke | PASS: the signed bundle activated a visible 1,180 × 780 window, preserved and loaded the existing encrypted profile without a Keychain prompt, and showed Calm, Play, and Harbor Tiles |
+| Packaged app launch and risk-based walkthrough | PASS: the signed bundle activated a visible 1,180 × 780 window, loaded the existing encrypted profile, began a standard activity, placed a Harbor Tiles piece, completed Harbor Path, and rendered Support, Privacy, About, and all Settings panes; see `release_acceptance_2026-09-03.md` |
 | Submission screenshots | PASS: 2,360 × 1,560 Retina captures for Calm, Play, and Harbor Tiles are in `output/submission/` |
 | Distribution signing/notarization | Not performed |
 | Accessibility testing with representative users | Not performed |

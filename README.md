@@ -46,5 +46,6 @@ The packaged application is written to `build/PaceBack.app`. Packaging automatic
 - [Safety and privacy](docs/safety_privacy.md)
 - [Clinical and scientific limitations](docs/clinical_limitations.md)
 - [Verification provenance](docs/provenance.md)
+- [Release acceptance walkthrough](docs/release_acceptance_2026-09-03.md)
 
 The defensible product claim is: **PaceBack makes a small set of optional, evidence-informed activities easy to choose, stop, switch, or leave for human support.** Whether PaceBack itself reduces stress or improves wellbeing remains untested.
