@@ -36,8 +36,12 @@ public enum ProfileRepositoryError: LocalizedError, Equatable, Sendable {
 }
 
 protocol ProfileKeyProviding: Sendable {
-    func existingKey(for account: String) async throws -> SymmetricKey
-    func key(for account: String) async throws -> SymmetricKey
+    // Data is Sendable on every supported SDK. Keeping CryptoKit's
+    // SymmetricKey inside the consuming actor avoids crossing an actor
+    // boundary with the older macOS 14 CryptoKit declaration, where the type
+    // was not yet annotated Sendable.
+    func existingKeyData(for account: String) async throws -> Data
+    func keyData(for account: String) async throws -> Data
     func deleteKey(for account: String) async throws
 }
 
@@ -48,7 +52,7 @@ actor KeychainProfileKeyProvider: ProfileKeyProviding {
         self.service = service
     }
 
-    func existingKey(for account: String) async throws -> SymmetricKey {
+    func existingKeyData(for account: String) async throws -> Data {
         var query = baseQuery(account: account)
         query[kSecReturnData as String] = true
         query[kSecMatchLimit as String] = kSecMatchLimitOne
@@ -57,12 +61,12 @@ actor KeychainProfileKeyProvider: ProfileKeyProviding {
         guard status == errSecSuccess, let data = item as? Data else {
             throw ProfileRepositoryError.keychain(status)
         }
-        return SymmetricKey(data: data)
+        return data
     }
 
-    func key(for account: String) async throws -> SymmetricKey {
+    func keyData(for account: String) async throws -> Data {
         do {
-            return try await existingKey(for: account)
+            return try await existingKeyData(for: account)
         } catch ProfileRepositoryError.keychain(let status) where status == errSecItemNotFound {
             let generated = SymmetricKey(size: .bits256)
             let data = generated.withUnsafeBytes { Data($0) }
@@ -71,12 +75,12 @@ actor KeychainProfileKeyProvider: ProfileKeyProviding {
             add[kSecValueData as String] = data
             let addStatus = SecItemAdd(add as CFDictionary, nil)
             if addStatus == errSecDuplicateItem {
-                return try await existingKey(for: account)
+                return try await existingKeyData(for: account)
             }
             guard addStatus == errSecSuccess else {
                 throw ProfileRepositoryError.keychain(addStatus)
             }
-            return generated
+            return data
         }
     }
 
@@ -161,7 +165,8 @@ public actor EncryptedProfileRepository: ProfileRepository {
                 throw ProfileRepositoryError.missingProfileFile(reference.id)
             }
             let sealed = try Data(contentsOf: url)
-            let key = try await keyProvider.existingKey(for: profileAccount(reference.id))
+            let keyData = try await keyProvider.existingKeyData(for: profileAccount(reference.id))
+            let key = SymmetricKey(data: keyData)
             let clear = try Self.decrypt(sealed, with: key)
             let profile: LocalProfile
             do {
@@ -199,7 +204,8 @@ public actor EncryptedProfileRepository: ProfileRepository {
             guard fileManager.fileExists(atPath: url.path) else {
                 throw ProfileRepositoryError.missingProfileFile(reference.id)
             }
-            let key = try await keyProvider.existingKey(for: profileAccount(reference.id))
+            let keyData = try await keyProvider.existingKeyData(for: profileAccount(reference.id))
+            let key = SymmetricKey(data: keyData)
             let clear = try Self.decrypt(Data(contentsOf: url), with: key)
             guard let profile = try? decoder.decode(LocalProfile.self, from: clear),
                   profile.id == reference.id,
@@ -235,7 +241,8 @@ public actor EncryptedProfileRepository: ProfileRepository {
                     ciphertextFileName: Self.generationFileName(for: profile.id)
                 )
                 let destination = try profileURL(reference)
-                let key = try await keyProvider.key(for: profileAccount(profile.id))
+                let keyData = try await keyProvider.keyData(for: profileAccount(profile.id))
+                let key = SymmetricKey(data: keyData)
                 let clear = try encoder.encode(profile)
                 try Self.encrypt(clear, with: key).write(to: destination, options: .atomic)
                 try setPrivatePermissions(destination)
@@ -252,7 +259,8 @@ public actor EncryptedProfileRepository: ProfileRepository {
                 schemaVersion: ProfileIndex.currentSchemaVersion,
                 profiles: stagedReferences
             )
-            let key = try await keyProvider.key(for: indexAccount)
+            let keyData = try await keyProvider.keyData(for: indexAccount)
+            let key = SymmetricKey(data: keyData)
             let pending = directory.appending(path: "index-\(UUID().uuidString.lowercased()).pending")
             pendingIndexURL = pending
             try Self.encrypt(try encoder.encode(index), with: key).write(to: pending, options: .atomic)
@@ -301,7 +309,8 @@ public actor EncryptedProfileRepository: ProfileRepository {
         }
 
         do {
-            let key = try await keyProvider.existingKey(for: indexAccount)
+            let keyData = try await keyProvider.existingKeyData(for: indexAccount)
+            let key = SymmetricKey(data: keyData)
             let clear = try Self.decrypt(Data(contentsOf: indexURL), with: key)
 
             if let current = try? decoder.decode(ProfileIndex.self, from: clear) {

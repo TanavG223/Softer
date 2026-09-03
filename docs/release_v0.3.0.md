@@ -5,7 +5,7 @@ Artifact: `PaceBack-0.3.0-macOS-universal.zip`
 SHA-256:
 
 ```text
-47b1bd4942bc7c328aa0ed3e362c2d530d55bae7dc05b3f279782454ee4c4af1
+901ba49662323e4811a1ccca450f63aa8e9b1d7f01a446dc9fe9d8c44061a8ae
 ```
 
 The ZIP contains a universal arm64/x86_64 native app. Both executable slices
