@@ -1,5 +1,9 @@
 # PaceBack
 
+[![PaceBack verification](https://github.com/TanavG223/PaceBack/actions/workflows/ci.yml/badge.svg)](https://github.com/TanavG223/PaceBack/actions/workflows/ci.yml)
+[![GitHub release](https://img.shields.io/github/v/release/TanavG223/PaceBack)](https://github.com/TanavG223/PaceBack/releases/latest)
+[![License](https://img.shields.io/github/license/TanavG223/PaceBack)](LICENSE)
+
 PaceBack is a native macOS mental-wellbeing prototype for ordinary stressful moments when choosing what to do next feels difficult. It offers a no-save guest start, one immediate option, six plain-language needs, nine short activities, two finite games, and static routes to human support.
 
 [Open the public project page](https://tanavg223.github.io/PaceBack/) or [download the latest Mac release](https://github.com/TanavG223/PaceBack/releases/latest).
@@ -21,7 +25,7 @@ The production target contains no Python helper, downloaded model, chatbot, acco
 
 ## Download the Mac app
 
-The current universal release candidate supports Apple silicon and Intel Macs running macOS 14 or newer: [PaceBack releases](https://github.com/TanavG223/PaceBack/releases/latest).
+The current universal release supports Apple silicon and Intel Macs running macOS 14 or newer: [PaceBack releases](https://github.com/TanavG223/PaceBack/releases/latest).
 
 This prototype is Apple Development-signed but not Developer ID notarized. After unzipping, Control-click **PaceBack.app**, choose **Open**, and confirm **Open**. If macOS still blocks it, use **System Settings → Privacy & Security → Open Anyway**. Verify the ZIP against the SHA-256 published with the release before opening it.
 
@@ -45,7 +49,7 @@ make package-macos
 
 `make macos-test` runs the dependency-free `PaceBackVerification` executable. Its 58 checks cover the bounded catalogs, age gates, deterministic recommendation/cooldown behavior, finite and branching game state machines, support non-mutation, encrypted repository round trips, real ciphertext-tamper failure, deletion, legacy-schema decoding, the fail-closed workspace path, and the memory-only guest fallback. The historical XCTest files are not part of the current package because the standalone Command Line Tools installation on this machine does not include XCTest.
 
-The packaged universal application (Apple silicon and Intel) is written to `build/PaceBack.app`. Packaging automatically uses an installed Apple Development identity so existing Keychain access survives rebuilds, with ad-hoc signing only as a fallback. Developer ID distribution signing and notarization are separate release gates.
+The packaged universal application (Apple silicon and Intel) and versioned ZIP are written to `build/`. Packaging prints the ZIP's SHA-256, automatically uses an installed Apple Development identity so existing Keychain access survives rebuilds, and uses ad-hoc signing only as a fallback. Developer ID distribution signing and notarization are separate release gates.
 
 ## Read before making claims
 
@@ -56,6 +60,9 @@ The packaged universal application (Apple silicon and Intel) is written to `buil
 - [Clinical and scientific limitations](docs/clinical_limitations.md)
 - [Verification provenance](docs/provenance.md)
 - [Release acceptance walkthrough](docs/release_acceptance_2026-09-03.md)
-- [v0.3.0 release candidate and checksum](docs/release_v0.3.0.md)
+- [v0.3.1 release and checksum](docs/release_v0.3.1.md)
+- [Contributing](CONTRIBUTING.md)
+- [Security policy](SECURITY.md)
+- [Changelog](CHANGELOG.md)
 
 The defensible product claim is: **PaceBack makes a small set of optional, evidence-informed activities easy to choose, stop, switch, or leave for human support.** Whether PaceBack itself reduces stress or improves wellbeing remains untested.

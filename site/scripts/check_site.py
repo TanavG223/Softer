@@ -27,6 +27,7 @@ class Parser(HTMLParser):
         self.refs = []
         self.images = []
         self.buttons = []
+        self.invalid_anchor_roles = []
 
     def handle_starttag(self, tag, attrs):
         values = {key: value or "" for key, value in attrs}
@@ -40,6 +41,8 @@ class Parser(HTMLParser):
             self.images.append(values)
         if tag == "button":
             self.buttons.append(values)
+        if tag == "a" and values.get("role"):
+            self.invalid_anchor_roles.append(values["role"])
 
 
 def main():
@@ -96,6 +99,8 @@ def main():
             errors.append(f"image {index} missing alt")
         if not image.get("width") or not image.get("height"):
             errors.append(f"image {index} missing intrinsic dimensions")
+    for index, role in enumerate(parser.invalid_anchor_roles, 1):
+        errors.append(f"link {index} overrides its native role with {role}")
     for index, button in enumerate(parser.buttons, 1):
         if button.get("type") != "button":
             errors.append(f"button {index} missing type=button")

@@ -2550,7 +2550,51 @@ main:focus {
 }
 
 .game-evidence-note .micro-label {
-  color: var(--teal);
+  /* This card stays cream in both color schemes, so use a stable dark teal
+     instead of the adaptive --teal token used on dark section surfaces. */
+  color: #1d6e6b;
+}
+
+.support-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.support-actions li {
+  display: block;
+}
+
+/* The wellbeing page reuses older field-guide section classes. These scoped
+   overrides keep their text/background pairs intact instead of inheriting
+   the light legacy cards underneath a dark section. */
+.experience .pattern-grid article {
+  background: #173740;
+}
+
+.experience .pattern-source {
+  color: var(--teal-bright);
+}
+
+.experience .pattern-grid article > p:not(.pattern-source) {
+  color: var(--cream-muted);
+}
+
+.safety.section-dark,
+.safety.section-dark .spine-marker {
+  background: var(--navy);
+}
+
+.safety.section-dark .footer-note {
+  color: var(--cream-muted);
+}
+
+.safety.section-dark .button-text {
+  border-color: var(--navy-rule);
+  color: var(--cream);
 }
 
 .game-originality {

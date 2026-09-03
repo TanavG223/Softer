@@ -21,6 +21,10 @@ shasum -a 256 build/PaceBack.app/Contents/MacOS/PaceBack
 open build/PaceBack.app
 ```
 
+`make package-macos` also writes a versioned universal ZIP and prints its
+SHA-256. Extract that ZIP to a temporary directory and verify the extracted
+copy before publishing it; do not infer archive integrity from the source app.
+
 Manual smoke path: create or select a synthetic profile; use the one-action start; choose each need; stop and skip an activity; verify Harbor Tiles Hint/Undo and finite completion; verify Harbor Path Skip/Stop and finite completion; submit each checkout; reset adaptation; open Support from normal and encrypted-workspace-error states; verify profile update/delete isolation.
 
 Release checks: search current source/site/docs for injury-recovery, mobile, AI/model, efficacy, diagnostic, treatment, and “normal” claims; confirm only current Mac code ships; inventory files; record bundle size/hash/signing; visually inspect standard, narrow, increased-text, dark, keyboard, VoiceOver, and reduced-motion states.

@@ -5,7 +5,7 @@ MACOS_DEVELOPER_DIR ?= /Library/Developer/CommandLineTools
 
 verify: macos-test macos-build site-test
 
-release-candidate: verify
+release-candidate: verify package-macos
 
 macos-test:
 	cd macos && DEVELOPER_DIR="$(MACOS_DEVELOPER_DIR)" swift run PaceBackVerification

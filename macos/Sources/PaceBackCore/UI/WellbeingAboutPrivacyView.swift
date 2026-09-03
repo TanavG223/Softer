@@ -207,7 +207,7 @@ struct WellbeingAboutView: View {
 
             HStack {
                 PaceBackMark(size: 28)
-                Text("PaceBack 0.2 · Research prototype · Not clinically validated")
+                Text("PaceBack 0.3.1 · Research prototype · Not clinically validated")
                     .font(.caption)
                     .foregroundStyle(.secondary)
                 Spacer()

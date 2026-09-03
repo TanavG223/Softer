@@ -7,6 +7,9 @@ MACOS_DEVELOPER_DIR=${MACOS_DEVELOPER_DIR:-/Library/Developer/CommandLineTools}
 SIGN_IDENTITY=${SIGN_IDENTITY:-}
 OUTPUT_DIR=${OUTPUT_DIR:-${PROJECT_DIR}/build}
 APP_DIR=${OUTPUT_DIR}/PaceBack.app
+APP_VERSION=$(/usr/libexec/PlistBuddy -c "Print :CFBundleShortVersionString" \
+  "${PROJECT_DIR}/packaging/Info.plist")
+ZIP_PATH=${OUTPUT_DIR}/PaceBack-${APP_VERSION}-macOS-universal.zip
 ARM_BUILD_DIR=${PROJECT_DIR}/macos/.build/package-arm64
 INTEL_BUILD_DIR=${PROJECT_DIR}/macos/.build/package-x86_64
 
@@ -67,4 +70,10 @@ codesign "${SIGN_FLAGS[@]}" --entitlements "${PROJECT_DIR}/packaging/PaceBack.en
   "${APP_DIR}"
 codesign --verify --deep --strict --verbose=2 "${APP_DIR}"
 
+rm -f "${ZIP_PATH}"
+/usr/bin/ditto -c -k --sequesterRsrc --keepParent "${APP_DIR}" "${ZIP_PATH}"
+ZIP_SHA256=$(shasum -a 256 "${ZIP_PATH}" | awk '{print $1}')
+
 print "Built standalone native wellbeing app at ${APP_DIR}"
+print "Created release archive at ${ZIP_PATH}"
+print "SHA-256: ${ZIP_SHA256}"
