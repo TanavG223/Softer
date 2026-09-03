@@ -8,26 +8,24 @@ let package = Package(
         .macOS(.v26)
     ],
     products: [
-        .executable(name: "PaceBack", targets: ["PaceBackApp"])
+        .executable(name: "PaceBack", targets: ["PaceBackApp"]),
+        .executable(name: "PaceBackVerification", targets: ["PaceBackVerification"])
     ],
     targets: [
         .target(
             name: "PaceBackCore",
             linkerSettings: [
                 .linkedFramework("CryptoKit"),
-                .linkedFramework("AVFoundation"),
                 .linkedFramework("LocalAuthentication"),
-                .linkedFramework("PDFKit"),
-                .linkedFramework("Security"),
-                .linkedFramework("Vision")
+                .linkedFramework("Security")
             ]
         ),
         .executableTarget(
             name: "PaceBackApp",
             dependencies: ["PaceBackCore"]
         ),
-        .testTarget(
-            name: "PaceBackCoreTests",
+        .executableTarget(
+            name: "PaceBackVerification",
             dependencies: ["PaceBackCore"]
         )
     ]

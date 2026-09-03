@@ -4,27 +4,23 @@ public struct PaceBackRootView: View {
     @Environment(\.accessibilityReduceMotion) private var systemReduceMotion
 
     private let store: AppStore
-    private let sidecarState: SidecarRuntimeState
 
-    public init(store: AppStore, sidecarState: SidecarRuntimeState = .idle) {
+    public init(store: AppStore) {
         self.store = store
-        self.sidecarState = sidecarState
     }
 
     public var body: some View {
         Group {
             if !store.hasLoaded || store.isLoading {
                 PaceBackLaunchView()
+            } else if store.isGuestSession {
+                AppNavigationView(store: store)
+            } else if let workspaceError = store.workspaceErrorMessage {
+                EncryptedWorkspaceUnavailableView(store: store, message: workspaceError)
             } else if store.needsOnboarding {
                 OnboardingView(store: store)
             } else {
-                AppNavigationView(
-                    store: store,
-                    evidenceEngineConnected: {
-                        if case .connected = sidecarState { return true }
-                        return false
-                    }()
-                )
+                AppNavigationView(store: store)
             }
         }
         .tint(PaceBackDesign.accent)
@@ -35,9 +31,29 @@ public struct PaceBackRootView: View {
             }
         }
         .safeAreaInset(edge: .bottom, spacing: 0) {
-            SidecarStatusBar(state: sidecarState)
+            PersistentSupportBar(store: store)
         }
         .task { await store.load() }
+        .sheet(
+            item: Binding(
+                get: { store.presentedSheet },
+                set: { store.presentedSheet = $0 }
+            )
+        ) { sheet in
+            switch sheet {
+            case .support:
+                NavigationStack {
+                    SupportHubView(
+                        store: store,
+                        ageBand: store.selectedProfile?.ageBand,
+                        showsDoneButton: true
+                    )
+                }
+                .frame(minWidth: 700, minHeight: 650)
+            case .addProfile:
+                AddProfileView(store: store)
+            }
+        }
         .alert(
             "PaceBack could not complete that action",
             isPresented: Binding(
@@ -53,6 +69,63 @@ public struct PaceBackRootView: View {
     }
 }
 
+private struct EncryptedWorkspaceUnavailableView: View {
+    let store: AppStore
+    let message: String
+    @State private var guestAgeBand: AgeBand = .adult18To64
+
+    var body: some View {
+        ZStack {
+            PaceBackCanvasBackground()
+            VStack(spacing: 18) {
+                Image(systemName: "lock.trianglebadge.exclamationmark")
+                    .font(.system(size: 50))
+                    .foregroundStyle(PaceBackDesign.warm)
+                    .accessibilityHidden(true)
+                Text("Encrypted workspace unavailable")
+                    .font(.largeTitle.weight(.semibold))
+                    .accessibilityAddTraits(.isHeader)
+                Text(message)
+                    .foregroundStyle(.secondary)
+                    .multilineTextAlignment(.center)
+                    .frame(maxWidth: 560)
+                    .textSelection(.enabled)
+                Text("PaceBack has not treated the workspace as empty or written new profile data.")
+                    .font(.callout.weight(.medium))
+                    .multilineTextAlignment(.center)
+                    .frame(maxWidth: 560)
+                GuestSessionControls(store: store, ageBand: $guestAgeBand)
+                    .frame(maxWidth: 560)
+
+                HStack(spacing: 12) {
+                    Button {
+                        Task { await store.retryWorkspaceLoad() }
+                    } label: {
+                        Label("Try again", systemImage: "arrow.clockwise")
+                    }
+                    .buttonStyle(.bordered)
+                    .controlSize(.large)
+
+                    Button {
+                        store.presentedSheet = .support
+                    } label: {
+                        Label("Open Support", systemImage: "heart.text.square")
+                    }
+                    .buttonStyle(.bordered)
+                    .controlSize(.large)
+                }
+                Text("Guest activity choices and check-outs stay only in memory and disappear when you leave PaceBack.")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                    .multilineTextAlignment(.center)
+                    .frame(maxWidth: 560)
+            }
+            .padding(44)
+        }
+        .frame(minWidth: 760, minHeight: 560)
+    }
+}
+
 private struct PaceBackLaunchView: View {
     var body: some View {
         ZStack {
@@ -63,13 +136,13 @@ private struct PaceBackLaunchView: View {
                     Text("PaceBack")
                         .font(.largeTitle.weight(.semibold))
                         .accessibilityAddTraits(.isHeader)
-                    Text("Opening your private recovery workspace")
+                    Text("Opening your private wellbeing space")
                         .foregroundStyle(.secondary)
                 }
                 ProgressView()
                     .controlSize(.small)
                     .accessibilityLabel("Opening encrypted local profiles")
-                Label("Encrypted profiles stay on this Mac", systemImage: "lock.shield")
+                Label("No account, ads, or passive mood tracking", systemImage: "lock.shield")
                     .font(.caption.weight(.medium))
                     .foregroundStyle(PaceBackDesign.accent)
             }
@@ -78,25 +151,13 @@ private struct PaceBackLaunchView: View {
     }
 }
 
-private struct SidecarStatusBar: View {
-    let state: SidecarRuntimeState
+private struct PersistentSupportBar: View {
+    let store: AppStore
 
     var body: some View {
-        HStack(spacing: 10) {
-            Label("LOCAL", systemImage: icon)
-                .font(.caption2.weight(.bold))
-                .tracking(0.8)
-                .foregroundStyle(foregroundStyle)
-            Rectangle()
-                .fill(Color.secondary.opacity(0.25))
-                .frame(width: 1, height: 14)
-                .accessibilityHidden(true)
-            Text(message)
-                .lineLimit(2)
-            Spacer(minLength: 8)
-            Text("No cloud generation")
-                .foregroundStyle(.secondary)
-                .lineLimit(1)
+        ViewThatFits(in: .horizontal) {
+            HStack(spacing: 12) { content }
+            VStack(alignment: .leading, spacing: 8) { content }
         }
         .font(.caption.weight(.medium))
         .padding(.horizontal, 14)
@@ -104,48 +165,29 @@ private struct SidecarStatusBar: View {
         .frame(maxWidth: .infinity)
         .background(Color(nsColor: .underPageBackgroundColor))
         .overlay(alignment: .top) { Divider() }
-        .accessibilityElement(children: .combine)
-        .accessibilityLabel("Local evidence engine status. \(message). No cloud generation.")
     }
 
-    private var message: String {
-        switch state {
-        case .idle, .starting:
-            "Starting the private evidence engine…"
-        case .connected:
-            "Evidence engine connected · profile data stays on device"
-        case .unavailable(let reason):
-            "Evidence engine unavailable · no answer will be simulated. \(reason)"
-        case .stopped:
-            "Evidence engine stopped"
-        }
-    }
-
-    private var icon: String {
-        switch state {
-        case .connected: "checkmark.shield.fill"
-        case .unavailable: "exclamationmark.triangle.fill"
-        case .idle, .starting: "hourglass"
-        case .stopped: "stop.circle.fill"
-        }
-    }
-
-    private var foregroundStyle: Color {
-        switch state {
-        case .connected: PaceBackDesign.accent
-        case .unavailable: PaceBackDesign.warm
-        case .idle, .starting, .stopped: .secondary
-        }
+    @ViewBuilder
+    private var content: some View {
+        PersistentSupportButton(store: store)
+        Text("Urgent support is static and works without a profile.")
+            .foregroundStyle(.secondary)
+        Spacer(minLength: 8)
+        Label(
+            store.isGuestSession ? "Guest session · nothing saved" : "Private local profiles",
+            systemImage: store.isGuestSession ? "eye.slash.fill" : "lock.fill"
+        )
+            .foregroundStyle(PaceBackDesign.accent)
+            .accessibilityElement(children: .combine)
     }
 }
 
 private struct AppNavigationView: View {
     @Bindable var store: AppStore
-    let evidenceEngineConnected: Bool
 
-    private let dailySections: [AppSection] = [.today, .focus]
-    private let evidenceSections: [AppSection] = [.simplify, .askEvidence, .trends]
-    private let planSections: [AppSection] = [.carePlan, .privacy]
+    private let calmSections: [AppSection] = [.calm]
+    private let toolkitSections: [AppSection] = [.toolkit, .play]
+    private let youSections: [AppSection] = [.support, .privacy, .about]
 
     var body: some View {
         NavigationSplitView {
@@ -160,11 +202,21 @@ private struct AppNavigationView: View {
             .navigationSplitViewColumnWidth(
                 min: 224,
                 ideal: PaceBackDesign.sidebarWidth,
-                max: 300
+                max: 310
             )
         } detail: {
             if let profile = store.selectedProfile {
-                detail(for: store.selectedSection, profile: profile)
+                NavigationStack {
+                    detail(for: store.selectedSection, profile: profile)
+                        .navigationDestination(for: WellbeingLaunch.self) { launch in
+                            WellbeingSessionHostView(
+                                store: store,
+                                profile: profile,
+                                launch: launch
+                            )
+                        }
+                }
+                .id(profile.id)
             } else {
                 ZStack {
                     PaceBackCanvasBackground()
@@ -179,24 +231,7 @@ private struct AppNavigationView: View {
         .navigationSplitViewStyle(.balanced)
         .toolbar {
             ToolbarItem(placement: .primaryAction) {
-                Button {
-                    store.presentedSheet = .dangerSigns
-                } label: {
-                    Label("Check danger signs", systemImage: "cross.case.fill")
-                }
-                .help("Open the deterministic emergency safety check")
-                .keyboardShortcut("e", modifiers: [.command, .shift])
-                .accessibilityHint("This safety check does not use AI")
-            }
-        }
-        .sheet(item: $store.presentedSheet) { sheet in
-            switch sheet {
-            case .dangerSigns:
-                if let profile = store.selectedProfile {
-                    DangerSignsView(ageBand: profile.ageBand)
-                }
-            case .addProfile:
-                AddProfileView(store: store)
+                PersistentSupportButton(store: store, compact: true)
             }
         }
     }
@@ -207,9 +242,10 @@ private struct AppNavigationView: View {
             VStack(alignment: .leading, spacing: 1) {
                 Text("PaceBack")
                     .font(.title3.weight(.bold))
-                Text("Recovery field guide")
+                Text("Small choices for stressful moments")
                     .font(.caption)
                     .foregroundStyle(.secondary)
+                    .fixedSize(horizontal: false, vertical: true)
             }
             Spacer(minLength: 0)
         }
@@ -222,7 +258,7 @@ private struct AppNavigationView: View {
 
     private var profilePicker: some View {
         VStack(alignment: .leading, spacing: 10) {
-            Text("ACTIVE LOCAL PROFILE")
+            Text(store.isGuestSession ? "TEMPORARY GUEST" : "ACTIVE LOCAL PROFILE")
                 .font(.caption2.weight(.bold))
                 .tracking(0.8)
                 .foregroundStyle(.secondary)
@@ -255,10 +291,10 @@ private struct AppNavigationView: View {
                         .font(.caption.weight(.medium))
                         .foregroundStyle(.secondary)
                     Spacer(minLength: 0)
-                    Image(systemName: "lock.fill")
+                    Image(systemName: store.isGuestSession ? "eye.slash.fill" : "lock.fill")
                         .font(.caption2)
                         .foregroundStyle(PaceBackDesign.accent)
-                        .accessibilityLabel("Encrypted profile")
+                        .accessibilityLabel(store.isGuestSession ? "Temporary guest session" : "Encrypted profile")
                 }
             }
         }
@@ -268,12 +304,9 @@ private struct AppNavigationView: View {
 
     private var navigationList: some View {
         List(selection: $store.selectedSection) {
-            navigationSection("TODAY", sections: dailySections)
-            navigationSection("UNDERSTAND", sections: evidenceSections)
-            navigationSection("PLAN & TRUST", sections: planSections)
-            Section {
-                navigationRow(.about)
-            }
+            navigationSection("CALM", sections: calmSections)
+            navigationSection("TOOLKIT", sections: toolkitSections)
+            navigationSection("YOU", sections: youSections)
         }
         .listStyle(.sidebar)
         .scrollContentBackground(.hidden)
@@ -304,24 +337,36 @@ private struct AppNavigationView: View {
         VStack(spacing: 10) {
             Divider()
             HStack(spacing: 8) {
-                Image(systemName: "wifi.slash")
+                Image(systemName: "lock.shield")
                     .foregroundStyle(PaceBackDesign.accent)
                     .accessibilityHidden(true)
-                Text("Private by design")
+                Text("No passive mental-state inference")
                     .font(.caption.weight(.semibold))
                 Spacer()
             }
             .accessibilityElement(children: .combine)
 
-            Button {
-                store.presentedSheet = .addProfile
-            } label: {
-                Label("Add local profile", systemImage: "person.badge.plus")
-                    .frame(maxWidth: .infinity, alignment: .leading)
+            if store.isGuestSession {
+                Button {
+                    Task { await store.returnToEncryptedWorkspace() }
+                } label: {
+                    Label("Return to encrypted profiles", systemImage: "lock.rotation")
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
+                .buttonStyle(.bordered)
+                .paceBackControlTarget()
+                .accessibilityHint("Ends this guest session and discards its temporary choices")
+            } else {
+                Button {
+                    store.presentedSheet = .addProfile
+                } label: {
+                    Label("Add local profile", systemImage: "person.badge.plus")
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
+                .buttonStyle(.bordered)
+                .paceBackControlTarget()
+                .keyboardShortcut("n", modifiers: [.command, .shift])
             }
-            .buttonStyle(.bordered)
-            .paceBackControlTarget()
-            .keyboardShortcut("n", modifiers: [.command, .shift])
         }
         .padding(.horizontal, 16)
         .padding(.bottom, 14)
@@ -330,19 +375,18 @@ private struct AppNavigationView: View {
     @ViewBuilder
     private func detail(for section: AppSection, profile: LocalProfile) -> some View {
         switch section {
-        case .today: TodayView(store: store, profile: profile)
-        case .focus: FocusSessionView(store: store, profile: profile)
-        case .simplify: SimplifyView(store: store, profile: profile)
-        case .askEvidence:
-            AskEvidenceView(
-                store: store,
-                profile: profile,
-                engineConnected: evidenceEngineConnected
-            )
-        case .trends: TrendsView(store: store, profile: profile)
-        case .carePlan: CarePlanView(store: store, profile: profile)
-        case .privacy: PrivacyView(store: store, profile: profile)
-        case .about: AboutSettingsView(store: store, profile: profile)
+        case .calm:
+            CalmHomeView(store: store, profile: profile)
+        case .toolkit:
+            WellbeingToolkitView(store: store, profile: profile)
+        case .play:
+            WellbeingPlayView(store: store, profile: profile)
+        case .support:
+            SupportHubView(store: store, ageBand: profile.ageBand)
+        case .privacy:
+            WellbeingPrivacyView(store: store, profile: profile)
+        case .about:
+            WellbeingAboutView(store: store, profile: profile)
         }
     }
 }

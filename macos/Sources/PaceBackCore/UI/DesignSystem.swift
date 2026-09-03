@@ -1,7 +1,7 @@
 import SwiftUI
 
-/// Semantic visual tokens for the PaceBack "recovery field guide" aesthetic.
-/// The palette stays restrained so evidence, permissions, and safety state—not
+/// Semantic visual tokens for PaceBack's quiet wellbeing workspace.
+/// The palette stays restrained so choices, boundaries, and safety state—not
 /// decoration—carry the hierarchy.
 public enum PaceBackDesign {
     public static let contentWidth: CGFloat = 1_080
@@ -179,7 +179,7 @@ public struct ContentScaffold<Content: View>: View {
     public init(
         _ title: String,
         subtitle: String? = nil,
-        eyebrow: String = "PRIVATE RECOVERY WORKSPACE",
+        eyebrow: String = "PRIVATE WELLBEING SPACE",
         comfortableSpacing: Bool = true,
         @ViewBuilder content: () -> Content
     ) {
@@ -446,8 +446,8 @@ public struct SafetyBoundaryNotice: View {
 
     public var body: some View {
         PaceBackNotice(
-            "PaceBack supports a clinician’s plan. It does not diagnose, treat, predict recovery, or provide clearance.",
-            title: "Support, never clearance",
+            "PaceBack offers optional activities for ordinary stressful moments. It does not diagnose, treat, monitor, or replace professional or emergency help.",
+            title: "A wellbeing tool, not treatment",
             style: .boundary
         )
     }

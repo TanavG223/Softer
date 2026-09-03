@@ -95,12 +95,6 @@ public enum CareContext: String, CaseIterable, Codable, Identifiable, Sendable {
 
 public enum ProfilePermission: String, CaseIterable, Codable, Sendable {
     case useGuidedSessions
-    case simplifyDocuments
-    case askEvidence
-    case useFreeformAI
-    case manageCarePlan
-    case importDocuments
-    case exportData
     case deleteProfile
     case changeSettings
 }
@@ -127,6 +121,9 @@ public struct LocalProfile: Identifiable, Codable, Hashable, Sendable {
     public var trendEntries: [TrendEntry]
     public var carePlanDraft: CarePlanDraft?
     public var confirmedPreferences: [String]
+    /// Explicit, closed wellbeing check-outs stored inside this profile's
+    /// existing encrypted vault. Optional keeps older profile payloads decodable.
+    public var wellbeing: WellbeingPersonalizationState?
 
     public init(
         id: UUID = UUID(),
@@ -138,7 +135,8 @@ public struct LocalProfile: Identifiable, Codable, Hashable, Sendable {
         createdAt: Date = .now,
         trendEntries: [TrendEntry] = [],
         carePlanDraft: CarePlanDraft? = nil,
-        confirmedPreferences: [String] = []
+        confirmedPreferences: [String] = [],
+        wellbeing: WellbeingPersonalizationState? = nil
     ) {
         self.id = id
         self.alias = alias.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -150,6 +148,7 @@ public struct LocalProfile: Identifiable, Codable, Hashable, Sendable {
         self.trendEntries = trendEntries
         self.carePlanDraft = carePlanDraft
         self.confirmedPreferences = confirmedPreferences
+        self.wellbeing = wellbeing
     }
 }
 
@@ -179,28 +178,8 @@ public enum RolePolicy {
         }
 
         switch permission {
-        case .useGuidedSessions, .simplifyDocuments, .askEvidence:
+        case .useGuidedSessions:
             return true
-        case .useFreeformAI:
-            return !profile.ageBand.isUnder13
-        case .manageCarePlan:
-            switch profile.ageBand {
-            case .youngChild0To5, .child6To12:
-                return profile.actingRole == .guardian || profile.actingRole == .caregiver
-            case .teen13To17:
-                return profile.actingRole == .guardian
-            case .adult18To64, .olderAdult65Plus:
-                return profile.actingRole == .selfManaged
-            }
-        case .importDocuments, .exportData:
-            switch profile.ageBand {
-            case .youngChild0To5, .child6To12:
-                return profile.actingRole == .guardian || profile.actingRole == .caregiver
-            case .teen13To17:
-                return profile.actingRole == .guardian
-            case .adult18To64, .olderAdult65Plus:
-                return profile.actingRole == .selfManaged || profile.actingRole == .caregiver
-            }
         case .deleteProfile, .changeSettings:
             switch profile.ageBand {
             case .youngChild0To5, .child6To12:
@@ -217,7 +196,7 @@ public enum RolePolicy {
         _ permission: ProfilePermission,
         profile: LocalProfile
     ) -> Bool {
-        guard [.manageCarePlan, .importDocuments, .exportData, .deleteProfile, .changeSettings]
+        guard [ProfilePermission.deleteProfile, .changeSettings]
             .contains(permission) else { return false }
         return profile.ageBand.isPediatric
     }
@@ -248,12 +227,10 @@ public enum ReadingMode: String, CaseIterable, Codable, Identifiable, Sendable {
 }
 
 public enum AppSection: String, CaseIterable, Identifiable, Sendable {
-    case today
-    case focus
-    case simplify
-    case askEvidence
-    case trends
-    case carePlan
+    case calm
+    case toolkit
+    case play
+    case support
     case privacy
     case about
 
@@ -261,12 +238,10 @@ public enum AppSection: String, CaseIterable, Identifiable, Sendable {
 
     public var title: String {
         switch self {
-        case .today: "Today"
-        case .focus: "Focus Session"
-        case .simplify: "Simplify"
-        case .askEvidence: "Ask Evidence"
-        case .trends: "Trends"
-        case .carePlan: "Care Plan"
+        case .calm: "Calm"
+        case .toolkit: "Toolkit"
+        case .play: "Play"
+        case .support: "Support"
         case .privacy: "Privacy"
         case .about: "About"
         }
@@ -274,12 +249,10 @@ public enum AppSection: String, CaseIterable, Identifiable, Sendable {
 
     public var systemImage: String {
         switch self {
-        case .today: "sun.max"
-        case .focus: "timer"
-        case .simplify: "text.alignleft"
-        case .askEvidence: "quote.bubble"
-        case .trends: "chart.xyaxis.line"
-        case .carePlan: "doc.text"
+        case .calm: "sparkles"
+        case .toolkit: "square.grid.2x2"
+        case .play: "gamecontroller"
+        case .support: "heart.text.square"
         case .privacy: "lock.shield"
         case .about: "info.circle"
         }

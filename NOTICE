@@ -1,57 +1,18 @@
 PaceBack
 Copyright 2026 PaceBack contributors
 
-This product is an unvalidated research prototype. It is not intended to
-diagnose, treat, predict recovery, or provide medical or activity clearance.
+PaceBack is an unvalidated mental-wellbeing research prototype. It is not
+intended to diagnose, treat, monitor crisis, guarantee calm, or replace
+professional or emergency care.
 
-Design provenance includes the repository owner's earlier local
-"research_agent" project. Its inspected files and hashes are recorded in
-docs/provenance.md. No prior benchmark result is a PaceBack result.
+The product and documentation cite public guidance and research from the World
+Health Organization, the U.S. National Institute of Mental Health, the U.S.
+National Center for Complementary and Integrative Health, and published
+systematic reviews. They also discuss public repositories and commercial apps
+as design references. Citation does not imply endorsement, and none of these
+sources tested PaceBack.
 
-PaceBack references materials from the U.S. Centers for Disease Control and
-Prevention (CDC), U.S. Federal Trade Commission (FTC), U.S. Food and Drug
-Administration (FDA), British Journal of Sports Medicine/BMJ, Apple Inc., and
-the Association for Computational Linguistics. External materials and marks
-remain subject to their respective terms. Their citation does not imply
-endorsement of PaceBack. CDC, HHS, and the United States Government do not
-endorse this product. CDC/HHS/FDA/FTC/BMJ/Apple/ACL logos are not licensed by
-this repository.
-
-The benchmark and synthetic clinician plans are original synthetic test data.
-They describe no real person and are not medical guidance.
-
-The PaceBack app icon was generated with OpenAI's image-generation tool from
-the original prompt recorded in docs/provenance.md, then converted locally to
-the macOS ICNS format. This attribution is not an endorsement or a completed
-trademark/rights review.
-
-The packaged local model pack distributes frozen upstream artifacts for:
-
-- BAAI/bge-small-en-v1.5, revision
-  5c38ec7c405ec4b44b94cc5a9bb96e735b38267a, declared MIT license.
-- cross-encoder/ms-marco-MiniLM-L-6-v2, revision
-  233902d25c440f23af6f7d6e94d2946bac0bee0a, declared Apache-2.0 license.
-
-PaceBack does not fine-tune these models or update them from user data. Exact
-source URLs, distributed file hashes and sizes, pack/signature/trust-key hashes,
-and license declarations are recorded in engine/MODEL_PROVENANCE.md. Canonical
-upstream license texts are checked in under third_party/model_licenses and are
-embedded in the macOS application bundle. This summary and those texts are not a
-substitute for a final redistribution review.
-
-The native iOS target links Microsoft ONNX Runtime through the official
-onnxruntime Swift package, pinned to version 1.24.2. ONNX Runtime is distributed
-under the MIT License; the upstream source and license for this pin are:
-
-- https://github.com/microsoft/onnxruntime-swift-package-manager
-- https://github.com/microsoft/onnxruntime/blob/v1.24.2/LICENSE
-
-The canonical upstream software license text is checked in at
-third_party/software_licenses/onnxruntime-1.24.2-MIT.txt. This software license
-is distinct from the BGE-small and MiniLM model-weight licenses above. The
-current macOS packaging script embeds it under ThirdPartySoftwareLicenses, and
-the iOS project copies it into the app's resources.
-
-Third-party software and any separately downloaded model weights remain under
-their own licenses. A release must include the dependency/model inventory and
-notices generated from the exact locked build.
+PaceBack contains no redistributed model weights or third-party runtime code.
+The application is built with Apple system frameworks. The PaceBack icon was
+generated with OpenAI's image-generation tool and converted locally to ICNS;
+this attribution is not a completed trademark or rights review.

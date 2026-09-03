@@ -11,6 +11,8 @@ struct OnboardingView: View {
                 VStack(alignment: .leading, spacing: 32) {
                     brandHeader
 
+                    GuestStartCard(store: store)
+
                     ViewThatFits(in: .horizontal) {
                         HStack(alignment: .top, spacing: 44) {
                             onboardingStory
@@ -41,7 +43,7 @@ struct OnboardingView: View {
             VStack(alignment: .leading, spacing: 2) {
                 Text("PaceBack")
                     .font(.title.weight(.bold))
-                Text("PRIVATE · LOCAL · EVIDENCE-GROUNDED")
+                Text("PRIVATE · LOCAL · OPTIONAL")
                     .font(.caption2.weight(.bold))
                     .tracking(1.15)
                     .foregroundStyle(PaceBackDesign.accent)
@@ -56,11 +58,11 @@ struct OnboardingView: View {
     private var onboardingStory: some View {
         VStack(alignment: .leading, spacing: 26) {
             VStack(alignment: .leading, spacing: 12) {
-                Text("A steadier way back to everyday life.")
+                Text("One small choice when everything feels like a lot.")
                     .font(.system(.largeTitle, design: .rounded, weight: .semibold))
                     .fixedSize(horizontal: false, vertical: true)
                     .accessibilityAddTraits(.isHeader)
-                Text("Organize a clinician’s plan, pace short sessions, simplify dense documents, and ask questions against age-matched evidence—without sending health information off this Mac.")
+                Text("Notice the room, move gently, reach someone, step away from the screen, or try one finite game—without an account, a mood score, or passive tracking.")
                     .font(.title3)
                     .foregroundStyle(.secondary)
                     .fixedSize(horizontal: false, vertical: true)
@@ -112,25 +114,87 @@ struct OnboardingView: View {
         VStack(alignment: .leading, spacing: 0) {
             OnboardingPrinciple(
                 number: "01",
-                icon: "lock.shield",
-                title: "Local by architecture",
-                detail: "No account, ads, analytics, cloud model, or profile-data transmission."
+                icon: "sparkles",
+                title: "Start without explaining",
+                detail: "One neutral option appears first. Naming a need is optional, and free-form journaling is never required."
             )
             Divider().padding(.leading, 52)
             OnboardingPrinciple(
                 number: "02",
-                icon: "checkmark.seal",
-                title: "Evidence stays visible",
-                detail: "Answers show supporting passages or clearly say when information is insufficient."
+                icon: "hand.raised",
+                title: "Stop and switch freely",
+                detail: "Every activity is optional. The games are finite, scoreless, and never treated as a mental-state test."
             )
             Divider().padding(.leading, 52)
             OnboardingPrinciple(
                 number: "03",
-                icon: "hand.raised",
-                title: "People keep control",
-                detail: "Imported plan items remain unconfirmed until an authorized person checks the original."
+                icon: "heart.text.square",
+                title: "Human support stays visible",
+                detail: "Static urgent-help routes never depend on a model, recommendation, game, or check-out."
             )
         }
+    }
+}
+
+struct GuestSessionControls: View {
+    let store: AppStore
+    @Binding var ageBand: AgeBand
+
+    private let guestAgeBands: [AgeBand] = [.teen13To17, .adult18To64, .olderAdult65Plus]
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Picker("Guest age experience", selection: $ageBand) {
+                ForEach(guestAgeBands) { band in
+                    Text(band.shortTitle).tag(band)
+                }
+            }
+            .pickerStyle(.segmented)
+            .accessibilityHint("Selects age-appropriate activities without saving an age or profile")
+
+            Button {
+                store.startGuestSession(ageBand: ageBand)
+            } label: {
+                Label("Continue without saving", systemImage: "play.fill")
+                    .frame(maxWidth: .infinity)
+            }
+            .buttonStyle(.borderedProminent)
+            .controlSize(.large)
+            .keyboardShortcut(.defaultAction)
+            .accessibilityHint("Starts a temporary session stored only in memory")
+            .accessibilityIdentifier("guest.continueWithoutSaving")
+        }
+    }
+}
+
+private struct GuestStartCard: View {
+    let store: AppStore
+    @State private var ageBand: AgeBand = .adult18To64
+
+    var body: some View {
+        PaceBackCard(style: .prominent, padding: 24) {
+            ViewThatFits(in: .horizontal) {
+                HStack(alignment: .center, spacing: 24) { content }
+                VStack(alignment: .leading, spacing: 18) { content }
+            }
+        }
+        .accessibilityElement(children: .contain)
+    }
+
+    @ViewBuilder
+    private var content: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            Label("Start now—nothing is saved", systemImage: "eye.slash.fill")
+                .font(.title2.weight(.semibold))
+                .foregroundStyle(PaceBackDesign.accent)
+                .accessibilityAddTraits(.isHeader)
+            Text("Choose an age experience and begin. No alias, account, Keychain item, or activity history is created.")
+                .foregroundStyle(.secondary)
+                .fixedSize(horizontal: false, vertical: true)
+        }
+        Spacer(minLength: 0)
+        GuestSessionControls(store: store, ageBand: $ageBand)
+            .frame(maxWidth: 420)
     }
 }
 
@@ -275,7 +339,7 @@ private struct ProfileForm: View {
 
                 if requiresSafetyAcknowledgement {
                     Toggle(isOn: $acknowledged) {
-                        Text("I understand this research prototype supports—but does not replace—professional care.")
+                        Text("I understand this research prototype offers optional wellbeing activities, not diagnosis, treatment, monitoring, or emergency response.")
                             .fixedSize(horizontal: false, vertical: true)
                     }
                     .toggleStyle(.checkbox)
@@ -306,7 +370,6 @@ private struct ProfileForm: View {
                 .paceBackControlTarget()
                 .disabled(alias.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || alias.count > 40 ||
                     (requiresSafetyAcknowledgement && !acknowledged) || isSaving)
-                .keyboardShortcut(.defaultAction)
             }
         }
         .onAppear { aliasFocused = true }
@@ -336,12 +399,12 @@ private struct ProfileForm: View {
         switch ageBand {
         case .youngChild0To5, .child6To12:
             PaceBackNotice(
-                "A parent, guardian, or caregiver operates this profile. Child-facing freeform AI is disabled.",
+                "A parent, guardian, or caregiver operates this profile. PaceBack will show only the activities permitted for the selected age experience; any available game is caregiver-led.",
                 style: .local
             )
         case .teen13To17:
             PaceBackNotice(
-                "A guardian initializes the profile. Teen mode can use guided tools; guardian mode protects plans, clipboard reports, deletion, and settings.",
+                "A guardian initializes the profile. Teen mode can choose guided activities and support; guardian approval protects deletion and administrative settings.",
                 style: .local
             )
         case .adult18To64, .olderAdult65Plus:
