@@ -29,4 +29,12 @@ Research informed the available modalities and the restraint of the claims. Pace
 
 ## Submission boundary
 
-Repository, screenshots, contributors, license, and event-specific fields should match the verified build. The demo video and the final submission action are deliberately left to the team. Do not present engineering tests as evidence of a mental-health outcome.
+Prepared and attached to the Devpost draft:
+
+- public source: <https://github.com/TanavG223/PaceBack>
+- Apache-2.0 license and three-person team attribution
+- 3:2 Calm thumbnail plus captioned Calm, Play, and Harbor Tiles screenshots
+- Mental health focus and Best Mental Health Tool prize selection
+- complete project story with research links and explicit safety/effectiveness limits
+
+The draft remains at 3/5 because Devpost requires a video for Project details. The demo video and final submission action are deliberately left to the team. Do not present engineering tests as evidence of a mental-health outcome.

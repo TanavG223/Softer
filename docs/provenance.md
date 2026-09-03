@@ -7,8 +7,8 @@ Status: source-matched results for the current native macOS wellbeing prototype.
 | Dependency-free wellbeing harness | PASS: 50 checks covering catalog, age gates, recommendation bounds, both games, support isolation, fail-closed state, memory-only guest behavior, Keychain/AES-GCM persistence, update/delete, and legacy Mac migration |
 | Native release compilation | PASS with Apple Command Line Tools and `swift build -c release --product PaceBack` |
 | Static site contract | PASS: structural/claim checker and JavaScript syntax; the Codex in-app browser exposed the expected landmarks, headings, support links, and pressed-state semantics; choosing “Thoughts moving fast” updated the live region to Harbor Tiles and the expected alternatives |
-| Packaged app signature/bundle inventory | PASS: 6.7 MiB bundle; 4,834,784-byte arm64 executable; strict deep signature valid; Apple Development team `8RMK4MG9T2`; executable SHA-256 `53601a20956e8465279296634a7e44ec2d60099692d62866d4837d7282ebc4b6` |
-| Packaged app launch and visual smoke | PASS: a fresh process opened one visible 1,180 × 780 window, preserved and loaded the existing encrypted profile without a Keychain prompt, and showed Calm, Play, and Harbor Tiles; reopening a running app with no visible window now creates or reveals one |
+| Packaged app signature/bundle inventory | PASS: 6.7 MiB arm64 bundle; strict deep signature valid; Apple Development team `8RMK4MG9T2`; only Apple system frameworks and Swift runtime libraries are linked |
+| Packaged app launch and visual smoke | PASS: the signed bundle activated a visible 1,180 × 780 window, preserved and loaded the existing encrypted profile without a Keychain prompt, and showed Calm, Play, and Harbor Tiles |
 | Submission screenshots | PASS: 2,360 × 1,560 Retina captures for Calm, Play, and Harbor Tiles are in `output/submission/` |
 | Distribution signing/notarization | Not performed |
 | Accessibility testing with representative users | Not performed |
