@@ -81,6 +81,11 @@ def main():
                 errors.append(f"missing fragment target: {ref}")
         else:
             path = (ROOT / ref.split("#", 1)[0].split("?", 1)[0]).resolve()
+            try:
+                path.relative_to(ROOT)
+            except ValueError:
+                errors.append(f"local reference escapes deployed site root: {ref}")
+                continue
             if not path.exists():
                 errors.append(f"missing local reference: {ref}")
 
