@@ -101,7 +101,9 @@ struct WellbeingSessionHostView: View {
         case .introduction:
             introductionCard
         case .activity:
-            if launch.activityID == .screenOffPause {
+            if launch.activityID == .gentleBreathing {
+                breathingPacerContent
+            } else if launch.activityID == .screenOffPause {
                 screenOffContent
             } else if launch.activityID == .trustedConnection {
                 trustedConnectionContent
@@ -124,11 +126,6 @@ struct WellbeingSessionHostView: View {
                 Text(safetyCopy)
                     .font(.body)
                     .fixedSize(horizontal: false, vertical: true)
-
-                PaceBackNotice(
-                    "This may or may not feel useful. You can Stop or Skip at any point, and nothing about your play or pace is treated as a mental-state signal.",
-                    style: .boundary
-                )
 
                 Button {
                     if store.startWellbeingActivity(
@@ -156,6 +153,15 @@ struct WellbeingSessionHostView: View {
                     .frame(maxWidth: .infinity)
             }
         }
+    }
+
+    private var breathingPacerContent: some View {
+        BreathingPacerView(
+            reduceMotionOverride: store.preferences.reduceMotionOverride,
+            onFinish: { phase = .checkout },
+            onSkip: { save(.skipped) },
+            onStop: { stopAndLeave() }
+        )
     }
 
     private var instructionContent: some View {
@@ -257,7 +263,10 @@ struct WellbeingSessionHostView: View {
     private var gameContent: some View {
         switch launch.activityID {
         case .harborTiles:
-            switch HarborTilesGame.prepare(ageBand: profile.ageBand) {
+            switch HarborTilesGame.prepare(
+                ageBand: profile.ageBand,
+                variantIndex: Int.random(in: 0..<6)
+            ) {
             case .ready(let game):
                 HarborTilesGameView(game: game) { summary in
                     switch summary.resolutionID {

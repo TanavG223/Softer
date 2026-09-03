@@ -75,7 +75,7 @@ If a person chooses “Less settled”:
 2. state that stopping was appropriate;
 3. offer a different modality or no activity;
 4. make trusted-person and urgent-help paths visible; and
-5. move only that exact activity later for 24 hours.
+5. remove only that exact activity from automatic suggestions for 24 hours, then retain a bounded negative preference signal that decays over 30 days.
 
 Do not interpret the response as self-harm risk, notify a contact, begin a crisis flow automatically, or use it as evidence about mental health.
 

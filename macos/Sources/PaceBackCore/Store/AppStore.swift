@@ -18,7 +18,7 @@ public final class AppPreferences {
     public init(defaults: UserDefaults = .standard) {
         self.defaults = defaults
         let storedScale = defaults.double(forKey: Keys.textScale)
-        self.textScale = storedScale == 0 ? 1 : max(0.9, min(storedScale, 1.5))
+        self.textScale = storedScale == 0 ? 1 : max(0.9, min(storedScale, 2.0))
         self.comfortableSpacing = defaults.object(forKey: Keys.comfortableSpacing) as? Bool ?? true
         self.reduceMotionOverride = defaults.bool(forKey: Keys.reduceMotion)
     }
@@ -161,10 +161,10 @@ public final class AppStore {
         }
         if ageBand.isPediatric {
             let approved = await guardianGate.authorize(
-                reason: "A parent or guardian must initialize a child or teen PaceBack profile."
+                reason: "Device-owner authentication is required before creating a child or teen PaceBack profile."
             )
             guard approved else {
-                lastError = "Parent or guardian approval was not completed."
+                lastError = "Device-owner authentication was not completed."
                 return false
             }
         }
@@ -221,8 +221,8 @@ public final class AppStore {
             return false
         }
         guard RolePolicy.requiresAdministrativeGate(permission, profile: profile) else { return true }
-        let success = await guardianGate.authorize(reason: "A parent or guardian must approve this change.")
-        if !success { lastError = "Parent or guardian approval was not completed." }
+        let success = await guardianGate.authorize(reason: "Device-owner authentication is required for this administrative change.")
+        if !success { lastError = "Device-owner authentication was not completed." }
         return success
     }
 

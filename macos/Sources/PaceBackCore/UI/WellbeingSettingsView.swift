@@ -10,7 +10,7 @@ public struct PaceBackSettingsView: View {
         TabView {
             Form {
                 Section("Text and layout") {
-                    Slider(value: $preferences.textScale, in: 0.9...1.5, step: 0.1) {
+                    Slider(value: $preferences.textScale, in: 0.9...2.0, step: 0.1) {
                         Text("Text and control scale")
                     } minimumValueLabel: {
                         Text("A")

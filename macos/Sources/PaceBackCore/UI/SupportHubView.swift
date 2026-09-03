@@ -45,13 +45,13 @@ struct SupportHubView: View {
             Alert(
                 title: Text("Open \(route.title)?"),
                 message: Text(
-                    "\(route.detail) PaceBack cannot confirm whether the call, text, or website opens or whether support is reached."
+                    "\(route.detail) PaceBack cannot confirm whether the app, call, text, or website opens or whether support is reached."
                 ),
-                primaryButton: .default(Text("Open")) {
-                    open(route)
-                },
-                secondaryButton: .cancel {
+                primaryButton: .cancel(Text("Cancel")) {
                     store.clearSupportRoute()
+                },
+                secondaryButton: .destructive(Text("Open")) {
+                    open(route)
                 }
             )
         }
@@ -140,9 +140,8 @@ struct SupportHubView: View {
                 Text("Other human support")
                     .font(.title3.weight(.semibold))
                     .accessibilityAddTraits(.isHeader)
-                supportInformation(.trustedPerson)
-                Divider()
-                supportInformation(.professionalCare)
+                supportButton(.trustedPerson, prominent: false)
+                supportButton(.professionalCare, prominent: false)
             }
         }
     }
@@ -183,24 +182,6 @@ struct SupportHubView: View {
         }
     }
 
-    private func supportInformation(_ route: SupportRoute) -> some View {
-        HStack(alignment: .top, spacing: 13) {
-            Image(systemName: symbol(for: route))
-                .font(.headline)
-                .foregroundStyle(PaceBackDesign.accent)
-                .frame(width: 28)
-                .accessibilityHidden(true)
-            VStack(alignment: .leading, spacing: 4) {
-                Text(route.title).font(.headline)
-                Text(route.detail)
-                    .font(.callout)
-                    .foregroundStyle(.secondary)
-                    .fixedSize(horizontal: false, vertical: true)
-            }
-        }
-        .accessibilityElement(children: .combine)
-    }
-
     private func symbol(for route: SupportRoute) -> String {
         switch route {
         case .immediateDanger, .call988: "phone.fill"
@@ -217,7 +198,16 @@ struct SupportHubView: View {
             store.clearSupportRoute()
             pendingRoute = nil
         }
-        guard let destination = route.destinationURL else { return }
+        let destination: URL?
+        switch route {
+        case .trustedPerson:
+            destination = NSWorkspace.shared.urlForApplication(withBundleIdentifier: "com.apple.MobileSMS")
+        case .professionalCare:
+            destination = NSWorkspace.shared.urlForApplication(withBundleIdentifier: "com.apple.AddressBook")
+        default:
+            destination = route.destinationURL
+        }
+        guard let destination else { return }
         NSWorkspace.shared.open(destination)
     }
 }

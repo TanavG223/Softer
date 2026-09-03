@@ -186,8 +186,6 @@ public struct HarborPathGame: Equatable, Sendable {
                     resultID: .skipped
                 )
             )
-            resolutionID = .skippedComplete
-            return .ended(.skippedComplete)
         }
 
         currentIndex += 1
@@ -218,7 +216,7 @@ public enum HarborPathCopy {
     public static let productLabel = "Harbor Path · optional game"
     public static let promise = "A tiny game for noticing what is already around you. It may or may not feel helpful. Stop anytime."
     public static let objective = "Guide the lantern home through one to three static waypoints."
-    public static let noCompetition = "No score, timer, streak, failure, or reward. Skipping or stopping counts as complete."
+    public static let noCompetition = "No score, timer, streak, failure, or reward. Skip moves past one clue; Stop leaves anytime."
     public static let careBoundary = "This exact low-stimulation game has not been clinically validated. It is optional distraction—not treatment or proof that a person is calm."
     public static let skipped = "Skipped. Leaving counts as complete here."
     public static let stopped = "Enough for now. Stopping counts as complete here."

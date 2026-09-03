@@ -287,7 +287,8 @@ public struct WellbeingPersonalizationState: Codable, Hashable, Sendable {
         let delta: Double
         switch outcome {
         case .moreSettled: delta = 0.12
-        case .same, .lessSettled: delta = 0
+        case .same: delta = 0
+        case .lessSettled: delta = -0.16
         case .skipped: delta = -0.02
         }
         updateSignal(key: Self.signalKey(needID: needID, activityID: activityID), delta: delta)
@@ -527,8 +528,8 @@ public enum SupportRoute: String, CaseIterable, Codable, Identifiable, Sendable 
         case .immediateDanger: "If there is immediate danger, call your local emergency number now."
         case .call988, .text988, .chat988: "U.S. Suicide & Crisis Lifeline support."
         case .internationalDirectory: "Open a country-by-country crisis support directory."
-        case .trustedPerson: "Choose and contact a trusted person yourself. PaceBack does not send messages."
-        case .professionalCare: "Use contact information you already trust for a clinician or counselor."
+        case .trustedPerson: "Opens Messages so you can choose and contact a trusted person yourself. PaceBack does not send messages."
+        case .professionalCare: "Opens Contacts so you can choose contact information you already trust for a clinician or counselor."
         }
     }
 
@@ -544,7 +545,7 @@ public enum SupportRoute: String, CaseIterable, Codable, Identifiable, Sendable 
     }
 
     public var requiresConfirmation: Bool {
-        destinationURL != nil
+        true
     }
 
     public static let boundaryNotice =

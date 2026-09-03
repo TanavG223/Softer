@@ -9,8 +9,12 @@ permissions:
 
 jobs:
   macos:
-    name: Native macOS build and tests
-    runs-on: macos-26
+    name: Native macOS build and tests (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-14, macos-26]
+    runs-on: ${{ matrix.os }}
     timeout-minutes: 35
     steps:
       - uses: actions/checkout@v4

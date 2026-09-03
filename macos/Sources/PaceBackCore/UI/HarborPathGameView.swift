@@ -262,14 +262,14 @@ public struct HarborPathGameView: View {
         Button {
             apply(.skipCheckpoint)
         } label: {
-            Label("Skip", systemImage: "forward.fill")
+            Label("Skip this waypoint", systemImage: "forward.fill")
                 .frame(maxWidth: .infinity)
         }
         .buttonStyle(.bordered)
         .paceBackControlTarget()
         .keyboardShortcut(.rightArrow, modifiers: [.command, .shift])
-        .accessibilityLabel("Skip this clue")
-        .accessibilityHint("Leaves Harbor Path now. Skipping counts as complete.")
+        .accessibilityLabel("Skip this waypoint")
+        .accessibilityHint("Moves to the next optional waypoint without placing an item")
         .accessibilityIdentifier("harborPath.skip")
 
         Button {

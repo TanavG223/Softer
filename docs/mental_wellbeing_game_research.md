@@ -38,7 +38,7 @@ Harbor Tiles retains only the broad ideas of direct placement, simple spatial fi
 2. Each cove has three fixed-orientation pieces containing 3, 3, and 4 cells.
 3. Completion occurs after exactly nine placements: three pieces in each of three coves.
 4. Every accepted placement is in bounds, nonoverlapping, and approved by a backtracking solver that proves all remaining pieces can still fit. Every accepted state therefore keeps at least one completion path.
-5. A person can drag a piece or use the equivalent tap-piece then tap-destination path. **Place selected piece**, **Hint**, and **Undo** remain available without penalty.
+5. A person can drag a piece or use the equivalent choose-piece then choose-destination path. Valid fits are not visually pre-marked; **Show a fit** and **Undo** remain available without penalty.
 6. Completed pieces remain visible and one harbor light marks each completed cove. Nothing explodes, clears, drops, or disappears for reward.
 7. There is no score, timer, accuracy label, speed target, losing, line clear, combo, streak, currency, rank, failure, punishment, surprise reward, daily goal, or endless loop.
 8. Stop and Skip are valid terminal outcomes. Completion after the ninth placement does not prompt an endless restart.
@@ -61,7 +61,7 @@ Its safe description is: **“Harbor Path may offer a brief, gentle change of fo
 
 Board state, clues, invalid placements, hints, undo use, taps, speed, dwell time, completion behavior, sound, and haptics are session-local and are not stored or used for personalization. The only optional retained activity signal is the same closed check-out used elsewhere: activity ID, selected outcome, and timestamp within the declared encrypted bounded ledger.
 
-Both games belong to the interactive-play modality family. A “Less settled” response cools down only that exact game for 24 hours. Any immediate activity alternative comes from a different modality rather than suggesting the other game; when none is eligible, the app offers no activity and keeps human support visible. No response triggers diagnosis, crisis inference, or a retry.
+Both games belong to the interactive-play modality family. A “Less settled” response cools down only that exact game for 24 hours and leaves a bounded negative preference signal that then decays. Any immediate activity alternative comes from a different modality rather than suggesting the other game; when none is eligible, the app offers no activity and keeps human support visible. No response triggers diagnosis, crisis inference, or a retry.
 
 ## Safety, age, and accessibility
 

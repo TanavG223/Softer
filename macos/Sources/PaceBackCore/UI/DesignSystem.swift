@@ -1,3 +1,4 @@
+import AppKit
 import SwiftUI
 
 /// Semantic visual tokens for PaceBack's quiet wellbeing workspace.
@@ -12,11 +13,31 @@ public enum PaceBackDesign {
     public static let comfortableSpacing: CGFloat = 22
     public static let minimumControlHeight: CGFloat = 44
 
-    public static let accent = Color(red: 0.13, green: 0.44, blue: 0.46)
+    public static let accent = adaptiveColor(
+        light: NSColor(srgbRed: 0.04, green: 0.36, blue: 0.38, alpha: 1),
+        dark: NSColor(srgbRed: 0.34, green: 0.78, blue: 0.77, alpha: 1)
+    )
     public static let accentDeep = Color(red: 0.07, green: 0.25, blue: 0.34)
-    public static let calmBlue = Color(red: 0.20, green: 0.39, blue: 0.60)
-    public static let warm = Color(red: 0.75, green: 0.45, blue: 0.22)
-    public static let critical = Color(red: 0.72, green: 0.16, blue: 0.15)
+    public static let calmBlue = adaptiveColor(
+        light: NSColor(srgbRed: 0.12, green: 0.33, blue: 0.56, alpha: 1),
+        dark: NSColor(srgbRed: 0.46, green: 0.68, blue: 0.91, alpha: 1)
+    )
+    public static let warm = adaptiveColor(
+        light: NSColor(srgbRed: 0.52, green: 0.27, blue: 0.07, alpha: 1),
+        dark: NSColor(srgbRed: 0.95, green: 0.65, blue: 0.37, alpha: 1)
+    )
+    public static let critical = adaptiveColor(
+        light: NSColor(srgbRed: 0.65, green: 0.10, blue: 0.08, alpha: 1),
+        dark: NSColor(srgbRed: 1.00, green: 0.48, blue: 0.44, alpha: 1)
+    )
+
+    private static func adaptiveColor(light: NSColor, dark: NSColor) -> Color {
+        Color(
+            nsColor: NSColor(name: nil) { appearance in
+                appearance.bestMatch(from: [.darkAqua, .aqua]) == .darkAqua ? dark : light
+            }
+        )
+    }
 
     public static func dynamicTypeSize(for scale: Double) -> DynamicTypeSize {
         switch scale {
@@ -24,12 +45,30 @@ public enum PaceBackDesign {
         case ..<1.08: .medium
         case ..<1.2: .large
         case ..<1.4: .xLarge
-        default: .xxLarge
+        case ..<1.55: .xxLarge
+        case ..<1.7: .xxxLarge
+        case ..<1.85: .accessibility1
+        default: .accessibility2
         }
     }
 
     public static func controlSize(for scale: Double) -> ControlSize {
         scale >= 1.25 ? .extraLarge : .regular
+    }
+}
+
+public enum PaceBackAccessibility {
+    @MainActor
+    public static func announce(_ message: String) {
+        guard let app = NSApp else { return }
+        NSAccessibility.post(
+            element: app,
+            notification: .announcementRequested,
+            userInfo: [
+                .announcement: message,
+                .priority: NSAccessibilityPriorityLevel.medium.rawValue
+            ]
+        )
     }
 }
 

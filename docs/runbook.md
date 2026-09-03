@@ -1,6 +1,6 @@
 # Native Mac runbook
 
-Requirements: macOS 26+, Apple Command Line Tools, Swift 6.2. Xcode and iOS simulators are not required.
+Requirements: macOS 14+, Apple Command Line Tools, Swift 6.0+, and Node.js for the site JavaScript syntax check. Xcode and iOS simulators are not required.
 
 ```sh
 make macos-test

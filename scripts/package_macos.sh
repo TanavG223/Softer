@@ -7,6 +7,8 @@ MACOS_DEVELOPER_DIR=${MACOS_DEVELOPER_DIR:-/Library/Developer/CommandLineTools}
 SIGN_IDENTITY=${SIGN_IDENTITY:-}
 OUTPUT_DIR=${OUTPUT_DIR:-${PROJECT_DIR}/build}
 APP_DIR=${OUTPUT_DIR}/PaceBack.app
+ARM_BUILD_DIR=${PROJECT_DIR}/macos/.build/package-arm64
+INTEL_BUILD_DIR=${PROJECT_DIR}/macos/.build/package-x86_64
 
 if [[ ! -d ${MACOS_DEVELOPER_DIR} ]]; then
   print -u2 "MACOS_DEVELOPER_DIR must point to installed macOS Command Line Tools."
@@ -24,16 +26,22 @@ if [[ -z ${SIGN_IDENTITY} ]]; then
 fi
 SIGN_IDENTITY=${SIGN_IDENTITY:--}
 
-# PaceBack's wellbeing activities are native and model-independent.
-swift build --package-path "${PROJECT_DIR}/macos" -c release --arch arm64 --product PaceBack
+# Build both supported Mac architectures with Command Line Tools, then merge
+# them into one distributable executable. No Xcode project or simulator is used.
+swift build --package-path "${PROJECT_DIR}/macos" --scratch-path "${ARM_BUILD_DIR}" \
+  -c release --arch arm64 --product PaceBack
+swift build --package-path "${PROJECT_DIR}/macos" --scratch-path "${INTEL_BUILD_DIR}" \
+  -c release --arch x86_64 --product PaceBack
 
 rm -rf "${APP_DIR}"
 mkdir -p \
   "${APP_DIR}/Contents/MacOS" \
   "${APP_DIR}/Contents/Resources/PaceBackEvidence"
 
-cp "${PROJECT_DIR}/macos/.build/arm64-apple-macosx/release/PaceBack" \
-  "${APP_DIR}/Contents/MacOS/PaceBack"
+lipo -create \
+  "${ARM_BUILD_DIR}/arm64-apple-macosx/release/PaceBack" \
+  "${INTEL_BUILD_DIR}/x86_64-apple-macosx/release/PaceBack" \
+  -output "${APP_DIR}/Contents/MacOS/PaceBack"
 cp "${PROJECT_DIR}/packaging/Info.plist" "${APP_DIR}/Contents/Info.plist"
 cp "${PROJECT_DIR}/packaging/PaceBack.icns" \
   "${APP_DIR}/Contents/Resources/PaceBack.icns"

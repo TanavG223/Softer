@@ -17,6 +17,7 @@ struct CalmHomeView: View {
         ) {
             ProfileContextStrip(profile: profile)
             CaregiverUseNotice(ageBand: profile.ageBand)
+            recentChoice
             if let recommendation, recommendation.hasEligibleActivities {
                 recommendedStart(recommendation)
             } else if let recommendation {
@@ -45,6 +46,36 @@ struct CalmHomeView: View {
         .navigationTitle("Calm")
         .onAppear { refreshRecommendation() }
         .onChange(of: selectedNeed) { _, _ in refreshRecommendation() }
+    }
+
+    @ViewBuilder
+    private var recentChoice: some View {
+        if let recent = mostRecentReusableChoice {
+            NavigationLink(
+                value: WellbeingLaunch(needID: recent.needID, activityID: recent.activityID)
+            ) {
+                HStack(spacing: 12) {
+                    Label("Use \(recent.activityID.title) again", systemImage: "arrow.counterclockwise.circle.fill")
+                    Spacer()
+                    Text(recent.activityID.durationLabel)
+                        .font(.callout)
+                        .foregroundStyle(.secondary)
+                }
+                .frame(maxWidth: .infinity)
+            }
+            .buttonStyle(.bordered)
+            .controlSize(.large)
+            .accessibilityHint("Opens your most recent reusable choice. Based only on an optional check-out.")
+        }
+    }
+
+    private var mostRecentReusableChoice: WellbeingFeedbackEvent? {
+        guard let wellbeing = profile.wellbeing else { return nil }
+        return wellbeing.feedbackEvents.last { event in
+            (event.outcome == .moreSettled || event.outcome == .same)
+                && event.activityID.isAvailable(for: profile)
+                && !wellbeing.isCoolingDown(event.activityID, at: .now)
+        }
     }
 
     @ViewBuilder

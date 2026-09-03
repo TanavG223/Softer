@@ -1,3 +1,4 @@
+import AppKit
 import SwiftUI
 
 /// Keyboard- and VoiceOver-operable Harbor Tiles board. The parent owns the
@@ -6,6 +7,7 @@ public struct HarborTilesGameView: View {
     @State private var game: HarborTilesGame
     @State private var lastMessage: String
     @State private var hintedAnchor: HarborTilesCell?
+    @State private var placementPulse = false
 
     private let onEnd: (HarborTilesGameSummary) -> Void
 
@@ -44,7 +46,7 @@ public struct HarborTilesGameView: View {
                             .foregroundStyle(.secondary)
                             .fixedSize(horizontal: false, vertical: true)
                     }
-                    .frame(maxWidth: 760, alignment: .leading)
+                    .frame(maxWidth: 980, alignment: .leading)
                     .padding(28)
                     .frame(maxWidth: .infinity)
                 }
@@ -86,12 +88,23 @@ public struct HarborTilesGameView: View {
     }
 
     private var activeGame: some View {
-        VStack(alignment: .leading, spacing: 18) {
-            statusCard
-            pieceTray
-            boardCard
-            placeSelectedButton
-            utilityControls
+        ViewThatFits(in: .horizontal) {
+            HStack(alignment: .top, spacing: 18) {
+                boardCard
+                    .frame(maxWidth: 470)
+                VStack(alignment: .leading, spacing: 18) {
+                    statusCard
+                    pieceTray
+                    utilityControls
+                }
+                .frame(maxWidth: 450)
+            }
+            VStack(alignment: .leading, spacing: 18) {
+                boardCard
+                statusCard
+                pieceTray
+                utilityControls
+            }
         }
     }
 
@@ -180,7 +193,7 @@ public struct HarborTilesGameView: View {
             )
             .accessibilityLabel("\(pieceID.title), \(pieceID.cellCount) tiles")
             .accessibilityValue(game.selectedPieceID == pieceID ? "Selected" : "Not selected")
-            .accessibilityHint("Selects this piece. Choose an outlined board position, press Return, or drag it onto the cove.")
+            .accessibilityHint("Selects this piece. Choose an available board position or drag it onto the cove.")
             .accessibilityAddTraits(game.selectedPieceID == pieceID ? .isSelected : [])
             .accessibilityIdentifier("harborTiles.piece.\(pieceID.rawValue)")
             .draggable(pieceID.rawValue) {
@@ -199,7 +212,7 @@ public struct HarborTilesGameView: View {
                     Label("Cove board", systemImage: "square.grid.3x3")
                         .font(.headline)
                     Spacer()
-                    Text("Outlined + = available fit")
+                    Text(hintedAnchor == nil ? "Choose a starting cell" : "Hint outlined")
                         .font(.caption)
                         .foregroundStyle(.secondary)
                 }
@@ -212,8 +225,9 @@ public struct HarborTilesGameView: View {
                     onPlaceSelected: placeSelected,
                     onDropPiece: placeDraggedPiece
                 )
+                .scaleEffect(placementPulse && !reduceMotion ? 1.012 : 1)
 
-                Text("Drag a piece onto the cove, choose an outlined position with a pointer or keyboard, or use Place selected piece. Every accepted position keeps the cove solvable.")
+                Text("Drag a piece onto the cove or choose a starting cell with a pointer or keyboard. Show a fit is optional. Every accepted position keeps the cove solvable.")
                     .font(.footnote)
                     .foregroundStyle(.secondary)
                     .fixedSize(horizontal: false, vertical: true)
@@ -226,26 +240,6 @@ public struct HarborTilesGameView: View {
             )
             .accessibilityIdentifier("harborTiles.gameBoard")
         }
-    }
-
-    private var placeSelectedButton: some View {
-        Button {
-            guard let hint = game.hint() else { return }
-            if game.selectedPieceID != hint.pieceID {
-                _ = game.select(hint.pieceID)
-            }
-            placeSelected(at: hint.anchor)
-        } label: {
-            Label("Place selected piece", systemImage: "square.and.arrow.down.fill")
-                .frame(maxWidth: .infinity)
-        }
-        .buttonStyle(.borderedProminent)
-        .controlSize(.large)
-        .paceBackControlTarget()
-        .keyboardShortcut(.return, modifiers: [])
-        .disabled(game.hint() == nil)
-        .accessibilityHint("Uses the first completion-preserving fit. There is no score or penalty.")
-        .accessibilityIdentifier("harborTiles.placeSelected")
     }
 
     private var utilityControls: some View {
@@ -437,12 +431,16 @@ public struct HarborTilesGameView: View {
         switch transition {
         case .placed:
             lastMessage = "\(beforePiece?.title ?? "Piece") placed. Cove \(beforeCove), \(game.placedPieceIDs.count) of 3 pieces."
+            placementFeedback(lastMessage)
         case .coveCompleted:
             lastMessage = "Cove \(beforeCove) complete. Nothing was scored."
+            placementFeedback(lastMessage)
         case .ended(.completed):
             lastMessage = HarborTilesCopy.completion
+            placementFeedback(lastMessage)
         case .rejected:
             lastMessage = "That position is unavailable. The board did not change."
+            PaceBackAccessibility.announce(lastMessage)
         default:
             break
         }
@@ -469,14 +467,18 @@ public struct HarborTilesGameView: View {
         switch transition {
         case .placed:
             lastMessage = "\(pieceID.title) placed. Cove \(beforeCove), \(game.placedPieceIDs.count) of 3 pieces."
+            placementFeedback(lastMessage)
         case .coveCompleted:
             lastMessage = "Cove \(beforeCove) complete. Nothing was scored."
+            placementFeedback(lastMessage)
         case .ended(.completed):
             lastMessage = HarborTilesCopy.completion
+            placementFeedback(lastMessage)
         case .rejected:
             // Atomic placement leaves both selection and board state untouched
             // when a direct-manipulation destination is invalid.
             lastMessage = "That drop is unavailable. The board did not change."
+            PaceBackAccessibility.announce(lastMessage)
             return false
         default:
             break
@@ -489,18 +491,35 @@ public struct HarborTilesGameView: View {
         _ = game.select(hint.pieceID)
         hintedAnchor = hint.anchor
         lastMessage = "A fit is outlined for \(hint.pieceID.title), row \(hint.anchor.row + 1), column \(hint.anchor.column + 1)."
+        PaceBackAccessibility.announce(lastMessage)
     }
 
     private func undo() {
         guard case .undone(let pieceID) = game.undo() else { return }
         hintedAnchor = nil
         lastMessage = "\(pieceID.title) returned to the tray. There is no penalty."
+        PaceBackAccessibility.announce(lastMessage)
     }
 
     private func applyAdvance() {
         guard case .advanced(let coveNumber) = game.advanceCove() else { return }
         hintedAnchor = nil
         lastMessage = "Cove \(coveNumber) is ready. Choose any available piece."
+        PaceBackAccessibility.announce(lastMessage)
+    }
+
+    private func placementFeedback(_ message: String) {
+        PaceBackAccessibility.announce(message)
+        NSHapticFeedbackManager.defaultPerformer.perform(.alignment, performanceTime: .now)
+        guard !reduceMotion else { return }
+        withAnimation(.spring(response: 0.22, dampingFraction: 0.58)) {
+            placementPulse = true
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.18) {
+            withAnimation(.easeOut(duration: 0.14)) {
+                placementPulse = false
+            }
+        }
     }
 }
 
@@ -540,7 +559,7 @@ private struct HarborTilesBoard: View {
 
         if !isTarget {
             RoundedRectangle(cornerRadius: 10)
-                .fill(PaceBackDesign.calmBlue.opacity(0.035))
+                .fill(PaceBackDesign.calmBlue.opacity(0.025))
                 .aspectRatio(1, contentMode: .fit)
                 .overlay {
                     Image(systemName: "water.waves")
@@ -583,36 +602,36 @@ private struct HarborTilesBoard: View {
                         .fill(
                             isHinted
                                 ? PaceBackDesign.warm.opacity(0.22)
-                                : PaceBackDesign.calmBlue.opacity(isValidAnchor ? 0.14 : 0.055)
+                                : PaceBackDesign.calmBlue.opacity(0.16)
                         )
                         .overlay {
                             RoundedRectangle(cornerRadius: 12)
                                 .strokeBorder(
                                     isHinted
                                         ? PaceBackDesign.warm
-                                        : PaceBackDesign.calmBlue.opacity(isValidAnchor ? 0.82 : 0.30),
+                                        : PaceBackDesign.calmBlue.opacity(0.68),
                                     style: StrokeStyle(
                                         lineWidth: isHinted || contrast == .increased ? 2.5 : 1.5,
-                                        dash: isValidAnchor ? [5, 4] : []
+                                        dash: isHinted ? [5, 4] : []
                                     )
                                 )
                         }
                         .overlay {
-                            if isValidAnchor {
-                                Image(systemName: isHinted ? "lightbulb.fill" : "plus")
+                            if isHinted {
+                                Image(systemName: "lightbulb.fill")
                                     .font(.headline.weight(.bold))
-                                    .foregroundStyle(isHinted ? PaceBackDesign.warm : PaceBackDesign.calmBlue)
+                                    .foregroundStyle(PaceBackDesign.warm)
                             }
                         }
                 }
                 .buttonStyle(.plain)
                 .disabled(!isValidAnchor)
                 .accessibilityLabel("Row \(cell.row + 1), column \(cell.column + 1)")
-                .accessibilityValue(isValidAnchor ? "Available fit" : "Unavailable for selected piece")
+                .accessibilityValue(isHinted ? "Hinted fit" : (isValidAnchor ? "Available fit" : "Unavailable for selected piece"))
                 .accessibilityHint(
                     isValidAnchor
                         ? "Places the selected piece here"
-                        : "Choose another outlined position or drag a compatible piece"
+                        : "Choose another position or drag a compatible piece"
                 )
                 .accessibilityIdentifier("harborTiles.cell.r\(cell.row).c\(cell.column)")
             }

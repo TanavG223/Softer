@@ -37,16 +37,6 @@ public enum AgeBand: String, CaseIterable, Codable, Identifiable, Sendable {
         isUnder13 || self == .teen13To17
     }
 
-    public var specificScope: EvidenceScope {
-        switch self {
-        case .youngChild0To5: .youngChild0To5
-        case .child6To12: .child6To12
-        case .teen13To17: .teen13To17
-        case .adult18To64: .adult18To64
-        case .olderAdult65Plus: .olderAdult65Plus
-        }
-    }
-
     public var defaultCareContext: CareContext {
         switch self {
         case .youngChild0To5: .home
@@ -99,17 +89,6 @@ public enum ProfilePermission: String, CaseIterable, Codable, Sendable {
     case changeSettings
 }
 
-public enum EvidenceScope: String, Codable, CaseIterable, Identifiable, Sendable {
-    case allAges
-    case youngChild0To5
-    case child6To12
-    case teen13To17
-    case adult18To64
-    case olderAdult65Plus
-
-    public var id: String { rawValue }
-}
-
 public struct LocalProfile: Identifiable, Codable, Hashable, Sendable {
     public let id: UUID
     public var alias: String
@@ -118,9 +97,6 @@ public struct LocalProfile: Identifiable, Codable, Hashable, Sendable {
     public var careContext: CareContext
     public var caregiverApproved: Bool
     public let createdAt: Date
-    public var trendEntries: [TrendEntry]
-    public var carePlanDraft: CarePlanDraft?
-    public var confirmedPreferences: [String]
     /// Explicit, closed wellbeing check-outs stored inside this profile's
     /// existing encrypted vault. Optional keeps older profile payloads decodable.
     public var wellbeing: WellbeingPersonalizationState?
@@ -133,9 +109,6 @@ public struct LocalProfile: Identifiable, Codable, Hashable, Sendable {
         careContext: CareContext? = nil,
         caregiverApproved: Bool = false,
         createdAt: Date = .now,
-        trendEntries: [TrendEntry] = [],
-        carePlanDraft: CarePlanDraft? = nil,
-        confirmedPreferences: [String] = [],
         wellbeing: WellbeingPersonalizationState? = nil
     ) {
         self.id = id
@@ -145,9 +118,6 @@ public struct LocalProfile: Identifiable, Codable, Hashable, Sendable {
         self.careContext = careContext ?? ageBand.defaultCareContext
         self.caregiverApproved = caregiverApproved
         self.createdAt = createdAt
-        self.trendEntries = trendEntries
-        self.carePlanDraft = carePlanDraft
-        self.confirmedPreferences = confirmedPreferences
         self.wellbeing = wellbeing
     }
 }
@@ -202,30 +172,6 @@ public enum RolePolicy {
     }
 }
 
-public enum ReadingMode: String, CaseIterable, Codable, Identifiable, Sendable {
-    case brief
-    case standard
-    case full
-
-    public var id: String { rawValue }
-
-    public var title: String {
-        switch self {
-        case .brief: "Brief"
-        case .standard: "Standard"
-        case .full: "Full detail"
-        }
-    }
-
-    public var maximumParagraphs: Int {
-        switch self {
-        case .brief: 2
-        case .standard: 4
-        case .full: 8
-        }
-    }
-}
-
 public enum AppSection: String, CaseIterable, Identifiable, Sendable {
     case calm
     case toolkit
@@ -256,166 +202,5 @@ public enum AppSection: String, CaseIterable, Identifiable, Sendable {
         case .privacy: "lock.shield"
         case .about: "info.circle"
         }
-    }
-}
-
-public struct SourceCitation: Identifiable, Codable, Hashable, Sendable {
-    public var id: String { sourceID }
-    public let sourceID: String
-    public let title: String
-    public let url: URL?
-    public let page: Int?
-    public let quote: String
-
-    public init(sourceID: String, title: String, url: URL? = nil, page: Int? = nil, quote: String) {
-        self.sourceID = sourceID
-        self.title = title
-        self.url = url
-        self.page = page
-        self.quote = quote
-    }
-}
-
-public enum SupportStatus: String, Codable, Sendable {
-    case verified
-    case partial
-    case insufficientInformation
-    case dangerSignDetected
-    case cancelled
-}
-
-public struct RunUsage: Codable, Hashable, Sendable {
-    public let retrievedTokens: Int
-    public let inputTokens: Int
-    public let outputTokens: Int
-    public let retrievalRounds: Int
-    public let latencyMS: Double
-
-    public init(
-        retrievedTokens: Int,
-        inputTokens: Int,
-        outputTokens: Int,
-        retrievalRounds: Int,
-        latencyMS: Double
-    ) {
-        self.retrievedTokens = retrievedTokens
-        self.inputTokens = inputTokens
-        self.outputTokens = outputTokens
-        self.retrievalRounds = retrievalRounds
-        self.latencyMS = latencyMS
-    }
-}
-
-public struct EvidenceQuery: Codable, Hashable, Sendable {
-    public let runID: String
-    public let question: String
-    public let profileID: UUID
-    public let ageBand: AgeBand
-    public let actingRole: ActingRole
-    public let careContext: CareContext
-    public let evidenceScope: [EvidenceScope]
-    public let maxOutputTokens: Int
-
-    public init(
-        question: String,
-        profile: LocalProfile,
-        maxOutputTokens: Int = 500,
-        runID: String = UUID().uuidString
-    ) {
-        self.runID = runID
-        self.question = question
-        self.profileID = profile.id
-        self.ageBand = profile.ageBand
-        self.actingRole = profile.actingRole
-        self.careContext = profile.careContext
-        self.evidenceScope = [.allAges, profile.ageBand.specificScope]
-        self.maxOutputTokens = max(100, min(maxOutputTokens, 800))
-    }
-}
-
-public struct EvidenceAnswer: Identifiable, Codable, Hashable, Sendable {
-    public var id: String { runID }
-    public let runID: String
-    public let answer: String
-    public let supportStatus: SupportStatus
-    public let citations: [SourceCitation]
-    public let route: String
-    public let stopReason: String
-    public let usage: RunUsage
-
-    public init(
-        runID: String,
-        answer: String,
-        supportStatus: SupportStatus,
-        citations: [SourceCitation],
-        route: String,
-        stopReason: String,
-        usage: RunUsage
-    ) {
-        self.runID = runID
-        self.answer = answer
-        self.supportStatus = supportStatus
-        self.citations = citations
-        self.route = route
-        self.stopReason = stopReason
-        self.usage = usage
-    }
-}
-
-public struct TrendEntry: Identifiable, Codable, Hashable, Sendable {
-    public let id: UUID
-    public let recordedAt: Date
-    public let symptomRating: Int
-    public let focusMinutes: Int
-    public let note: String
-
-    public init(
-        id: UUID = UUID(),
-        recordedAt: Date = .now,
-        symptomRating: Int,
-        focusMinutes: Int,
-        note: String = ""
-    ) {
-        self.id = id
-        self.recordedAt = recordedAt
-        self.symptomRating = max(0, min(symptomRating, 10))
-        self.focusMinutes = max(0, focusMinutes)
-        self.note = note
-    }
-}
-
-public struct CarePlanRestriction: Identifiable, Codable, Hashable, Sendable {
-    public let id: UUID
-    public let text: String
-    public let page: Int
-    public var isConfirmed: Bool
-
-    public init(id: UUID = UUID(), text: String, page: Int, isConfirmed: Bool = false) {
-        self.id = id
-        self.text = text
-        self.page = page
-        self.isConfirmed = isConfirmed
-    }
-}
-
-public struct CarePlanDraft: Identifiable, Codable, Hashable, Sendable {
-    public let id: UUID
-    public let profileID: UUID
-    public let sourceName: String
-    public let importedAt: Date
-    public var restrictions: [CarePlanRestriction]
-
-    public init(
-        id: UUID = UUID(),
-        profileID: UUID,
-        sourceName: String,
-        importedAt: Date = .now,
-        restrictions: [CarePlanRestriction]
-    ) {
-        self.id = id
-        self.profileID = profileID
-        self.sourceName = sourceName
-        self.importedAt = importedAt
-        self.restrictions = restrictions
     }
 }

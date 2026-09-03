@@ -65,12 +65,35 @@ struct PaceBackVerification {
         state.record(needID: .notSure, activityID: .screenOffPause, outcome: .lessSettled, at: now)
         try check(state.isCoolingDown(.screenOffPause, at: now.addingTimeInterval(86_399)), "less-settled cooldown must last 24 hours")
         try check(!state.isCoolingDown(.screenOffPause, at: now.addingTimeInterval(86_400)), "cooldown must expire exactly at 24 hours")
+        try check(
+            state.score(for: .notSure, activityID: .screenOffPause, at: now.addingTimeInterval(86_400)) < 0,
+            "less-settled feedback must remain a decaying negative preference after cooldown"
+        )
         print("verification stage: recommender")
 
         guard case .ready(var tiles) = HarborTilesGame.prepare(ageBand: .adult18To64) else {
             throw VerificationFailure(description: "Harbor Tiles configuration must be solvable")
         }
         try check(tiles.coves.count == 3, "tiles must contain exactly three coves")
+        for variantIndex in 0..<3 {
+            guard case .ready(let opening) = HarborTilesGame.prepare(
+                ageBand: .adult18To64,
+                variantIndex: variantIndex
+            ), let selectedPieceID = opening.selectedPieceID else {
+                throw VerificationFailure(description: "tiles must begin each cove route with a selected piece")
+            }
+            try check(
+                opening.validAnchors(for: selectedPieceID).count > 1,
+                "each tiles cove must open with more than one completion-preserving fit"
+            )
+        }
+        guard case .ready(let alternateTiles) = HarborTilesGame.prepare(ageBand: .adult18To64, variantIndex: 4) else {
+            throw VerificationFailure(description: "alternate Harbor Tiles route must prepare")
+        }
+        try check(
+            alternateTiles.coves.map(\.id) != tiles.coves.map(\.id),
+            "tiles variants must change the cove route"
+        )
         while tiles.isActive {
             if tiles.coveNeedsAdvance {
                 _ = tiles.advanceCove()
@@ -95,6 +118,17 @@ struct PaceBackVerification {
         _ = path.send(.placeHarborItem)
         try check(path.resolutionID == .pathComplete, "path must end after three checkpoints")
         try check(path.checkpointResults.count == 3, "path must record only bounded session results")
+        guard case .ready(var skippedPath) = HarborPathGame.prepare(ageBand: .adult18To64, checkpointCount: 3) else {
+            throw VerificationFailure(description: "Harbor Path skip route should prepare")
+        }
+        let firstSkip = skippedPath.send(.skipCheckpoint)
+        try check(
+            firstSkip == .advanced(to: .supportedSurface) && skippedPath.isActive,
+            "path skip must move one waypoint instead of ending the session"
+        )
+        _ = skippedPath.send(.skipCheckpoint)
+        let finalSkip = skippedPath.send(.skipCheckpoint)
+        try check(finalSkip == .ended(.pathComplete), "skipping all waypoints must reach finite completion")
         guard case .unavailable(.youngChildScreenOffOnly) = HarborPathGame.prepare(ageBand: .youngChild0To5, checkpointCount: 1) else {
             throw VerificationFailure(description: "0-5 path must be unavailable")
         }
@@ -171,6 +205,13 @@ struct PaceBackVerification {
         try check(updatedEncryptedLoad == [changed], "same-ID update must atomically replace the active generation")
         try check(deletion == .deleted, "encrypted profile deletion must complete")
         try check(afterDeletion.isEmpty, "deleted profile must not reappear")
+        try Data([0x50, 0x42, 0x00, 0x01]).write(to: tempRoot.appending(path: "index.pbvault"), options: .atomic)
+        do {
+            _ = try await encrypted.loadProfiles()
+            throw VerificationFailure(description: "tampered encrypted index must fail closed")
+        } catch ProfileRepositoryError.corruptVault {
+            count += 1
+        }
         print("verification stage: encrypted repository")
 
         let legacyRoot = FileManager.default.temporaryDirectory
@@ -191,7 +232,16 @@ struct PaceBackVerification {
         try addKey(legacyProfileKey, service: legacyService, account: "profile.\(adult.id.uuidString)")
         try seal(JSONEncoder().encode(LegacyIndexFixture(profileIDs: [adult.id])), with: legacyIndexKey)
             .write(to: legacyRoot.appending(path: "index.pbvault"))
-        try seal(JSONEncoder().encode(adult), with: legacyProfileKey)
+        guard var legacyObject = try JSONSerialization.jsonObject(
+            with: JSONEncoder().encode(adult)
+        ) as? [String: Any] else {
+            throw VerificationFailure(description: "legacy profile fixture must encode as an object")
+        }
+        legacyObject["trendEntries"] = []
+        legacyObject["carePlanDraft"] = NSNull()
+        legacyObject["confirmedPreferences"] = []
+        let legacyPayload = try JSONSerialization.data(withJSONObject: legacyObject)
+        try seal(legacyPayload, with: legacyProfileKey)
             .write(to: legacyRoot.appending(path: "\(adult.id.uuidString).pbvault"))
         let legacyRepository = EncryptedProfileRepository(directory: legacyRoot, keychainService: legacyService)
         let legacyLoad = try await legacyRepository.loadProfiles()

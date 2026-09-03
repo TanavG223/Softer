@@ -14,29 +14,31 @@ The signed `build/PaceBack.app` bundle was launched and exercised on macOS at a
 | Launch and saved workspace | Packaged app opened without a Keychain prompt and loaded the existing encrypted profile | PASS |
 | Calm entry | The one-action Calm screen showed the fixed recommendation, its reason, Harbor Tiles, and progressive disclosure for other choices | PASS |
 | Standard activity | “Notice the room” opened, began, displayed step 1 of 3, and returned through the always-available Stop action without saving a check-out | PASS |
-| Harbor Tiles | The intro opened, the game started, one named piece was selected, and a legal board position advanced the state from piece 1 to piece 2 | PASS |
-| Harbor Path | The intro opened, all three waypoint actions advanced, the finite “PATH COMPLETE” state appeared, and Continue opened the optional check-out | PASS |
-| Support | The static support page displayed U.S.-specific 988 and 911 boundaries, the international option, trusted-person guidance, and the non-monitoring disclaimer | PASS; external support actions deliberately not invoked |
+| Gentle breathing | The visual pacer ran, changed to shape-only wording, paused, and exposed both in-content and persistent Stop controls | PASS |
+| Harbor Tiles | The board rendered above the fold with two unmarked valid opening choices; one piece placed, Show a fit highlighted only on request, and Undo restored the opening state | PASS |
+| Harbor Path | Skip advanced from waypoint 1 to waypoint 2 without ending the session | PASS |
+| Support | The page displayed U.S.-specific 988/911 boundaries, the international option, and actionable Messages/Contacts controls; the 911 confirmation displayed Cancel plus a non-default destructive Open action and was cancelled | PASS; no external destination invoked |
 | Privacy and About | Both destinations rendered the local-data contract, no-passive-inference boundary, mental-wellbeing definition, research boundary, and prototype status | PASS |
 | Settings | Display, Accessibility, and Privacy panes rendered text scaling, comfortable spacing, reduced-motion, keyboard/drag alternatives, and privacy summaries | PASS; preferences were inspected without changing the saved configuration |
 | Runtime network check | `lsof` found no active Internet socket for the running PaceBack process | PASS at the observation time |
-| Bundle | `codesign --verify --deep --strict` accepted the 6.7 MiB package | PASS |
+| Temporary screenshot alias | A `PaceBack Demo` adult profile was created, used for screenshots, then deleted; the original encrypted profile remained selected and readable | PASS |
+| Bundle | `codesign --verify --deep --strict` accepted the 11 MiB universal arm64/x86_64 package; both slices report a macOS 14.0 minimum | PASS |
 
-The emergency call/text/chat actions, external research links, destructive
-profile deletion, and a real operating-system Keychain failure were not
-triggered during the walkthrough. Doing so would create avoidable external or
-user-data effects. Those boundaries are not represented as manually exercised.
+Emergency call/text/chat actions, external research links, and a real
+operating-system Keychain failure were not triggered during the walkthrough.
+Those boundaries are not represented as manually exercised. A temporary
+screenshot profile was deliberately deleted after its images were captured.
 
 ## Deterministic verification
 
 `make verify` passed on the same source revision:
 
-- 50 checks across all nine activity definitions and eligibility boundaries;
-- deterministic recommendation, bounded adaptation, and cooldown behavior;
-- Harbor Tiles completion, legal-progress, Hint, Undo, stop, and skip states;
-- Harbor Path finite completion, stop, skip, and age-specific presentation;
+- 58 checks across all nine activity definitions and eligibility boundaries;
+- deterministic recommendation, bounded positive/negative adaptation, decay, and cooldown behavior;
+- Harbor Tiles finite completion, multiple opening fits in every cove, route variation, stop, and skip states;
+- Harbor Path finite completion plus one-waypoint Skip, Stop, and age-specific presentation;
 - support-route non-mutation;
-- encrypted repository create/load/update/delete and legacy migration;
+- encrypted repository create/load/update/delete, real tampered-index rejection, and legacy schema migration;
 - fail-closed workspace handling and memory-only guest behavior;
 - native Swift build, static-site contract checks, and JavaScript syntax.
 

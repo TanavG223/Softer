@@ -175,36 +175,38 @@ public struct HarborTilesGame: Equatable, Sendable {
             title: "Sheltered cove",
             targetCells: cells([
                 (0, 0), (0, 1), (0, 2),
-                (1, 0), (1, 2), (1, 3),
-                (2, 0), (2, 1), (2, 2), (2, 3)
+                (1, 0), (1, 1), (1, 2),
+                (2, 0), (2, 1), (2, 2)
             ]),
-            pieceIDs: [.threeAcross, .cornerLeft, .square]
+            pieceIDs: [.threeAcross, .cornerLeft, .cornerRight]
         ),
         HarborTilesCove(
             id: 1,
             title: "Open-water cove",
             targetCells: cells([
-                (0, 0), (0, 1), (0, 2), (0, 3),
-                (1, 0), (1, 2),
-                (2, 0), (2, 1), (2, 2), (2, 3)
+                (0, 0), (0, 1),
+                (1, 0), (1, 1), (1, 2),
+                (2, 0), (2, 1), (2, 2),
+                (3, 2)
             ]),
-            pieceIDs: [.threeDown, .threeAcross, .tee]
+            pieceIDs: [.threeDown, .cornerLeft, .cornerRight]
         ),
         HarborTilesCove(
             id: 2,
             title: "Lantern cove",
             targetCells: cells([
-                (0, 0), (0, 1), (0, 2), (0, 3),
-                (1, 0), (1, 1), (1, 3),
+                (0, 1), (0, 2), (0, 3),
+                (1, 1), (1, 2), (1, 3),
                 (2, 1), (2, 2), (2, 3)
             ]),
-            pieceIDs: [.square, .cornerRight, .threeAcross]
+            pieceIDs: [.cornerRight, .threeAcross, .cornerLeft]
         )
     ]
 
     public static func prepare(
         ageBand: AgeBand,
-        coves: [HarborTilesCove] = standardCoves
+        coves: [HarborTilesCove] = standardCoves,
+        variantIndex: Int = 0
     ) -> HarborTilesPreparation {
         guard ageBand != .youngChild0To5 else {
             return .unavailable(.youngChildScreenOffOnly)
@@ -213,10 +215,23 @@ public struct HarborTilesGame: Equatable, Sendable {
             return .unavailable(.invalidConfiguration)
         }
 
+        let shift = ((variantIndex % coves.count) + coves.count) % coves.count
+        var preparedCoves = Array(coves[shift...]) + Array(coves[..<shift])
+        if (variantIndex / coves.count).isMultiple(of: 2) == false {
+            preparedCoves = preparedCoves.map {
+                HarborTilesCove(
+                    id: $0.id,
+                    title: $0.title,
+                    targetCells: $0.targetCells,
+                    pieceIDs: $0.pieceIDs.reversed()
+                )
+            }
+        }
+
         var game = HarborTilesGame(
             ageBand: ageBand,
             presentation: presentation(for: ageBand),
-            coves: coves,
+            coves: preparedCoves,
             currentCoveIndex: 0,
             occupiedCells: [],
             placedPieceIDs: [],
@@ -508,8 +523,8 @@ public enum HarborTilesCopy {
 
     public static func initialInstruction(for ageBand: AgeBand) -> String {
         ageBand.isUnder13
-            ? "A caregiver operates this game. Together, choose a sea-glass piece, then choose an outlined fit."
-            : "Choose a sea-glass piece, then choose an outlined fit."
+            ? "A caregiver operates this game. Together, choose a sea-glass piece, then try a starting cell."
+            : "Choose a sea-glass piece, then try a starting cell."
     }
 
     public static func selectionInstruction(
@@ -517,7 +532,7 @@ public enum HarborTilesCopy {
         for ageBand: AgeBand
     ) -> String {
         ageBand.isUnder13
-            ? "\(pieceTitle) selected. Together, choose an outlined plus or use Place selected piece."
-            : "\(pieceTitle) selected. Choose an outlined plus or use Place selected piece."
+            ? "\(pieceTitle) selected. Together, choose a starting cell or ask to Show a fit."
+            : "\(pieceTitle) selected. Choose a starting cell or use Show a fit."
     }
 }

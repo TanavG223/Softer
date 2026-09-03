@@ -1,6 +1,6 @@
 # PaceBack for macOS
 
-PaceBack is a native SwiftUI mental-wellbeing prototype for macOS 26 or newer. The production target has no Python process, model pack, chatbot, server, account, analytics SDK, or required network service.
+PaceBack is a native SwiftUI mental-wellbeing prototype for macOS 14 or newer. The production target has no Python process, model pack, chatbot, server, account, analytics SDK, or required network service.
 
 From the repository root:
 

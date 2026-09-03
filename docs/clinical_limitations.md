@@ -17,7 +17,7 @@ It does not validate:
 - pediatric suitability, cultural fit, accessibility, or safety for an individual; or
 - superiority over another wellbeing app.
 
-The current ranker is fixed code, not a trained mental-health model. It uses only explicit closed activity receipts, retains at most 120 events, applies a 30-day decay, clamps activity signals to -0.40 through 0.40, and pauses an exact activity for 24 hours after a “Less settled” receipt. Those are product parameters without clinical calibration.
+The current ranker is fixed code, not a trained mental-health model. It uses only explicit closed activity receipts, retains at most 120 events, applies a 30-day decay, clamps activity signals to -0.40 through 0.40, and pauses an exact activity for 24 hours after a “Less settled” receipt. After that pause, its negative preference signal continues to decay rather than being erased. Those are product parameters without clinical calibration.
 
 ## Activity cautions
 

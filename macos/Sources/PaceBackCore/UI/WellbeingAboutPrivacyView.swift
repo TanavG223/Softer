@@ -130,7 +130,7 @@ struct WellbeingPrivacyView: View {
                 Text(store.isGuestSession
                     ? "Return to the encrypted workspace at any time. Temporary choices and check-outs will be discarded."
                     : (profile.ageBand.isPediatric
-                        ? "A parent or guardian must approve administrative changes for this age experience."
+                        ? "macOS device-owner authentication is required for administrative changes. PaceBack cannot verify the authenticated person's family or care relationship."
                         : "The profile owner controls administrative changes. Approved caregiver access does not silently become owner access."))
                 .font(.callout)
                 .foregroundStyle(.secondary)
