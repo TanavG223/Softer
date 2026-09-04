@@ -31,7 +31,7 @@ public struct PaceBackSettingsView: View {
                 Section("Motion and access") {
                     Toggle("Always reduce app motion", isOn: $preferences.reduceMotionOverride)
                         .paceBackControlTarget()
-                    Label("PaceBack also follows macOS Reduce Motion, Reduce Transparency, and Increase Contrast.", systemImage: "accessibility")
+                    Label("Softer also follows macOS Reduce Motion, Reduce Transparency, and Increase Contrast.", systemImage: "accessibility")
                     Label("Games work with tap or keyboard controls; dragging is optional.", systemImage: "keyboard")
                 }
             }

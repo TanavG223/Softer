@@ -217,7 +217,7 @@ public struct HarborPathGameView: View {
                 .controlSize(.large)
                 .paceBackControlTarget()
                 .keyboardShortcut(.return, modifiers: [])
-                .accessibilityHint("Returns to PaceBack. The game stores no session history.")
+                .accessibilityHint("Returns to Softer. The game stores no session history.")
                 .accessibilityIdentifier("harborPath.finish")
             }
         }

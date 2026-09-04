@@ -485,7 +485,7 @@ public struct SafetyBoundaryNotice: View {
 
     public var body: some View {
         PaceBackNotice(
-            "PaceBack offers optional activities for ordinary stressful moments. It does not diagnose, treat, monitor, or replace professional or emergency help.",
+            "Softer offers optional activities for ordinary stressful moments. It does not diagnose, treat, monitor, or replace professional or emergency help.",
             title: "A wellbeing tool, not treatment",
             style: .boundary
         )

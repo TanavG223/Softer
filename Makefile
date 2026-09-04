@@ -8,10 +8,10 @@ verify: macos-test macos-build site-test
 release-candidate: verify package-macos
 
 macos-test:
-	cd macos && DEVELOPER_DIR="$(MACOS_DEVELOPER_DIR)" swift run PaceBackVerification
+	cd macos && DEVELOPER_DIR="$(MACOS_DEVELOPER_DIR)" swift run SofterVerification
 
 macos-build:
-	cd macos && DEVELOPER_DIR="$(MACOS_DEVELOPER_DIR)" swift build --product PaceBack
+	cd macos && DEVELOPER_DIR="$(MACOS_DEVELOPER_DIR)" swift build --product Softer
 
 site-test:
 	$(PYTHON) site/scripts/check_site.py

@@ -4,7 +4,7 @@ Status: evidence and interaction rationale for Harbor Tiles and Harbor Path, upd
 
 ## Why include two forms of play
 
-Some people do not want to meditate, label an emotion, write, or follow a body-focused exercise when stressed. PaceBack therefore offers two finite play options alongside screen-off, movement, connection, orientation, breathing, muscle release, and one-small-step activities:
+Some people do not want to meditate, label an emotion, write, or follow a body-focused exercise when stressed. Softer therefore offers two finite play options alongside screen-off, movement, connection, orientation, breathing, muscle release, and one-small-step activities:
 
 - **Harbor Tiles — active focus:** a short spatial-fitting task for someone who wants more direct interaction.
 - **Harbor Path — gentle focus:** a short visual scavenger path for someone who wants lower-demand interaction.
@@ -13,13 +13,13 @@ The product claim is deliberately narrow: either game **may offer a brief change
 
 ## What the research does and does not support
 
-Casual-game research is mixed and highly dependent on the game, task, population, comparison, dose, and outcome. The closest evidence does not validate PaceBack or justify a promise of calm:
+Casual-game research is mixed and highly dependent on the game, task, population, comparison, dose, and outcome. The closest evidence does not validate Softer or justify a promise of calm:
 
-| Source | Relevant finding | Limit for PaceBack |
+| Source | Relevant finding | Limit for Softer |
 |---|---|---|
 | [Collins et al., 2019](https://mental.jmir.org/2019/7/e12853) | A study of the spatial puzzle Block! Hexa Puzzle reported higher energetic arousal in its laboratory sample (`n=45`), but no between-group recovery-experience difference; its field sample (`n=20`) showed no immediate arousal effect. | Small samples, a different game and dose, and mixed results. Increased energy is not the same as calm. |
 | [Rupp et al., 2017](https://doi.org/10.1177/0018720817715360) | In a randomized laboratory study (`n=66`), 5.5 minutes of casual play improved engagement and affective restoration but not cognitive restoration. | A young sample and one different game do not establish an effect for Harbor Tiles or Harbor Path. |
-| [Rankin et al., 2018](https://pubmed.ncbi.nlm.nih.gov/30265082/) | Adaptive Tetris increased flow and improved emotion during an uncertain waiting task (`n=309`). | The study did not directly reduce worry, used a specific stressor, and did not evaluate PaceBack. |
+| [Rankin et al., 2018](https://pubmed.ncbi.nlm.nih.gov/30265082/) | Adaptive Tetris increased flow and improved emotion during an uncertain waiting task (`n=309`). | The study did not directly reduce worry, used a specific stressor, and did not evaluate Softer. |
 | [Desai et al.](https://pubmed.ncbi.nlm.nih.gov/40477391/) | In a comparison (`n=80`), both a casual game and a body-scan condition improved from pre- to post-session; the body-scan condition showed greater perceived-stress reduction. | Alternating allocation, undergraduates, a different 20-minute task, and no quiet control limit generalization. |
 | [Pine et al., 2020](https://pubmed.ncbi.nlm.nih.gov/32053021/) | A systematic review found promising signals across a small set of casual-game studies. | The evidence was heterogeneous and does not establish that any casual game works for any individual. |
 | [Pallavicini et al., 2021](https://pubmed.ncbi.nlm.nih.gov/34398795/) | A review of commercial-game studies found possible stress and anxiety effects in some settings. | Effects varied by game, population, dose, platform, and measure, with limited generalizability. |
@@ -28,9 +28,9 @@ This evidence supports testing optional, clearly bounded play as one modality. I
 
 ## Familiarity reference, not efficacy evidence
 
-The official [Block Blast site](https://www.blockblast.com/) and [Google Play listing](https://play.google.com/store/apps/details?gl=US&id=com.block.juggle) demonstrate a contemporary interaction grammar: directly place shapes, judge spatial fit, and receive immediate feedback. PaceBack uses familiarity only as a design hypothesis to test; the listings do not prove that it reduces rule-learning effort or improves wellbeing.
+The official [Block Blast site](https://www.blockblast.com/) and [Google Play listing](https://play.google.com/store/apps/details?gl=US&id=com.block.juggle) demonstrate a contemporary interaction grammar: directly place shapes, judge spatial fit, and receive immediate feedback. Softer uses familiarity only as a design hypothesis to test; the listings do not prove that it reduces rule-learning effort or improves wellbeing.
 
-Harbor Tiles retains only the broad ideas of direct placement, simple spatial fit, visible legal destinations, and immediate restrained feedback. It rejects Block Blast’s identity and retention mechanics. PaceBack does not use the Block Blast name, artwork, copy, trade dress, glossy cubes, 8 × 8 board, row or column clearing, score, combo, high-score chase, daily goals, rewards, revives, ads, in-app purchases, or endless replay.
+Harbor Tiles retains only the broad ideas of direct placement, simple spatial fit, visible legal destinations, and immediate restrained feedback. It rejects Block Blast’s identity and retention mechanics. Softer does not use the Block Blast name, artwork, copy, trade dress, glossy cubes, 8 × 8 board, row or column clearing, score, combo, high-score chase, daily goals, rewards, revives, ads, in-app purchases, or endless replay.
 
 ## Harbor Tiles contract — active focus
 

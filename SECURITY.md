@@ -3,7 +3,7 @@
 ## Supported version
 
 Security fixes are applied to the latest release listed on the repository's
-Releases page. PaceBack is a local research prototype, not a monitored service,
+Releases page. Softer is a local research prototype, not a monitored service,
 medical device, crisis service, or clinically validated product.
 
 ## Reporting a vulnerability
@@ -20,7 +20,7 @@ resource; this repository is not an emergency channel.
 
 ## Security boundary
 
-PaceBack stores saved profiles locally using AES-GCM with key material in the
+Softer stores saved profiles locally using AES-GCM with key material in the
 macOS Keychain. It has no account, backend, analytics SDK, downloaded model, or
 required runtime network service. See `docs/threat_model.md` and
 `docs/safety_privacy.md` for the explicit boundary and known limitations.

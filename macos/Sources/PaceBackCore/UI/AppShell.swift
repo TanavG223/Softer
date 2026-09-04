@@ -55,7 +55,7 @@ public struct PaceBackRootView: View {
             }
         }
         .alert(
-            "PaceBack could not complete that action",
+            "Softer could not complete that action",
             isPresented: Binding(
                 get: { store.lastError != nil },
                 set: { if !$0 { store.lastError = nil } }
@@ -90,7 +90,7 @@ private struct EncryptedWorkspaceUnavailableView: View {
                     .multilineTextAlignment(.center)
                     .frame(maxWidth: 560)
                     .textSelection(.enabled)
-                Text("PaceBack has not treated the workspace as empty or written new profile data.")
+                Text("Softer has not treated the workspace as empty or written new profile data.")
                     .font(.callout.weight(.medium))
                     .multilineTextAlignment(.center)
                     .frame(maxWidth: 560)
@@ -114,7 +114,7 @@ private struct EncryptedWorkspaceUnavailableView: View {
                     .buttonStyle(.bordered)
                     .controlSize(.large)
                 }
-                Text("Guest activity choices and check-outs stay only in memory and disappear when you leave PaceBack.")
+                Text("Guest activity choices and check-outs stay only in memory and disappear when you leave Softer.")
                     .font(.caption)
                     .foregroundStyle(.secondary)
                     .multilineTextAlignment(.center)
@@ -133,7 +133,7 @@ private struct PaceBackLaunchView: View {
             VStack(spacing: 18) {
                 PaceBackMark(size: 68)
                 VStack(spacing: 5) {
-                    Text("PaceBack")
+                    Text("Softer")
                         .font(.largeTitle.weight(.semibold))
                         .accessibilityAddTraits(.isHeader)
                     Text("Opening your private wellbeing space")
@@ -240,7 +240,7 @@ private struct AppNavigationView: View {
         HStack(spacing: 12) {
             PaceBackMark(size: 42)
             VStack(alignment: .leading, spacing: 1) {
-                Text("PaceBack")
+                Text("Softer")
                     .font(.title3.weight(.bold))
                 Text("Small choices for stressful moments")
                     .font(.caption)

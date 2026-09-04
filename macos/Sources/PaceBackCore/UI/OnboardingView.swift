@@ -41,7 +41,7 @@ struct OnboardingView: View {
         HStack(spacing: 14) {
             PaceBackMark(size: 54)
             VStack(alignment: .leading, spacing: 2) {
-                Text("PaceBack")
+                Text("Softer")
                     .font(.title.weight(.bold))
                 Text("PRIVATE · LOCAL · OPTIONAL")
                     .font(.caption2.weight(.bold))
@@ -399,12 +399,12 @@ private struct ProfileForm: View {
         switch ageBand {
         case .youngChild0To5, .child6To12:
             PaceBackNotice(
-                "A parent, guardian, or caregiver operates this profile. PaceBack will show only the activities permitted for the selected age experience; any available game is caregiver-led. macOS authenticates a device owner, but PaceBack cannot verify that person's family or care relationship.",
+                "A parent, guardian, or caregiver operates this profile. Softer will show only the activities permitted for the selected age experience; any available game is caregiver-led. macOS authenticates a device owner, but Softer cannot verify that person's family or care relationship.",
                 style: .local
             )
         case .teen13To17:
             PaceBackNotice(
-                "A guardian initializes the profile. Teen mode can choose guided activities and support; macOS device-owner authentication protects deletion and administrative settings. PaceBack cannot verify the authenticated person's family relationship.",
+                "A guardian initializes the profile. Teen mode can choose guided activities and support; macOS device-owner authentication protects deletion and administrative settings. Softer cannot verify the authenticated person's family relationship.",
                 style: .local
             )
         case .adult18To64, .olderAdult65Plus:

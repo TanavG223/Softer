@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Dependency-free structural and claim checks for the PaceBack static site."""
+"""Dependency-free structural and claim checks for the Softer static site."""
 
 from collections import Counter
 from html.parser import HTMLParser
@@ -111,7 +111,7 @@ def main():
                 errors.append(f"need button {index} missing aria-pressed")
 
     required = (
-        "Start one gentle activity", "Nine activities", "Harbor Tiles", "Harbor Path",
+        "Softer", "Start one gentle activity", "Nine activities", "Harbor Tiles", "Harbor Path",
         "No score", "No account", "no chatbot", "Need help now?",
         "Research-informed is not research-validated", "Call 988", "Call 911",
         "Repository-informed", "encrypted multi-profile", "Continue without saving",
@@ -119,7 +119,7 @@ def main():
     for marker in required:
         if marker not in html:
             errors.append(f"missing product marker: {marker}")
-    for marker in ("concussion", "care plan", "model pack", "iphone", "ios app", "recovery companion"):
+    for marker in ("paceback", "concussion", "care plan", "model pack", "iphone", "ios app", "recovery companion"):
         if marker in public:
             errors.append(f"legacy product marker remains: {marker}")
     for marker in ("cure", "fix your mental", "clinically proven", "guaranteed to calm"):

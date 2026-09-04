@@ -6,10 +6,10 @@ PROJECT_DIR=${SCRIPT_DIR:h}
 MACOS_DEVELOPER_DIR=${MACOS_DEVELOPER_DIR:-/Library/Developer/CommandLineTools}
 SIGN_IDENTITY=${SIGN_IDENTITY:-}
 OUTPUT_DIR=${OUTPUT_DIR:-${PROJECT_DIR}/build}
-APP_DIR=${OUTPUT_DIR}/PaceBack.app
+APP_DIR=${OUTPUT_DIR}/Softer.app
 APP_VERSION=$(/usr/libexec/PlistBuddy -c "Print :CFBundleShortVersionString" \
   "${PROJECT_DIR}/packaging/Info.plist")
-ZIP_PATH=${OUTPUT_DIR}/PaceBack-${APP_VERSION}-macOS-universal.zip
+ZIP_PATH=${OUTPUT_DIR}/Softer-${APP_VERSION}-macOS-universal.zip
 ARM_BUILD_DIR=${PROJECT_DIR}/macos/.build/package-arm64
 INTEL_BUILD_DIR=${PROJECT_DIR}/macos/.build/package-x86_64
 
@@ -32,32 +32,32 @@ SIGN_IDENTITY=${SIGN_IDENTITY:--}
 # Build both supported Mac architectures with Command Line Tools, then merge
 # them into one distributable executable. No Xcode project or simulator is used.
 swift build --package-path "${PROJECT_DIR}/macos" --scratch-path "${ARM_BUILD_DIR}" \
-  -c release --arch arm64 --product PaceBack
+  -c release --arch arm64 --product Softer
 swift build --package-path "${PROJECT_DIR}/macos" --scratch-path "${INTEL_BUILD_DIR}" \
-  -c release --arch x86_64 --product PaceBack
+  -c release --arch x86_64 --product Softer
 
 rm -rf "${APP_DIR}"
 mkdir -p \
   "${APP_DIR}/Contents/MacOS" \
-  "${APP_DIR}/Contents/Resources/PaceBackEvidence"
+  "${APP_DIR}/Contents/Resources/SofterEvidence"
 
 lipo -create \
-  "${ARM_BUILD_DIR}/arm64-apple-macosx/release/PaceBack" \
-  "${INTEL_BUILD_DIR}/x86_64-apple-macosx/release/PaceBack" \
-  -output "${APP_DIR}/Contents/MacOS/PaceBack"
+  "${ARM_BUILD_DIR}/arm64-apple-macosx/release/Softer" \
+  "${INTEL_BUILD_DIR}/x86_64-apple-macosx/release/Softer" \
+  -output "${APP_DIR}/Contents/MacOS/Softer"
 cp "${PROJECT_DIR}/packaging/Info.plist" "${APP_DIR}/Contents/Info.plist"
-cp "${PROJECT_DIR}/packaging/PaceBack.icns" \
-  "${APP_DIR}/Contents/Resources/PaceBack.icns"
+cp "${PROJECT_DIR}/packaging/Softer.icns" \
+  "${APP_DIR}/Contents/Resources/Softer.icns"
 cp "${PROJECT_DIR}/LICENSE" "${APP_DIR}/Contents/Resources/LICENSE"
 cp "${PROJECT_DIR}/NOTICE" "${APP_DIR}/Contents/Resources/NOTICE"
 cp "${PROJECT_DIR}/docs/mental_wellbeing_evidence_contract.md" \
-  "${APP_DIR}/Contents/Resources/PaceBackEvidence/"
+  "${APP_DIR}/Contents/Resources/SofterEvidence/"
 cp "${PROJECT_DIR}/docs/mental_wellbeing_game_research.md" \
-  "${APP_DIR}/Contents/Resources/PaceBackEvidence/"
+  "${APP_DIR}/Contents/Resources/SofterEvidence/"
 cp "${PROJECT_DIR}/docs/clinical_limitations.md" \
-  "${APP_DIR}/Contents/Resources/PaceBackEvidence/"
+  "${APP_DIR}/Contents/Resources/SofterEvidence/"
 cp "${PROJECT_DIR}/docs/competitive_ux_research.md" \
-  "${APP_DIR}/Contents/Resources/PaceBackEvidence/"
+  "${APP_DIR}/Contents/Resources/SofterEvidence/"
 
 if [[ ${SIGN_IDENTITY} == "-" ]]; then
   SIGN_FLAGS=(--force --sign - --timestamp=none)
@@ -65,8 +65,8 @@ else
   SIGN_FLAGS=(--force --sign "${SIGN_IDENTITY}" --options runtime --timestamp)
 fi
 
-codesign "${SIGN_FLAGS[@]}" "${APP_DIR}/Contents/MacOS/PaceBack"
-codesign "${SIGN_FLAGS[@]}" --entitlements "${PROJECT_DIR}/packaging/PaceBack.entitlements" \
+codesign "${SIGN_FLAGS[@]}" "${APP_DIR}/Contents/MacOS/Softer"
+codesign "${SIGN_FLAGS[@]}" --entitlements "${PROJECT_DIR}/packaging/Softer.entitlements" \
   "${APP_DIR}"
 codesign --verify --deep --strict --verbose=2 "${APP_DIR}"
 

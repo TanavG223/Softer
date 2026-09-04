@@ -13,12 +13,12 @@ make package-macos
 Inspect the final bundle:
 
 ```sh
-codesign --verify --deep --strict build/PaceBack.app
-codesign -d --entitlements :- build/PaceBack.app
-otool -L build/PaceBack.app/Contents/MacOS/PaceBack
-du -sh build/PaceBack.app
-shasum -a 256 build/PaceBack.app/Contents/MacOS/PaceBack
-open build/PaceBack.app
+codesign --verify --deep --strict build/Softer.app
+codesign -d --entitlements :- build/Softer.app
+otool -L build/Softer.app/Contents/MacOS/Softer
+du -sh build/Softer.app
+shasum -a 256 build/Softer.app/Contents/MacOS/Softer
+open build/Softer.app
 ```
 
 `make package-macos` also writes a versioned universal ZIP and prints its

@@ -1,6 +1,6 @@
-# Contributing to PaceBack
+# Contributing to Softer
 
-PaceBack is a safety-conscious research prototype. Contributions should keep
+Softer is a safety-conscious research prototype. Contributions should keep
 its scope narrow, local-first, stoppable, and honest about what has and has not
 been validated.
 
@@ -29,7 +29,7 @@ make package-macos
 ```
 
 Describe the user-visible behavior you exercised manually. Passing engineering
-checks must not be presented as evidence that PaceBack improves wellbeing.
+checks must not be presented as evidence that Softer improves wellbeing.
 
 ## Pull requests
 

@@ -136,7 +136,7 @@ struct PaceBackVerification {
         print("verification stage: games")
 
         let memoryRepository = InMemoryProfileRepository(profiles: [adult])
-        let defaults = UserDefaults(suiteName: "PaceBackVerification.\(UUID().uuidString)")!
+        let defaults = UserDefaults(suiteName: "SofterVerification.\(UUID().uuidString)")!
         let store = AppStore(
             repository: memoryRepository,
             guardianGate: AllowingGuardianGate(result: true),
@@ -158,7 +158,7 @@ struct PaceBackVerification {
         let lockedStore = AppStore(
             repository: FailingRepository(),
             guardianGate: AllowingGuardianGate(result: true),
-            preferences: AppPreferences(defaults: UserDefaults(suiteName: "PaceBackLocked.\(UUID().uuidString)")!)
+            preferences: AppPreferences(defaults: UserDefaults(suiteName: "SofterLocked.\(UUID().uuidString)")!)
         )
         await lockedStore.load()
         let workspaceError = lockedStore.workspaceErrorMessage
@@ -179,7 +179,7 @@ struct PaceBackVerification {
         print("verification stage: store")
 
         let tempRoot = FileManager.default.temporaryDirectory
-            .appending(path: "PaceBackVerification-\(UUID().uuidString)", directoryHint: .isDirectory)
+            .appending(path: "SofterVerification-\(UUID().uuidString)", directoryHint: .isDirectory)
         let service = "org.hackforhumanity.paceback.verification.\(UUID().uuidString)"
         defer {
             try? FileManager.default.removeItem(at: tempRoot)
@@ -215,7 +215,7 @@ struct PaceBackVerification {
         print("verification stage: encrypted repository")
 
         let legacyRoot = FileManager.default.temporaryDirectory
-            .appending(path: "PaceBackLegacyVerification-\(UUID().uuidString)", directoryHint: .isDirectory)
+            .appending(path: "SofterLegacyVerification-\(UUID().uuidString)", directoryHint: .isDirectory)
         let legacyService = "org.hackforhumanity.paceback.legacy-verification.\(UUID().uuidString)"
         defer {
             try? FileManager.default.removeItem(at: legacyRoot)
@@ -259,7 +259,7 @@ struct PaceBackVerification {
             try check(!riskyCopy.contains(phrase), "catalog contains prohibited promise: \(phrase)")
         }
 
-        print("PaceBackVerification: PASS (\(count) checks)")
+        print("SofterVerification: PASS (\(count) checks)")
     }
 
     private static func addKey(_ key: SymmetricKey, service: String, account: String) throws {

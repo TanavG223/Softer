@@ -1,4 +1,4 @@
-name: Deploy PaceBack site
+name: Deploy Softer site
 
 on:
   push:

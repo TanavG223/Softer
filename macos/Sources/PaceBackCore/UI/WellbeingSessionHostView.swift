@@ -204,8 +204,8 @@ struct WellbeingSessionHostView: View {
                     .foregroundStyle(PaceBackDesign.accent)
                 Text(
                     profile.ageBand.isUnder13
-                        ? "If it fits, a caregiver can step away from the Mac and offer a quieter moment together. PaceBack will not alert you or require a check-in."
-                        : "If it feels possible, step away from the Mac. PaceBack will not start a timer, play a sound, or require you to come back."
+                        ? "If it fits, a caregiver can step away from the Mac and offer a quieter moment together. Softer will not alert you or require a check-in."
+                        : "If it feels possible, step away from the Mac. Softer will not start a timer, play a sound, or require you to come back."
                 )
                 .font(.body)
                 .fixedSize(horizontal: false, vertical: true)
@@ -233,8 +233,8 @@ struct WellbeingSessionHostView: View {
                     .font(.title2.weight(.semibold))
                 Text(
                     profile.ageBand.isUnder13
-                        ? "A caregiver reviews the message and chooses the recipient. PaceBack never selects a person or sends anything automatically."
-                        : "PaceBack can open the system share menu with a neutral draft. You review it, choose a recipient, and decide whether to send."
+                        ? "A caregiver reviews the message and chooses the recipient. Softer never selects a person or sends anything automatically."
+                        : "Softer can open the system share menu with a neutral draft. You review it, choose a recipient, and decide whether to send."
                 )
                 .font(.body)
                 .foregroundStyle(.secondary)
@@ -431,7 +431,7 @@ struct WellbeingSessionHostView: View {
         case .orientOutside, .harborPath, .harborTiles:
             "Keep your eyes open if you prefer. Skip any prompt and stop if distress, frustration, unreality, or feeling unsafe increases."
         case .trustedConnection:
-            "You or the caregiver choose the person and what to share. PaceBack never selects a recipient or sends anything automatically."
+            "You or the caregiver choose the person and what to share. Softer never selects a recipient or sends anything automatically."
         case .screenOffPause:
             "This is a low-stimulation pause, not a task to complete. Leave immediately if that is the better choice."
         case .oneSmallStep:

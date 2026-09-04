@@ -1,7 +1,7 @@
 {
-  "product": "PaceBack native macOS wellbeing prototype",
+  "product": "Softer native macOS wellbeing prototype",
   "reviewed_on": "2026-09-02",
-  "claim_boundary": "Sources inform optional activity design; none validates PaceBack or guarantees calm.",
+  "claim_boundary": "Sources inform optional activity design; none validates Softer or guarantees calm.",
   "sources": [
     {"id": "who-mental-health", "url": "https://www.who.int/en/health-topics/mental-health", "use": "definition of mental health and wellbeing"},
     {"id": "who-stress", "url": "https://www.who.int/en/news-room/questions-and-answers/item/stress", "use": "general stress and coping context"},

@@ -11,8 +11,8 @@ struct WellbeingPrivacyView: View {
         ContentScaffold(
             "Your choices stay yours",
             subtitle: store.isGuestSession
-                ? "This guest session exists only in memory. PaceBack does not save its age choice, activities, play, or check-outs."
-                : "PaceBack stores a small encrypted local profile. It does not infer a mood from typing, play, time on screen, sensors, or support choices.",
+                ? "This guest session exists only in memory. Softer does not save its age choice, activities, play, or check-outs."
+                : "Softer stores a small encrypted local profile. It does not infer a mood from typing, play, time on screen, sensors, or support choices.",
             eyebrow: "YOU · PRIVACY & CONTROL",
             comfortableSpacing: store.preferences.comfortableSpacing
         ) {
@@ -57,7 +57,7 @@ struct WellbeingPrivacyView: View {
                 Divider()
                 privacyFact(
                     "No account or advertising profile",
-                    "PaceBack does not require sign-in and does not include targeted ads or third-party behavior analytics.",
+                    "Softer does not require sign-in and does not include targeted ads or third-party behavior analytics.",
                     icon: "person.crop.circle.badge.minus"
                 )
                 Divider()
@@ -79,7 +79,7 @@ struct WellbeingPrivacyView: View {
                 Text(
                     store.isGuestSession
                         ? "A guest check-out may reorder already-available activities only during this temporary session. It is discarded when the session ends and never trains a model or creates a diagnosis."
-                        : "PaceBack can retain only the chosen need, activity, one closed check-out, and its timestamp. That information may reorder already-available activities. It does not train a model, create a diagnosis, or change age and role boundaries."
+                        : "Softer can retain only the chosen need, activity, one closed check-out, and its timestamp. That information may reorder already-available activities. It does not train a model, create a diagnosis, or change age and role boundaries."
                 )
                     .font(.body)
                     .fixedSize(horizontal: false, vertical: true)
@@ -114,7 +114,7 @@ struct WellbeingPrivacyView: View {
             VStack(alignment: .leading, spacing: 9) {
                 Label("Support use is not feedback", systemImage: "heart.text.square")
                     .font(.headline)
-                Text("Opening Support, 988, 911, a worldwide directory, or another app does not alter activity ordering. PaceBack cannot monitor what happens next.")
+                Text("Opening Support, 988, 911, a worldwide directory, or another app does not alter activity ordering. Softer cannot monitor what happens next.")
                     .font(.callout)
                     .foregroundStyle(.secondary)
                     .fixedSize(horizontal: false, vertical: true)
@@ -130,7 +130,7 @@ struct WellbeingPrivacyView: View {
                 Text(store.isGuestSession
                     ? "Return to the encrypted workspace at any time. Temporary choices and check-outs will be discarded."
                     : (profile.ageBand.isPediatric
-                        ? "macOS device-owner authentication is required for administrative changes. PaceBack cannot verify the authenticated person's family or care relationship."
+                        ? "macOS device-owner authentication is required for administrative changes. Softer cannot verify the authenticated person's family or care relationship."
                         : "The profile owner controls administrative changes. Approved caregiver access does not silently become owner access."))
                 .font(.callout)
                 .foregroundStyle(.secondary)
@@ -193,7 +193,7 @@ struct WellbeingAboutView: View {
 
     var body: some View {
         ContentScaffold(
-            "About PaceBack",
+            "About Softer",
             subtitle: "A local-first research prototype for choosing a small optional activity during an ordinary stressful moment.",
             eyebrow: "YOU · PURPOSE & BOUNDARIES",
             comfortableSpacing: store.preferences.comfortableSpacing
@@ -207,7 +207,7 @@ struct WellbeingAboutView: View {
 
             HStack {
                 PaceBackMark(size: 28)
-                Text("PaceBack 0.3.1 · Research prototype · Not clinically validated")
+                Text("Softer 0.4.0 · Research prototype · Not clinically validated")
                     .font(.caption)
                     .foregroundStyle(.secondary)
                 Spacer()
@@ -223,7 +223,7 @@ struct WellbeingAboutView: View {
                 Label("What mental wellbeing means here", systemImage: "person.and.background.dotted")
                     .font(.title3.weight(.semibold))
                     .foregroundStyle(PaceBackDesign.accent)
-                Text("Mental wellbeing includes emotional, psychological, and social wellbeing. It does not mean never feeling stressed or sad. PaceBack focuses on one narrow moment: making it easier to choose a small next step or reach a real person.")
+                Text("Mental wellbeing includes emotional, psychological, and social wellbeing. It does not mean never feeling stressed or sad. Softer focuses on one narrow moment: making it easier to choose a small next step or reach a real person.")
                     .font(.body)
                     .fixedSize(horizontal: false, vertical: true)
                 Text("This definition informs the product boundary; it does not let the app assess an individual.")
@@ -259,7 +259,7 @@ struct WellbeingAboutView: View {
                 Text("Public wellbeing context")
                     .font(.title3.weight(.semibold))
                     .accessibilityAddTraits(.isHeader)
-                Text("These sources inform cautious product language. They do not validate PaceBack’s exact activities, games, interface, or outcomes.")
+                Text("These sources inform cautious product language. They do not validate Softer’s exact activities, games, interface, or outcomes.")
                     .font(.callout)
                     .foregroundStyle(.secondary)
                 sourceLink(
@@ -294,7 +294,7 @@ struct WellbeingAboutView: View {
             .foregroundStyle(PaceBackDesign.accent)
             .accessibilityHidden(true)
         VStack(alignment: .leading, spacing: 5) {
-            Text("Make PaceBack easier to use")
+            Text("Make Softer easier to use")
                 .font(.title3.weight(.semibold))
             Text("Adjust text and control scale, spacing, and motion. Native controls support keyboard focus and VoiceOver, and the app follows Increase Contrast and Reduce Transparency.")
                 .font(.callout)

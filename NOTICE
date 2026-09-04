@@ -1,7 +1,7 @@
-PaceBack
-Copyright 2026 PaceBack contributors
+Softer
+Copyright 2026 Softer contributors
 
-PaceBack is an unvalidated mental-wellbeing research prototype. It is not
+Softer is an unvalidated mental-wellbeing research prototype. It is not
 intended to diagnose, treat, monitor crisis, guarantee calm, or replace
 professional or emergency care.
 
@@ -10,9 +10,9 @@ Health Organization, the U.S. National Institute of Mental Health, the U.S.
 National Center for Complementary and Integrative Health, and published
 systematic reviews. They also discuss public repositories and commercial apps
 as design references. Citation does not imply endorsement, and none of these
-sources tested PaceBack.
+sources tested Softer.
 
-PaceBack contains no redistributed model weights or third-party runtime code.
-The application is built with Apple system frameworks. The PaceBack icon was
+Softer contains no redistributed model weights or third-party runtime code.
+The application is built with Apple system frameworks. The Softer icon was
 generated with OpenAI's image-generation tool and converted locally to ICNS;
 this attribution is not a completed trademark or rights review.

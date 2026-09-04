@@ -1,12 +1,12 @@
 # Hackathon submission draft
 
-## PaceBack — make the next minute smaller
+## Softer — make the next minute smaller
 
 Team: Chahat A, Jia Patel, and Tanav Gosala.
 
-PaceBack is a private native Mac app for moments of ordinary stress or overload. Instead of asking someone to explain everything, score their mood, or maintain a streak, it offers a no-save guest start and one reversible activity immediately. A person can choose a plain-language need, browse nine short options, play one of two finite games, or open human support.
+Softer is a private native Mac app for moments of ordinary stress or overload. Instead of asking someone to explain everything, score their mood, or maintain a streak, it offers a no-save guest start and one reversible activity immediately. A person can choose a plain-language need, browse nine short options, play one of two finite games, or open human support.
 
-The problem is selection friction: when attention is overloaded, a large wellness library can become another task. PaceBack reduces that first decision while keeping alternatives visible. Its modalities include outside-in noticing, optional gentle breathing, release-only muscle relaxation, small movement, trusted-person connection, a screen-off pause, one small next step, Harbor Tiles, and Harbor Path.
+The problem is selection friction: when attention is overloaded, a large wellness library can become another task. Softer reduces that first decision while keeping alternatives visible. Its modalities include outside-in noticing, optional gentle breathing, release-only muscle relaxation, small movement, trusted-person connection, a screen-off pause, one small next step, Harbor Tiles, and Harbor Path.
 
 The games are stimulating without an engagement loop. Harbor Tiles uses original irregular coves, fixed pieces, guaranteed legal progress, Hint and Undo, and exactly nine placements. Harbor Path uses one to three static waypoints. Neither has a score, timer, loss, streak, currency, escalating difficulty, or endless reward cycle.
 
@@ -14,7 +14,7 @@ Personalization is deliberately small and inspectable. It uses only the selected
 
 Privacy is local by design: encrypted per-profile records, Keychain keys, no account, no chatbot, no backend, no analytics, and no required network service. A clearly labeled guest session keeps eligible activities available without saving an alias or touching a locked workspace. Human support remains static and available when profile storage fails.
 
-Research informed the available modalities and the restraint of the claims. PaceBack has not been clinically validated and cannot promise calm, diagnose a condition, provide therapy, monitor risk, or replace professional or emergency care.
+Research informed the available modalities and the restraint of the claims. Softer has not been clinically validated and cannot promise calm, diagnose a condition, provide therapy, monitor risk, or replace professional or emergency care.
 
 ## Three-minute demo
 
@@ -31,7 +31,7 @@ Research informed the available modalities and the restraint of the claims. Pace
 
 Prepared and attached to the Devpost draft:
 
-- public source: <https://github.com/TanavG223/PaceBack>
+- public source: <https://github.com/TanavG223/Softer>
 - Apache-2.0 license and three-person team attribution
 - 3:2 Calm thumbnail plus captioned Calm, Play, and Harbor Tiles screenshots
 - Mental health focus and Best Mental Health Tool prize selection

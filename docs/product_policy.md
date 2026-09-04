@@ -1,6 +1,6 @@
 # Product policy
 
-PaceBack supports a person through one ordinary stressful moment. It does not fix a person, define “normal,” diagnose a condition, provide therapy, or promise calm.
+Softer supports a person through one ordinary stressful moment. It does not fix a person, define “normal,” diagnose a condition, provide therapy, or promise calm.
 
 Required product rules:
 

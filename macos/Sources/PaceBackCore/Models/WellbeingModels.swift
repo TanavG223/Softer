@@ -91,7 +91,7 @@ public enum WellbeingActivityID: String, CaseIterable, Codable, Identifiable, Se
         case .gentleBreathing: "Comfortable breaths with no holds or required count."
         case .muscleRelease: "Release tension without forcing or straining."
         case .comfortableMovement: "A seated or standing movement within your usual range."
-        case .trustedConnection: "Draft a check-in; PaceBack never sends it automatically."
+        case .trustedConnection: "Draft a check-in; Softer never sends it automatically."
         case .harborPath: "Guide a lantern home with no score, timer, or losing."
         case .harborTiles: "Fit sea-glass pieces into finite coves with no score or timer."
         case .screenOffPause: "Step away from the screen with no countdown or required return."
@@ -148,7 +148,7 @@ public enum WellbeingActivityID: String, CaseIterable, Codable, Identifiable, Se
         case .comfortableMovement:
             ["Choose sitting or standing.", "Make one small movement within your usual range.", "Stop for pain, dizziness, or discomfort."]
         case .trustedConnection:
-            ["Choose someone you trust.", "Draft a short message asking whether they can check in.", "Review it yourself; PaceBack does not send messages."]
+            ["Choose someone you trust.", "Draft a short message asking whether they can check in.", "Review it yourself; Softer does not send messages."]
         case .harborPath:
             ["Follow one clue at a time.", "Guide the lantern to the harbor.", "There is no score or time limit."]
         case .harborTiles:
@@ -455,11 +455,11 @@ public enum WellbeingRecommender {
         if baseline.isEmpty {
             reason = "No guided activity is available for this profile’s current age and role."
         } else if allCooling {
-            reason = "Every available activity is paused after an explicit Less settled check-out. PaceBack will not automatically choose one during its 24-hour cooldown."
+            reason = "Every available activity is paused after an explicit Less settled check-out. Softer will not automatically choose one during its 24-hour cooldown."
         } else if learned {
             reason = "This matches your selection, and your explicit check-outs previously favored it. No passive behavior was used."
         } else if profile.ageBand.isUnder13 {
-            reason = "This is a short caregiver-led option for your selection. PaceBack does not infer or score a child’s feelings."
+            reason = "This is a short caregiver-led option for your selection. Softer does not infer or score a child’s feelings."
         } else {
             reason = "This is the first fixed option for your selection. It is optional and is not a treatment recommendation."
         }
@@ -528,7 +528,7 @@ public enum SupportRoute: String, CaseIterable, Codable, Identifiable, Sendable 
         case .immediateDanger: "If there is immediate danger, call your local emergency number now."
         case .call988, .text988, .chat988: "U.S. Suicide & Crisis Lifeline support."
         case .internationalDirectory: "Open a country-by-country crisis support directory."
-        case .trustedPerson: "Opens Messages so you can choose and contact a trusted person yourself. PaceBack does not send messages."
+        case .trustedPerson: "Opens Messages so you can choose and contact a trusted person yourself. Softer does not send messages."
         case .professionalCare: "Opens Contacts so you can choose contact information you already trust for a clinician or counselor."
         }
     }
@@ -549,5 +549,5 @@ public enum SupportRoute: String, CaseIterable, Codable, Identifiable, Sendable 
     }
 
     public static let boundaryNotice =
-        "PaceBack is not a crisis service, does not monitor you, and cannot contact help for you."
+        "Softer is not a crisis service, does not monitor you, and cannot contact help for you."
 }

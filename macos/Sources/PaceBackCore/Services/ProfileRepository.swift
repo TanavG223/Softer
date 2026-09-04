@@ -136,6 +136,8 @@ public actor EncryptedProfileRepository: ProfileRepository {
     ) {
         let appSupport = fileManager.urls(for: .applicationSupportDirectory, in: .userDomainMask).first
             ?? fileManager.temporaryDirectory
+        // Keep the legacy on-disk directory so a display-name change cannot strand
+        // an existing encrypted profile or silently create an empty workspace.
         self.directory = directory ?? appSupport.appending(path: "PaceBack", directoryHint: .isDirectory)
         self.keyProvider = KeychainProfileKeyProvider(service: keychainService)
         self.fileManager = SendableFileManager(fileManager)

@@ -161,7 +161,7 @@ public final class AppStore {
         }
         if ageBand.isPediatric {
             let approved = await guardianGate.authorize(
-                reason: "Device-owner authentication is required before creating a child or teen PaceBack profile."
+                reason: "Device-owner authentication is required before creating a child or teen Softer profile."
             )
             guard approved else {
                 lastError = "Device-owner authentication was not completed."

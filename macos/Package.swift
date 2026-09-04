@@ -3,13 +3,13 @@
 import PackageDescription
 
 let package = Package(
-    name: "PaceBack",
+    name: "Softer",
     platforms: [
         .macOS(.v14)
     ],
     products: [
-        .executable(name: "PaceBack", targets: ["PaceBackApp"]),
-        .executable(name: "PaceBackVerification", targets: ["PaceBackVerification"])
+        .executable(name: "Softer", targets: ["PaceBackApp"]),
+        .executable(name: "SofterVerification", targets: ["PaceBackVerification"])
     ],
     targets: [
         .target(

@@ -18,7 +18,7 @@ enum WellbeingPresentationCopy {
 struct WellbeingBoundaryNotice: View {
     var body: some View {
         PaceBackNotice(
-            "PaceBack offers optional activities for ordinary stressful moments. Different things work for different people, and stopping or doing nothing is always valid. It does not diagnose, treat, monitor, or guarantee an outcome.",
+            "Softer offers optional activities for ordinary stressful moments. Different things work for different people, and stopping or doing nothing is always valid. It does not diagnose, treat, monitor, or guarantee an outcome.",
             title: "Choice, not treatment",
             style: .boundary
         )
@@ -85,7 +85,7 @@ struct CaregiverUseNotice: View {
     var body: some View {
         if ageBand.isUnder13 {
             PaceBackNotice(
-                "A caregiver operates this profile. PaceBack shows only activities permitted for this age experience; any available game is caregiver-led, and unavailable options cannot be started.",
+                "A caregiver operates this profile. Softer shows only activities permitted for this age experience; any available game is caregiver-led, and unavailable options cannot be started.",
                 title: "Caregiver-operated experience",
                 style: .local
             )

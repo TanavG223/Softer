@@ -1,4 +1,4 @@
-# PaceBack product site
+# Softer product site
 
 This static, responsive page explains the current native macOS wellbeing app. It mirrors the shipped product boundary: a no-save guest start, nine brief activities, two finite scoreless games, explicit local adaptation, encrypted profiles, and static support routes. It does not present the former mobile or injury-recovery prototypes as current functionality.
 

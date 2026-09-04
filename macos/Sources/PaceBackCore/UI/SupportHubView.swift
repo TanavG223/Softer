@@ -45,7 +45,7 @@ struct SupportHubView: View {
             Alert(
                 title: Text("Open \(route.title)?"),
                 message: Text(
-                    "\(route.detail) PaceBack cannot confirm whether the app, call, text, or website opens or whether support is reached."
+                    "\(route.detail) Softer cannot confirm whether the app, call, text, or website opens or whether support is reached."
                 ),
                 primaryButton: .cancel(Text("Cancel")) {
                     store.clearSupportRoute()

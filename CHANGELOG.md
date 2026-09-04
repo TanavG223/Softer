@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.4.0 — 2026-09-04
+
+- Rename the product to Softer: a short, modern identity for the app's
+  low-pressure, reversible interaction standard.
+- Preserve the legacy bundle identifier, Keychain service, preferences, and
+  encrypted profile directory so the brand change does not strand saved data.
+- Refresh the app, website, documentation, release package, and two-person demo
+  script with the new name.
+
 ## 0.3.1 — 2026-09-03
 
 - Correct the version displayed in the native About screen.

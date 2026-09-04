@@ -2,7 +2,7 @@
 
 Status: current native macOS wellbeing prototype, reviewed 2026-09-02.
 
-PaceBack is a consumer research prototype, not a medical device, diagnostic, treatment, crisis service, or substitute for professional care. It does not determine whether a person is calm, anxious, depressed, traumatized, safe, or “normal.”
+Softer is a consumer research prototype, not a medical device, diagnostic, treatment, crisis service, or substitute for professional care. It does not determine whether a person is calm, anxious, depressed, traumatized, safe, or “normal.”
 
 ## What the evidence does and does not establish
 
@@ -10,7 +10,7 @@ Public guidance supports offering general self-care options such as grounding, c
 
 It does not validate:
 
-- PaceBack's exact wording, sequence, interface, duration, age gates, or two games;
+- Softer's exact wording, sequence, interface, duration, age gates, or two games;
 - the claim that a person will feel calmer or improve their mental health;
 - the four-value check-out as a clinical outcome measure;
 - the deterministic activity ordering parameters;
@@ -25,11 +25,11 @@ The current ranker is fixed code, not a trained mental-health model. It uses onl
 - Muscle release must not involve straining or painful, injured, spasm-prone, or recently operated areas.
 - Movement stays within the person's usual comfortable range and stops for pain, dizziness, chest pain, or unusual breathlessness.
 - Grounding/orienting can feel unhelpful or worsening for some people; eyes may remain open and stopping is always valid.
-- Trusted-person contact is user-selected; PaceBack cannot establish that a recipient is safe or available.
+- Trusted-person contact is user-selected; Softer cannot establish that a recipient is safe or available.
 - Play is optional distraction. Neither Harbor Tiles nor Harbor Path is a therapeutic game or mental-state test.
 
 ## Evidence required for stronger outcome claims
 
-Before saying that PaceBack reduces stress, calms users, or improves wellbeing, complete independent clinical and pediatric review, representative accessibility and usability work, a preregistered comparative study using validated outcomes, adverse-event review, privacy/security assessment, and reproducible source-matched release verification.
+Before saying that Softer reduces stress, calms users, or improves wellbeing, complete independent clinical and pediatric review, representative accessibility and usability work, a preregistered comparative study using validated outcomes, adverse-event review, privacy/security assessment, and reproducible source-matched release verification.
 
 Current engineering checks prove only that declared software rules execute in the tested build. They do not prove health benefit.
