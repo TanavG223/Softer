@@ -62,6 +62,7 @@ The packaged universal application (Apple silicon and Intel) and versioned ZIP a
 - [Current release acceptance walkthrough](docs/release_acceptance_2026-09-04.md)
 - [Brand-name rationale and compatibility boundary](docs/brand_name.md)
 - [v0.4.0 release and checksum](docs/release_v0.4.0.md)
+- [Submission-video narration, captions, and validation](docs/video/final-video-validation.md)
 - [v0.3.1 release under the former PaceBack name](docs/release_v0.3.1.md)
 - [Contributing](CONTRIBUTING.md)
 - [Security policy](SECURITY.md)

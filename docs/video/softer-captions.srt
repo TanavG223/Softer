@@ -1,0 +1,268 @@
+1
+00:00:00,000 --> 00:00:03,200
+Stress can make even a small decision feel heavy.
+
+2
+00:00:03,200 --> 00:00:06,180
+Yet many well-being apps ask for more attention.
+
+3
+00:00:06,180 --> 00:00:09,080
+Create an account, complete a questionnaire,
+
+4
+00:00:09,080 --> 00:00:12,480
+search a large library, or protect a streak.
+
+5
+00:00:12,480 --> 00:00:15,320
+We built Softer around the opposite idea.
+
+6
+00:00:15,320 --> 00:00:19,120
+Reduce the pressure and offer one useful next action.
+
+7
+00:00:19,120 --> 00:00:21,920
+Softer is a private native Mac app
+
+8
+00:00:21,920 --> 00:00:24,160
+for ordinary stressful moments.
+
+9
+00:00:24,160 --> 00:00:26,880
+A person can begin without an account, an alias,
+
+10
+00:00:26,880 --> 00:00:28,720
+or saved history.
+
+11
+00:00:28,720 --> 00:00:31,160
+The name is also the design rule.
+
+12
+00:00:31,160 --> 00:00:34,000
+Every path should be easy to understand,
+
+13
+00:00:34,000 --> 00:00:38,360
+easy to leave, and fully under the person's control.
+
+14
+00:00:38,360 --> 00:00:40,480
+Instead of diagnosing a mood,
+
+15
+00:00:40,480 --> 00:00:43,880
+Softer asks what might feel useful right now.
+
+16
+00:00:43,880 --> 00:00:47,080
+The person chooses a plain-language need.
+
+17
+00:00:47,080 --> 00:00:50,160
+The app never reads sensors, typing, gameplay,
+
+18
+00:00:50,160 --> 00:00:52,200
+or time on screen.
+
+19
+00:00:52,200 --> 00:00:55,800
+It suggests one starting point, explains why,
+
+20
+00:00:55,800 --> 00:00:58,160
+and keeps other choices visible.
+
+21
+00:00:58,160 --> 00:01:00,260
+Gentle Breathing is an adjustable visual
+
+22
+00:01:00,260 --> 00:01:02,760
+pacer, not a command.
+
+23
+00:01:02,760 --> 00:01:05,160
+The pace can be changed, paused, or watched
+
+24
+00:01:05,160 --> 00:01:07,320
+with shape-only wording.
+
+25
+00:01:07,320 --> 00:01:12,000
+Reduce Motion replaces the animation with a static cue.
+
+26
+00:01:12,000 --> 00:01:16,520
+Stop remains available if the exercise does not feel right.
+
+27
+00:01:16,520 --> 00:01:18,800
+For someone who wants active focus,
+
+28
+00:01:18,800 --> 00:01:22,000
+Harbor Tiles is a short spatial puzzle.
+
+29
+00:01:22,000 --> 00:01:23,560
+Answers stay hidden.
+
+30
+00:01:23,560 --> 00:01:26,800
+Each cove supports multiple valid routes,
+
+31
+00:01:26,800 --> 00:01:30,200
+and a hint appears only when requested.
+
+32
+00:01:30,200 --> 00:01:33,360
+Undo lets the person reconsider without penalty.
+
+33
+00:01:33,360 --> 00:01:37,000
+Harbor Path offers a quieter waypoint activity.
+
+34
+00:01:37,000 --> 00:01:40,160
+Both experiences are finite and scoreless.
+
+35
+00:01:40,160 --> 00:01:44,400
+There is no timer, streak, losing, leaderboard,
+
+36
+00:01:44,400 --> 00:01:47,000
+or endless reward loop.
+
+37
+00:01:47,000 --> 00:01:50,320
+Stopping or skipping is still a valid ending.
+
+38
+00:01:50,320 --> 00:01:53,440
+After an activity, a short optional checkout
+
+39
+00:01:53,440 --> 00:01:56,960
+asks whether the person feels more settled, the same,
+
+40
+00:01:56,960 --> 00:01:59,840
+less settled, or chose to skip.
+
+41
+00:01:59,840 --> 00:02:02,920
+Only that explicit response can slightly reorder
+
+42
+00:02:02,920 --> 00:02:05,720
+future suggestions on this Mac.
+
+43
+00:02:05,720 --> 00:02:07,960
+If an activity feels less helpful,
+
+44
+00:02:07,960 --> 00:02:12,640
+Softer temporarily cools it down instead of pushing repetition.
+
+45
+00:02:12,640 --> 00:02:16,000
+Free text, game performance, time spent,
+
+46
+00:02:16,000 --> 00:02:19,440
+and support actions are never used.
+
+47
+00:02:19,440 --> 00:02:24,040
+Human support is kept separate from personalization.
+
+48
+00:02:24,040 --> 00:02:25,880
+The Need Help Now route
+
+49
+00:02:25,880 --> 00:02:27,600
+remains available even when
+
+50
+00:02:27,600 --> 00:02:30,120
+the encrypted workspace is locked.
+
+51
+00:02:30,120 --> 00:02:33,200
+Softer labels United States crisis options,
+
+52
+00:02:33,200 --> 00:02:35,560
+links to an international directory,
+
+53
+00:02:35,560 --> 00:02:38,040
+and provides clear routes to a trusted person
+
+54
+00:02:38,040 --> 00:02:39,600
+or professional care.
+
+55
+00:02:39,600 --> 00:02:43,720
+It cannot detect a crisis, contact anyone automatically,
+
+56
+00:02:43,720 --> 00:02:46,360
+or replace emergency services.
+
+57
+00:02:46,360 --> 00:02:49,720
+We built Softer with SwiftUI, CryptoKit,
+
+58
+00:02:49,720 --> 00:02:52,840
+and the macOS keychain.
+
+59
+00:02:52,840 --> 00:02:56,400
+There's no AI model, chatbot, advertising,
+
+60
+00:02:56,400 --> 00:03:00,800
+analytics service, account system, or cloud backend.
+
+61
+00:03:00,800 --> 00:03:03,760
+Fifty-eight behavioral checks cover the activities,
+
+62
+00:03:03,760 --> 00:03:06,360
+games, recommendation boundaries,
+
+63
+00:03:06,360 --> 00:03:10,280
+support isolation, and encrypted storage.
+
+64
+00:03:10,280 --> 00:03:14,920
+Those checks verify the software, not a mental-health outcome.
+
+65
+00:03:14,920 --> 00:03:18,680
+Softer does not diagnose, treat, or promise calm.
+
+66
+00:03:18,680 --> 00:03:20,200
+It makes the next minute smaller
+
+67
+00:03:20,200 --> 00:03:25,040
+by keeping every choice clear, private, and optional.
+

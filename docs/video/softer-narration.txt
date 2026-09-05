@@ -1,0 +1,17 @@
+Stress can make even a small decision feel heavy. Yet many wellbeing apps ask for more attention: create an account, complete a questionnaire, search a large library, or protect a streak. We built Softer around the opposite idea: reduce the pressure and offer one useful next action.
+
+Softer is a private, native Mac app for ordinary stressful moments. A person can begin without an account, an alias, or saved history. The name is also the design rule. Every path should be easy to understand, easy to leave, and fully under the person’s control.
+
+Instead of diagnosing a mood, Softer asks what might feel useful right now. The person chooses a plain-language need. The app never reads sensors, typing, gameplay, or time on screen. It suggests one starting point, explains why, and keeps other choices visible.
+
+Gentle Breathing is an adjustable visual pacer, not a command. The pace can be changed, paused, or watched with shape-only wording. Reduce Motion replaces the animation with a static cue. Stop remains available if the exercise does not feel right.
+
+For someone who wants active focus, Harbor Tiles is a short spatial puzzle. Answers stay hidden, each cove supports multiple valid routes, and a hint appears only when requested. Undo lets the person reconsider without penalty. Harbor Path offers a quieter waypoint activity. Both experiences are finite and scoreless. There is no timer, streak, losing, leaderboard, or endless reward loop. Stopping or skipping is still a valid ending.
+
+After an activity, a short optional checkout asks whether the person feels more settled, the same, less settled, or chose to skip. Only that explicit response can slightly reorder future suggestions on this Mac. If an activity feels less helpful, Softer temporarily cools it down instead of pushing repetition. Free text, game performance, time spent, and support actions are never used.
+
+Human support is kept separate from personalization. The Need Help Now route remains available even when the encrypted workspace is locked. Softer labels United States crisis options, links to an international directory, and provides clear routes to a trusted person or professional care. It cannot detect a crisis, contact anyone automatically, or replace emergency services.
+
+We built Softer with SwiftUI, CryptoKit, and the macOS Keychain. There is no AI model, chatbot, advertising, analytics service, account system, or cloud backend. Fifty-eight behavioral checks cover the activities, games, recommendation boundaries, support isolation, and encrypted storage. Those checks verify the software, not a mental-health outcome.
+
+Softer does not diagnose, treat, or promise calm. It makes the next minute smaller by keeping every choice clear, private, and optional.
