@@ -6,7 +6,7 @@
 
 Softer is a native macOS mental-wellbeing prototype for ordinary stressful moments when choosing what to do next feels difficult. It offers a no-save guest start, one immediate option, six plain-language needs, nine short activities, two finite games, and static routes to human support.
 
-[Open the public project page](https://tanavg223.github.io/Softer/) or [download the latest Mac release](https://github.com/TanavG223/Softer/releases/latest).
+[Watch the 3:26 demo](https://youtu.be/oAyuhxrKdoY), [open the public project page](https://tanavg223.github.io/Softer/), or [download the latest Mac release](https://github.com/TanavG223/Softer/releases/latest).
 
 It does **not** diagnose a mental state, treat a disorder, promise calm, return anyone to a predefined “normal,” or replace professional or emergency care. Its exact activities, games, interface, and recommendation parameters have not been clinically validated.
 

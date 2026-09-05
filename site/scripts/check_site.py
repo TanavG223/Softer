@@ -15,7 +15,7 @@ ALLOWED_HOSTS = {
     "988lifeline.org", "findahelpline.com", "finchcare.com", "github.com",
     "howwefeel.org", "pmc.ncbi.nlm.nih.gov", "pubmed.ncbi.nlm.nih.gov",
     "tdr.who.int", "truluv.ai", "www.blockblast.com", "www.nccih.nih.gov",
-    "www.nimh.nih.gov", "www.who.int",
+    "www.nimh.nih.gov", "www.who.int", "youtu.be",
 }
 
 

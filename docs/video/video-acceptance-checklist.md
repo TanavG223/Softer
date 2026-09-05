@@ -11,6 +11,9 @@
 - [x] No legal name, account secret, notification, or unrelated window is visible.
 - [x] The synthetic ElevenLabs narration is disclosed in the YouTube description.
 - [x] The video never claims diagnosis, treatment, guaranteed calm, or clinical validation.
-- [ ] The owner has watched the local file with sound before upload.
-- [ ] The owner has uploaded `softer-captions.srt` and checked its readability on YouTube.
+- [x] `softer-captions.srt` is uploaded and published as English (United States).
+- [x] The custom 1280 by 720 Softer thumbnail is uploaded.
+- [x] YouTube's copyright check reports no issues.
+- [x] The uploaded watch page loads, identifies the video as unlisted, reports 3:26, and plays.
+- [ ] The owner has watched the complete YouTube video with sound.
 - [ ] The uploaded YouTube video has been watched while signed out before its URL is added to Devpost.
